@@ -191,10 +191,18 @@ ${frame.over}
 `;
 }
 
+// Where a slice draws: desktop slices are 880px wide; phone slices are
+// 440px and swap in through <picture> below 600px. R is the right edge of the
+// text column.
+export type Geo = {narrow: boolean; W: number; M: number; FL: number; FR: number; X: number; R: number; HW: number};
+export const DESKTOP: Geo = {narrow: false, W: 880, M: 16, FL: 16, FR: 864, X: 52, R: 828, HW: 440};
+export const PHONE: Geo = {narrow: true, W: 440, M: 10, FL: 10, FR: 430, X: 28, R: 412, HW: 220};
+
 type SliceOpts = Omit<Doc, 'w' | 'h' | 'body'> & {top?: boolean; bottom?: boolean};
 
-export async function slice(t: Theme, h: number, body: string, o: SliceOpts): Promise<string> {
+export async function sliceG(t: Theme, g: Geo, h: number, body: string, o: SliceOpts): Promise<string> {
 	if (h % 40) throw new Error(`slice height ${h} is not a multiple of 40`);
+	const {FL, FR, M} = g;
 	const y0 = o.top ? M : 0;
 	const y1 = o.bottom ? h - M : h;
 	let rails = `M${FL} ${y0}V${y1}M${FR} ${y0}V${y1}`;
@@ -207,7 +215,7 @@ export async function slice(t: Theme, h: number, body: string, o: SliceOpts): Pr
 	if (o.top) corners += `<path d="M${FL - 7} ${y0 + 18}V${y0 - 7}H${FL + 18}"/><path d="M${FR - 18} ${y0 - 7}H${FR + 7}V${y0 + 18}"/>`;
 	if (o.bottom) corners += `<path d="M${FL - 7} ${y1 - 18}V${y1 + 7}H${FL + 18}"/><path d="M${FR - 18} ${y1 + 7}H${FR + 7}V${y1 - 18}"/>`;
 	const defs = baseDefs(t) + (o.defs ? `\n${o.defs}` : '');
-	return document(t, {...o, w: W, h, body, defs}, {
+	return document(t, {...o, w: g.W, h, body, defs}, {
 		under: `<path d="${glow}" fill="none" stroke="${t.accent}" stroke-width="3" opacity=".55" filter="url(#glow)"/>
 <rect x="${FL}" y="${y0}" width="${FR - FL}" height="${y1 - y0}" fill="${t.bg}"/>
 <rect x="${FL}" y="${y0}" width="${FR - FL}" height="${y1 - y0}" fill="url(#grid)"/>`,
@@ -217,11 +225,11 @@ export async function slice(t: Theme, h: number, body: string, o: SliceOpts): Pr
 }
 
 // Left or right half of a full-width row; only its outer side has a rail.
-export async function halfSlice(t: Theme, h: number, side: 'L' | 'R', body: string, o: Omit<SliceOpts, 'top' | 'bottom'>): Promise<string> {
+export async function halfSliceG(t: Theme, g: Geo, h: number, side: 'L' | 'R', body: string, o: Omit<SliceOpts, 'top' | 'bottom'>): Promise<string> {
 	if (h % 40) throw new Error(`slice height ${h} is not a multiple of 40`);
-	const rx = side === 'L' ? FL : HW - M;
-	const [bx0, bx1] = side === 'L' ? [FL, HW] : [0, HW - M];
-	return document(t, {...o, w: HW, h, body}, {
+	const rx = side === 'L' ? g.FL : g.HW - g.M;
+	const [bx0, bx1] = side === 'L' ? [g.FL, g.HW] : [0, g.HW - g.M];
+	return document(t, {...o, w: g.HW, h, body}, {
 		under: `<path d="M${rx} -40V${h + 40}" fill="none" stroke="${t.accent}" stroke-width="3" opacity=".55" filter="url(#glow)"/>
 <rect x="${bx0}" y="0" width="${bx1 - bx0}" height="${h}" fill="${t.bg}"/>
 <rect x="${bx0}" y="0" width="${bx1 - bx0}" height="${h}" fill="url(#grid)"/>`,
@@ -230,8 +238,9 @@ export async function halfSlice(t: Theme, h: number, side: 'L' | 'R', body: stri
 }
 
 // One of `n` equal segments of a full-width row (link buttons and the like).
-export async function segment(t: Theme, k: number, n: number, h: number, body: string, o: Omit<SliceOpts, 'top' | 'bottom' | 'defs'>): Promise<string> {
-	const seg = W / n;
+export async function segmentG(t: Theme, g: Geo, k: number, n: number, h: number, body: string, o: Omit<SliceOpts, 'top' | 'bottom' | 'defs'>): Promise<string> {
+	const {FL, FR} = g;
+	const seg = g.W / n;
 	const x0 = seg * k;
 	const first = k === 0;
 	const last = k === n - 1;
@@ -247,18 +256,34 @@ export async function segment(t: Theme, k: number, n: number, h: number, body: s
 	});
 }
 
-export function heading(t: Theme, y: number, name: string, counter: string): string {
+export function headingG(t: Theme, g: Geo, y: number, name: string, counter: string): string {
+	const {X, R} = g;
 	return `<text x="${X}" y="${y}" font-weight="700" fill="${t.accent}" filter="url(#g)" opacity=".8" style="font-size:20px">~/</text>
 <text x="${X}" y="${y}" font-weight="700" style="font-size:20px"><tspan class="cy">~/</tspan><tspan class="wh">${esc(name)}</tspan></text>
-<text x="${FR - 36}" y="${y}" text-anchor="end" letter-spacing="2" fill="${t.faint}" style="font-size:12px">${esc(counter)}</text>
-<line x1="${X}" y1="${y + 14}" x2="${FR - 36}" y2="${y + 14}" stroke="${t.accent}" stroke-opacity=".4"/>
+<text x="${R}" y="${y}" text-anchor="end" letter-spacing="2" fill="${t.faint}" style="font-size:12px">${esc(counter)}</text>
+<line x1="${X}" y1="${y + 14}" x2="${R}" y2="${y + 14}" stroke="${t.accent}" stroke-opacity=".4"/>
 <line x1="${X}" y1="${y + 14}" x2="${X + 120}" y2="${y + 14}" stroke="${t.accent}" stroke-width="2"/>
 <line x1="${X}" y1="${y + 14}" x2="${X + 120}" y2="${y + 14}" stroke="${t.accent}" stroke-width="3" filter="url(#g)"/>`;
 }
 
-export function prompt(cmd: string, delay = 0.15, comment = ''): string {
+// A `$ cmd # comment` line. `size` overrides the 15px default (phones).
+export function promptG(g: Geo, cmd: string, delay = 0.15, comment = '', y = 96, size?: number): string {
 	const c = comment ? ` <tspan class="fainter">${esc(comment)}</tspan>` : '';
-	return `<g class="ln" style="animation-delay:${delay.toFixed(2)}s"><text x="${X}" y="96" class="dim"><tspan class="gr">$</tspan> ${esc(cmd)}${c}</text></g>`;
+	const st = size ? ` style="font-size:${size}px"` : '';
+	return `<g class="ln" style="animation-delay:${delay.toFixed(2)}s"><text x="${g.X}" y="${y}" class="dim"${st}><tspan class="gr">$</tspan> ${esc(cmd)}${c}</text></g>`;
+}
+
+// Desktop shorthands (the original 880px API).
+export const slice = (t: Theme, h: number, body: string, o: SliceOpts) => sliceG(t, DESKTOP, h, body, o);
+export const halfSlice = (t: Theme, h: number, side: 'L' | 'R', body: string, o: Omit<SliceOpts, 'top' | 'bottom'>) => halfSliceG(t, DESKTOP, h, side, body, o);
+export const segment = (t: Theme, k: number, n: number, h: number, body: string, o: Omit<SliceOpts, 'top' | 'bottom' | 'defs'>) => segmentG(t, DESKTOP, k, n, h, body, o);
+export const heading = (t: Theme, y: number, name: string, counter: string) => headingG(t, DESKTOP, y, name, counter);
+export const prompt = (cmd: string, delay = 0.15, comment = '') => promptG(DESKTOP, cmd, delay, comment);
+
+// Stand-in for a phone layout that hasn't been designed yet.
+export async function placeholder(t: Theme, w: number, h: number, label: string): Promise<string> {
+	const body = `<rect x="0" y="0" width="${w}" height="${h}" fill="${t.bg}"/><text x="${w / 2}" y="${h / 2 + 4}" text-anchor="middle" class="dim" style="font-size:11px">${esc(label)} (phone layout pending)</text>`;
+	return document(t, {w, h, body, title: label, desc: label, text: label + ' (phone layout pending)'}, {under: '', over: ''});
 }
 
 // rows: markup with {y}, or null for a small spacer.
