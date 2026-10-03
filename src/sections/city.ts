@@ -285,7 +285,7 @@ ${plane(t, 120)}
 ${shapes}
 ${info}
 ${readout(t, g.X, 356, 12, 'start')}
-${legendRow(t, g.X, 382, 11, 10)}`;
+${legendRow(t, g.X, 382, 12, 11)}`;
 	return sliceG(t, g, H, body, {
 		title: `Contribution city ${WHEN[p]}`, desc: cityAlt(calendar), css: sc.css, defs: sc.defs,
 		text: `~/contribution-city${counter}$ render-city --last 365d # one building per dayquietskyscraper`,

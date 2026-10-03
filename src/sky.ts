@@ -82,6 +82,7 @@ export function mix(a: string, b: string, k: number): string {
 	return `#${x.map((v, i) => Math.round(v + (y[i] - v) * k).toString(16).padStart(2, '0')).join('')}`;
 }
 
+const BLUR = 4; // the sun's glow, px (as the console's #g)
 const SUN = '#ffd36e';
 const SUN_CORE = '#fff6d8';
 // Sky gradients from the top of the sky down to the horizon: [offset, color, opacity].
@@ -142,6 +143,9 @@ export function skyLayer(t: Theme, p: Exclude<Phase, 'night'>, b: SkyBox): SkyLa
 		`<mask id="sky" maskUnits="userSpaceOnUse" ${box}><rect x="${b.x0}" y="${b.top}" width="${split + 2 - b.x0}" height="${b.bottom - b.top}" fill="url(#fadel)"/>` +
 			`<rect x="${split}" y="${b.top}" width="${b.x1 - split}" height="${b.bottom - b.top}" fill="url(#fader)"/></mask>`,
 	];
+	// The sun's glow: the console's 4px blur, but with room for all of it
+	// (#g stops 20% of the shape's width out, which squares off a small sun).
+	defs.push(`<filter id="sunblur" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="${BLUR}"/></filter>`);
 	const grad = `<rect ${box} fill="url(#skygrad)" mask="url(#sky)"/>`;
 	const sun: string[] = [];
 	const css: string[] = [];
@@ -155,7 +159,7 @@ export function skyLayer(t: Theme, p: Exclude<Phase, 'night'>, b: SkyBox): SkyLa
 		}).join('');
 		sun.push(`<circle cx="${cx}" cy="${cy}" r="${f1(74 * k)}" fill="url(#sunglow)"/>`,
 			`<g class="rays"><path d="${rays}" stroke="${SUN}" stroke-width="${f1(2 * k)}" stroke-linecap="round" opacity=".75"/></g>`,
-			`<circle cx="${cx}" cy="${cy}" r="${f1(15 * k)}" fill="${SUN}" filter="url(#g)"/>`,
+			`<circle cx="${cx}" cy="${cy}" r="${f1(15 * k)}" fill="${SUN}" filter="url(#sunblur)"/>`,
 			`<circle cx="${cx}" cy="${cy}" r="${f1(15 * k)}" fill="${SUN_CORE}"/>`);
 		css.push(`@keyframes spin{to{transform:rotate(360deg)}}`, `.rays{transform-origin:${cx}px ${cy}px;animation:spin 80s linear infinite}`);
 	} else {
@@ -165,12 +169,15 @@ export function skyLayer(t: Theme, p: Exclude<Phase, 'night'>, b: SkyBox): SkyLa
 		const [top, bottom] = FACES[p];
 		defs.push(`<radialGradient id="sunglow"><stop offset="0" stop-color="${bottom}" stop-opacity=".3"/><stop offset=".5" stop-color="#ff9e3d" stop-opacity=".1"/><stop offset="1" stop-color="#ff9e3d" stop-opacity="0"/></radialGradient>`,
 			`<linearGradient id="sunface" x1="0" y1="0" x2="0" y2="1"><stop offset=".1" stop-color="${top}"/><stop offset="1" stop-color="${bottom}"/></linearGradient>`);
-		const sq = `x="${f1(cx - r)}" y="${f1(cy - r)}" width="${f1(2 * r)}" height="${f1(2 * r)}"`;
+		// The slits cut the face and its glow, so the mask reaches as far as
+		// the blur does (3σ past the face); anything it leaves out is cut square.
+		const reach = r + 3 * BLUR;
+		const sq = `x="${f1(cx - reach)}" y="${f1(cy - reach)}" width="${f1(2 * reach)}" height="${f1(2 * reach)}"`;
 		const bars = [[0.12, 0.07], [0.34, 0.1], [0.56, 0.13], [0.78, 0.16]]
 			.map(([y, h]) => `<rect x="${f1(cx - r)}" y="${f1(cy + y * r)}" width="${f1(2 * r)}" height="${f1(h * r)}" fill="#000"/>`).join('');
 		defs.push(`<mask id="slits" maskUnits="userSpaceOnUse" ${sq}><rect ${sq} fill="#fff"/>${bars}</mask>`);
 		sun.push(`<circle cx="${cx}" cy="${cy}" r="${f1(96 * k)}" fill="url(#sunglow)"/>`,
-			`<circle cx="${cx}" cy="${cy}" r="${f1(r)}" fill="${bottom}" filter="url(#g)" opacity=".7" mask="url(#slits)"/>`,
+			`<circle cx="${cx}" cy="${cy}" r="${f1(r)}" fill="${bottom}" filter="url(#sunblur)" opacity=".7" mask="url(#slits)"/>`,
 			`<circle cx="${cx}" cy="${cy}" r="${f1(r)}" fill="url(#sunface)" mask="url(#slits)"/>`);
 	}
 	// Neon clouds: every puff stroked, then filled on top, which leaves only
