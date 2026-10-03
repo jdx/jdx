@@ -74,7 +74,7 @@ async function fetchMau(): Promise<Snapshot['mau']> {
 // than freezing the stats.
 let graphqlToken = process.env.PROFILE_TOKEN || token;
 
-async function graphql<T>(query: string, variables: Record<string, unknown>): Promise<T> {
+async function graphql<T>(query: string, variables: Record<string, unknown>, attempt = 1): Promise<T> {
 	if (!graphqlToken) throw new Error('GraphQL needs GITHUB_TOKEN or PROFILE_TOKEN');
 	const res = await fetch('https://api.github.com/graphql', {
 		method: 'POST',
@@ -86,6 +86,10 @@ async function graphql<T>(query: string, variables: Record<string, unknown>): Pr
 		warn('PROFILE_TOKEN', `GraphQL returned HTTP ${res.status}; using GITHUB_TOKEN (public contributions only)`);
 		graphqlToken = token;
 		return graphql(query, variables);
+	}
+	if (res.status >= 500 && attempt < 3) {
+		await new Promise(r => setTimeout(r, 3000 * attempt));
+		return graphql(query, variables, attempt + 1);
 	}
 	if (!res.ok) throw new Error(`GraphQL: HTTP ${res.status}`);
 	const body = await res.json() as {data: T; errors?: {message: string}[]};
@@ -147,12 +151,16 @@ function streaks(days: Map<string, number>, today: Date): [number, number] {
 async function fetchGitHub(today: Date): Promise<{github: GitHubStats; calendar: Calendar}> {
 	const {user: u} = await graphql<Profile>(PROFILE_QUERY, {login: 'jdx'});
 	const years = [...u.contributionsCollection.contributionYears].sort();
-	const yearsQuery = `query($login: String!) { user(login: $login) {${years.map(y => `
+	// A few years per query: all 17 at once can take GitHub past its 10s limit (HTTP 504).
+	const ydata: Record<string, YearData> = {};
+	for (let i = 0; i < years.length; i += 4) {
+		const query = `query($login: String!) { user(login: $login) {${years.slice(i, i + 4).map(y => `
     y${y}: contributionsCollection(from: "${y}-01-01T00:00:00Z", to: "${y}-12-31T23:59:59Z") {
       contributionCalendar { totalContributions weeks { contributionDays { date contributionCount } } }
     }`).join('')}
   } }`;
-	const {user: ydata} = await graphql<{user: Record<string, YearData>}>(yearsQuery, {login: 'jdx'});
+		Object.assign(ydata, (await graphql<{user: Record<string, YearData>}>(query, {login: 'jdx'})).user);
+	}
 
 	const days = new Map<string, number>();
 	let all = 0;
@@ -252,23 +260,49 @@ function toolRepos(projects: Project[]): string[] {
 	return projects.map(p => p.repo).filter(r => r !== 'jdx/mise');
 }
 
-async function fetchStargazers(repo: string): Promise<RepoStars> {
-	if (!token) throw new Error('the stargazers API needs GITHUB_TOKEN');
-	const info = await github<{created_at: string; stargazers_count: number}>(`repos/${repo}`);
+// The stargazers list with starred_at dates refuses the Actions token (HTTP
+// 403), so it is only used with a PROFILE_TOKEN PAT.
+const starToken = process.env.PROFILE_TOKEN;
+
+async function listStargazers(repo: string): Promise<Record<string, number>> {
 	const daily: Record<string, number> = {};
 	for (let page = 1; page <= 400; page++) {
 		const res = await get(`https://api.github.com/repos/${repo}/stargazers?per_page=100&page=${page}`, {
-			headers: {accept: 'application/vnd.github.star+json', authorization: `Bearer ${token}`, 'x-github-api-version': '2022-11-28'},
+			headers: {accept: 'application/vnd.github.star+json', authorization: `Bearer ${starToken}`, 'x-github-api-version': '2022-11-28'},
 		});
 		const list = await res.json() as {starred_at: string}[];
 		for (const s of list) daily[s.starred_at.slice(0, 10)] = (daily[s.starred_at.slice(0, 10)] ?? 0) + 1;
 		if (list.length < 100) break;
 	}
-	return {
-		created_at: info.created_at.slice(0, 10),
-		total: info.stargazers_count,
-		daily: Object.fromEntries(Object.entries(daily).sort(([a], [b]) => a.localeCompare(b))),
-	};
+	return daily;
+}
+
+const sortDays = (daily: Record<string, number>) => Object.fromEntries(Object.entries(daily).sort(([a], [b]) => a.localeCompare(b)));
+
+// Without a PAT, each run adds the change in stargazers_count since the last
+// run to today's bucket of the committed history. Runs are hours apart, so the
+// histogram stays daily. A tool with no history yet gets all of its stars on
+// the day its repo was created.
+async function repoStars(repo: string, prev: RepoStars | undefined, today: string): Promise<RepoStars> {
+	const info = await github<{created_at: string; stargazers_count: number}>(`repos/${repo}`);
+	const created_at = info.created_at.slice(0, 10);
+	const total = info.stargazers_count;
+	if (starToken) {
+		try {
+			return {created_at, total, daily: sortDays(await listStargazers(repo))};
+		} catch (err) {
+			warn(`stargazers for ${repo}`, `${(err as Error).message}; tracking the star count instead`);
+		}
+	}
+	const daily = {...(prev?.daily ?? {})};
+	if (!prev) {
+		daily[created_at] = total;
+	} else {
+		const known = Object.values(daily).reduce((a, b) => a + b, 0);
+		daily[today] = (daily[today] ?? 0) + total - known;
+		if (!daily[today]) delete daily[today];
+	}
+	return {created_at, total, daily: sortDays(daily)};
 }
 
 // mise is too big for the stargazers API (it stops at 40k), so its 30-day
@@ -288,12 +322,12 @@ async function fetchMiseStars(end: string): Promise<Stars['mise']> {
 	return {total: cur[1], gain30: prior && days(prior[0], before) <= 3 ? cur[1] - prior[1] : null};
 }
 
-async function fetchStarHistory(projects: Project[], end: string, previous: Stars | null): Promise<Stars> {
+async function fetchStarHistory(projects: Project[], end: string, today: string, previous: Stars | null): Promise<Stars> {
 	const repos: Record<string, RepoStars> = {};
 	let ok = 0;
 	for (const repo of toolRepos(projects)) {
 		try {
-			repos[repo] = await fetchStargazers(repo);
+			repos[repo] = await repoStars(repo, previous?.repos[repo], today);
 			ok++;
 		} catch (err) {
 			warn(`stargazers for ${repo}`, `keeping the last value: ${(err as Error).message}`);
@@ -417,7 +451,7 @@ async function main() {
 	// Charts count complete UTC days only, so re-runs on the same day agree.
 	const end = iso(addDays(today, -1));
 	const prevStars: Stars | null = JSON.parse(await readFile('data/stars.json', 'utf8').catch(() => 'null'));
-	const stars = await attempt('star history', () => fetchStarHistory(snapshot.projects, end, prevStars), null);
+	const stars = await attempt('star history', () => fetchStarHistory(snapshot.projects, end, iso(today), prevStars), null);
 	if (stars) await writeFile('data/stars.json', `${JSON.stringify(stars)}\n`);
 	const installs = await attempt('installs', () => fetchInstalls(snapshot.projects), null);
 	if (installs) await writeFile('data/installs.json', `${JSON.stringify(installs, null, '\t')}\n`);

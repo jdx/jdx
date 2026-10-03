@@ -75,7 +75,7 @@ export async function trendingRow(t: Theme, r: Trend, i: number, max: number): P
 	const hx = 660;
 	const hmax = Math.max(1, ...r.daily);
 	const hist = r.daily.map((n, k) => {
-		const h = n ? Math.max(1.5, (n / hmax) * 24) : 0;
+		const h = n > 0 ? Math.max(1.5, (n / hmax) * 24) : 0;
 		return h ? `<rect x="${hx + k * 3}" y="${f1(32 - h)}" width="2" height="${f1(h)}"/>` : '';
 	}).join('');
 	const pitch = r.p.tagline || r.p.kind;
@@ -159,7 +159,7 @@ export async function phoneTrendingRow(t: Theme, r: Trend, i: number, max: numbe
 	const w = Math.max(2, (r.gain / max) * bw);
 	const hmax = Math.max(1, ...r.daily);
 	const hist = r.daily.map((n, k) => {
-		const h = n ? Math.max(1.5, (n / hmax) * 11) : 0;
+		const h = n > 0 ? Math.max(1.5, (n / hmax) * 11) : 0;
 		return h ? `<rect x="${PHX + k * 2}" y="${f1(33 - h)}" width="1.5" height="${f1(h)}"/>` : '';
 	}).join('');
 	const pitch = r.p.tagline || r.p.kind;
