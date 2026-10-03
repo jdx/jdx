@@ -16,8 +16,9 @@ text{font-family:'JBM',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font
 </style>
 <defs>
 <pattern id="grid" x="0" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#00d9ff" stroke-opacity=".06"/></pattern>
-<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+<filter id="glow" filterUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><feGaussianBlur stdDeviation="6"/></filter>
 <filter id="g" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="4"/></filter>
+<filter id="gl" filterUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><feGaussianBlur stdDeviation="4"/></filter>
 </defs>
 <path d="M16 -40V640M864 -40V640" fill="none" stroke="#00d9ff" stroke-width="3" opacity=".55" filter="url(#glow)"/>
 <rect x="16" y="0" width="848" height="600" fill="#03040a"/>
@@ -27,7 +28,7 @@ text{font-family:'JBM',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font
 <text x="828" y="44" text-anchor="end" letter-spacing="2" fill="#6e7681" style="font-size:12px">// 03</text>
 <line x1="52" y1="58" x2="828" y2="58" stroke="#00d9ff" stroke-opacity=".4"/>
 <line x1="52" y1="58" x2="172" y2="58" stroke="#00d9ff" stroke-width="2"/>
-<line x1="52" y1="58" x2="172" y2="58" stroke="#00d9ff" stroke-width="3" filter="url(#g)"/>
+<line x1="52" y1="58" x2="172" y2="58" stroke="#00d9ff" stroke-width="3" filter="url(#gl)"/>
 <g class="ln" style="animation-delay:0.15s"><text x="52" y="96" class="dim"><tspan class="gr">$</tspan> gh api graphql -F login=jdx -f query=@profile.graphql</text></g>
 <g class="ln" style="animation-delay:0.25s">
 <rect x="52.0" y="118" width="182.0" height="92" fill="#00d9ff" fill-opacity=".035" stroke="#00d9ff" stroke-opacity=".35"/>
