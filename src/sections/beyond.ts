@@ -42,8 +42,10 @@ function model(t: Theme, stars: Stars, projects: Project[]) {
 	const grand = totals.at(-1)!;
 	const yearAgo = shift(D, -365);
 	const yearAgoTotal = repos.reduce((a, [, s]) => a + cum(s, yearAgo), 0);
+	// Stars on tools launched within the year, to say honestly where the growth came from.
+	const launched = repos.filter(([, s]) => s.created_at > yearAgo).reduce((a, [, s]) => a + cum(s, D), 0);
 	const others = bands.length - (rest.length ? 1 : 0) + rest.length;
-	return {D, names, own, dates, bands, totals, grand, yearAgo, yearAgoTotal, others};
+	return {D, names, own, dates, bands, totals, grand, yearAgo, yearAgoTotal, others, launched};
 }
 
 type Model = ReturnType<typeof model>;
@@ -74,7 +76,7 @@ function pulses(m: Model, px1: number, yOf: (v: number) => number): string {
 }
 
 function describe(m: Model): string {
-	return `Stacked area chart of cumulative GitHub stars since January 2025 for jdx's tools other than mise: ${short(m.grand)} stars in total, about ${short(m.yearAgoTotal)} a year earlier, mostly from new launches. ` +
+	return `Stacked area chart of cumulative GitHub stars since January 2025 for jdx's tools other than mise: ${short(m.grand)} stars in total, about ${short(m.yearAgoTotal)} a year earlier${m.grand > m.yearAgoTotal && m.launched * 2 > m.grand - m.yearAgoTotal ? ', mostly from tools launched since then' : ''}. ` +
 		m.bands.slice().reverse().map(b => `${b.label} ${b.total}`).join(', ') + '.';
 }
 

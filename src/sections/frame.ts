@@ -113,13 +113,15 @@ export async function button(t: Theme, b: Button, k: number, n: number, delay0 =
 	const box = `M${f1(lx)} ${by}H${f1(lx + bw - cut)}L${f1(lx + bw)} ${by + cut}V${by + bh}H${f1(lx)}Z`;
 	const maxHandle = Math.floor((bw - 24) / 6);
 	const handle = b.handle.length > maxHandle ? `${b.handle.slice(0, maxHandle - 1)}…` : b.handle;
+	const maxLabel = Math.floor((bw - 44) / 7.8);
+	const label = b.label.length > maxLabel ? `${b.label.slice(0, maxLabel - 1)}…` : b.label;
 	const body = `<g class="ln" style="animation-delay:${(delay0 + k * 0.08).toFixed(2)}s">
 <path d="${box}" fill="${t.accent}" fill-opacity=".05"/>
 <path d="${box}" fill="none" stroke="${t.accent}" stroke-opacity=".55"/>
 <path d="M${f1(lx + bw - cut)} ${by}L${f1(lx + bw)} ${by + cut}" stroke="${t.accent}" stroke-width="2"/>
 <g filter="url(#g)" opacity=".5">${b.icon(t, Math.round(lx + 12), by + 11)}</g>
 ${b.icon(t, Math.round(lx + 12), by + 11)}
-<text x="${f1(lx + 38)}" y="${by + 25}" font-weight="700" class="cy" style="font-size:13px">${esc(b.label)}</text>
+<text x="${f1(lx + 38)}" y="${by + 25}" font-weight="700" class="cy" style="font-size:13px">${esc(label)}</text>
 <text x="${f1(lx + 12)}" y="${by + 46}" class="dim" style="font-size:10px">${esc(handle)}</text>
 </g>`;
 	return segment(t, k, n, h, body, {title: b.label, desc: `${b.label}: ${b.url}`, text: b.label + handle + '>_'});

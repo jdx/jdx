@@ -4,8 +4,10 @@ import {CREDIT_POST, CREDIT_URL, DAY, NEW_DAYS, age, iso, monthDay, parse, shift
 import {type Calendar, type Installs, type Post, type Project, type RepoStars, type Snapshot, type Stars, type ToolInstalls, slugify} from '../data.ts';
 
 // ───────────────────────────── ~/installs ─────────────────────────────
-type Card = {tool: string; v: ToolInstalls; p: Project; isNew: boolean};
-type Picked = {cards: Card[]; combined: number; baseline: number | null; hottest: Card | undefined};
+// isNew: launched in the last 60 days. lowBase: older, but under 1,000 installs the
+// month before, so a percentage would mostly measure the small base.
+type Card = {tool: string; v: ToolInstalls; p: Project; isNew: boolean; lowBase: boolean};
+type Picked = {cards: Card[]; combined: number | null; baseline: number | null; hottest: Card | undefined};
 
 // The tools both layouts show (up to six, NEW first, then by month-over-month
 // growth), or null, meaning no section, when fewer than three qualify.
@@ -17,20 +19,22 @@ function pick(data: Installs, stars: Stars | null, projects: Project[]): Picked 
 		.sort((a, b) => b[1].this_month - a[1].this_month).slice(0, 6)
 		.map(([tool, v]) => {
 			const c = created(v.repo);
-			const isNew = v.last_month < 1000 || (c ? age(c, data.end) < NEW_DAYS : false);
-			return {tool, v, p: byRepo.get(v.repo)!, isNew};
+			const isNew = c ? age(c, data.end) < NEW_DAYS : v.last_month < 1000;
+			return {tool, v, p: byRepo.get(v.repo)!, isNew, lowBase: !isNew && v.last_month < 1000};
 		})
 		.sort((a, b) => Number(b.isNew) - Number(a.isNew) || b.v.mom - a.v.mom);
 	if (cards.length < 3) return null;
-	const combined = (all.reduce((a, [, v]) => a + v.this_month, 0) / all.reduce((a, [, v]) => a + v.last_month, 0) - 1) * 100;
+	const lastSum = all.reduce((a, [, v]) => a + v.last_month, 0);
+	const combined = lastSum >= 1000 ? (all.reduce((a, [, v]) => a + v.this_month, 0) / lastSum - 1) * 100 : null;
 	const baseline = data.baseline_mom;
-	const hottest = cards.find(c => !c.isNew && c.v.mom > (baseline ?? 0));
+	const hottest = cards.find(c => !c.isNew && !c.lowBase && c.v.mom > (baseline ?? 0));
 	return {cards, combined, baseline, hottest};
 }
 
 // A card's NEW or month-over-month chip, as [label, color].
 function chipOf(t: Theme, c: Card, baseline: number | null): [string, string] {
 	if (c.isNew) return ['NEW', t.accent2];
+	if (c.lowBase) return [`from ${short(c.v.last_month)}`, t.accent];
 	return [`${c.v.mom >= 0 ? '+' : ''}${Math.round(c.v.mom)}%`, c.v.mom < 0 ? t.faint : baseline !== null && c.v.mom > baseline + 2 ? t.ok : t.accent];
 }
 
@@ -67,13 +71,17 @@ const CSS = `.spark{stroke-dasharray:1;stroke-dashoffset:0;animation:draw 1.2s e
 
 // "jdx tools +24% · all of mise +18% MoM", the growth in green.
 function growth({combined, baseline}: Picked): string {
-	return `jdx tools <tspan class="gr">${combined >= 0 ? '+' : ''}${Math.round(combined)}%</tspan>` + (baseline !== null ? ` · all of mise ${baseline >= 0 ? '+' : ''}${Math.round(baseline)}%` : '') + ' MoM';
+	const parts = [
+		...(combined !== null ? [`jdx tools <tspan class="gr">${combined >= 0 ? '+' : ''}${Math.round(combined)}%</tspan>`] : []),
+		...(baseline !== null ? [`all of mise ${baseline >= 0 ? '+' : ''}${Math.round(baseline)}%`] : []),
+	];
+	return parts.length ? `${parts.join(' · ')} MoM` : '';
 }
 
 function describe(data: Installs, {cards, combined, baseline}: Picked): string {
 	return `Installs of jdx's tools through mise in the 30 days to ${monthDay(data.end)}, CI excluded: ` +
-		cards.map(c => `${c.p.name} ${num(c.v.this_month)}${c.isNew ? ' (new)' : ` (${Math.round(c.v.mom)}% month over month)`}`).join(', ') +
-		`. jdx tools combined ${Math.round(combined)}% month over month` + (baseline !== null ? `, all of mise ${Math.round(baseline)}%.` : '.');
+		cards.map(c => `${c.p.name} ${num(c.v.this_month)}${c.isNew ? ' (new)' : c.lowBase ? ` (up from ${num(c.v.last_month)})` : ` (${Math.round(c.v.mom)}% month over month)`}`).join(', ') +
+		(combined !== null ? `. jdx tools combined ${Math.round(combined)}% month over month` : '') + (baseline !== null ? `, all of mise ${Math.round(baseline)}%.` : '.');
 }
 
 export async function installs(t: Theme, data: Installs, stars: Stars | null, projects: Project[], counter: string): Promise<string | null> {

@@ -31,7 +31,7 @@ export function milestone(history: Record<string, number>): string {
 function statsData(s: Snapshot, history: Record<string, number>, updated: string) {
 	const g = s.github;
 	const since = g ? new Date(g.created_at) : null;
-	const years = since ? Math.floor((Date.parse(`${updated}T00:00:00Z`) - since.getTime()) / (365 * 864e5)) : 0;
+	const years = since ? yearsSince(since, updated) : 0;
 	const t1: [string, string, string][] = [
 		['TOTAL STARS', num(s.stars), 'jdx + aubepkg repos'],
 		[`CONTRIBUTIONS ${g?.year ?? ''}`, num(g?.contributions_year), `${num(g?.contributions_all)} all time`],
@@ -227,4 +227,11 @@ ${legend}
 	}
 	parts.push(`<text x="${R}" y="${fy}" text-anchor="end" class="fainter" style="font-size:11px">// last sync ${updated}</text>`);
 	return sliceG(t, PHONE, up40(fy + 16), parts.join('\n'), {title: 'Stats', desc, text: '—%.()d…'});
+}
+
+// Whole calendar years from `since` to the `updated` date (UTC).
+function yearsSince(since: Date, updated: string): number {
+	const u = new Date(`${updated}T00:00:00Z`);
+	const before = u.getUTCMonth() < since.getUTCMonth() || (u.getUTCMonth() === since.getUTCMonth() && u.getUTCDate() < since.getUTCDate());
+	return u.getUTCFullYear() - since.getUTCFullYear() - (before ? 1 : 0);
 }

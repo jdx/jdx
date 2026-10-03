@@ -6,7 +6,7 @@ import {type Calendar, type Installs, type Post, type Project, type RepoStars, t
 import {type Phase, type SkyBox, WHEN, daylight, mix, phaseColor, sky, skyLayer} from '../sky.ts';
 
 // ─────────────────────────── contribution city ────────────────────────
-// Isometric skyline, one building per day: height = 8 + 110·sqrt(count/peak),
+// Isometric skyline, one building per day: taller for days that rank higher,
 // drawn back to front, with windows from a seeded RNG so the same data always
 // draws the same city.
 export const CITY_TW = 25;
@@ -67,12 +67,36 @@ function cells(calendar: Calendar): Cells {
 	}).sort((a, b) => (a.w + a.dow) - (b.w + b.dow) || a.w - b.w);
 }
 
-// Buildings back to front: height = 8s + (hmax - 8s)·sqrt(count/peak).
+// Where a day ranks among the active days, 0 (quietest) to 1 (busiest), with
+// ties sharing their middle rank. GitHub shades the graph by the same kind of
+// rank (quartiles), so heights follow it and one huge day can't flatten the
+// rest of the skyline.
+function ranker(counts: number[]): (n: number) => number {
+	const nz = counts.filter(c => c > 0).sort((a, b) => a - b);
+	return n => {
+		const lo = nz.indexOf(n);
+		const hi = nz.lastIndexOf(n);
+		return nz.length > 1 ? (lo + hi) / 2 / (nz.length - 1) : 1;
+	};
+}
+
+// The headline numbers cover exactly the last 365 days; the drawn grid is
+// whole weeks (up to 371 days) so it lines up like GitHub's graph.
+function yearStats(calendar: Calendar): {total: number; active: number; busiest: [string, number]} {
+	const year = calendar.slice(-365);
+	return {
+		total: year.reduce((a, [, n]) => a + n, 0),
+		active: year.filter(([, n]) => n).length,
+		busiest: year.reduce((best, cur) => (cur[1] > best[1] ? cur : best), year[0]),
+	};
+}
+
+// Buildings back to front: height = 8s + (hmax - 8s)·rank^1.3.
 function buildings(t: Theme, calendar: Calendar, next: () => number, g: Iso, p: Phase): string {
 	const C = t.city;
 	const F = faces(t, p);
 	const counts = calendar.map(([, n]) => n);
-	const peak = Math.max(0, ...counts);
+	const rank = ranker(counts);
 	const lv = levels(counts);
 	const {tw, th, s, ws} = g;
 	const shapes: string[] = [];
@@ -88,7 +112,7 @@ function buildings(t: Theme, calendar: Calendar, next: () => number, g: Iso, p: 
 			shapes.push(`<path d="M${p2(...T)}L${p2(...R)}L${p2(...B)}L${p2(...L)}Z" fill="${C.empty}" stroke="${C.emptyStroke}" stroke-width="${String(0.6 * s).replace(/^0\./, '.')}"/>`);
 			continue;
 		}
-		const h = 8 * s + (g.hmax - 8 * s) * Math.sqrt(n / peak);
+		const h = 8 * s + (g.hmax - 8 * s) * rank(n) ** 1.3;
 		const level = lv.filter(lim => n > lim).length;
 		const [Tu, Ru, Bu, Lu] = [T, R, B, L].map(([x, y]) => [x, y - h] as [number, number]);
 		shapes.push(`<path d="M${p2(...L)}L${p2(...B)}L${p2(...Bu)}L${p2(...Lu)}Z" fill="${F.left}"/>` +
@@ -222,11 +246,12 @@ export async function city(t: Theme, calendar: Calendar, updated: string, counte
 		high: [FR - 80, 160], low: [FR - 86, 486], k: 1, clouds: [[488, 150, 1], [606, 226, 0.8]], drift: 40,
 	}, {x: FL, w: FR - FL, h: 680});
 	const st = stars(t, next, {x0: 470, w: 350, y0: 118, h: 150, n: 46, skip: (x, y) => x > 700 && y < 215}, p);
-	const busiest = calendar.reduce((best, cur) => (cur[1] > best[1] ? cur : best), calendar[0]);
+	const year = yearStats(calendar);
+	const busiest = year.busiest;
 	const info = [
-		`<tspan class="cy" font-weight="700">${num(total)}</tspan> contributions · last 365 days`,
+		`<tspan class="cy" font-weight="700">${num(year.total)}</tspan> contributions · last 365 days`,
 		busiest[1] ? `busiest day <tspan class="fg">${monthDay(busiest[0])}</tspan> · ${busiest[1]}` : '',
-		`${counts.filter(n => n).length} active days`,
+		`${year.active} active days`,
 	].filter(Boolean).map((s, i) => `<text x="${FR - 36}" y="${300 + i * 20}" text-anchor="end" class="dim" style="font-size:12px">${s}</text>`).join('');
 	const legend = [C.empty, ...C.roofs].map((c, i) => `<rect x="${X + 52 + i * 16}" y="642" width="11" height="11" fill="${c}"/>`).join('');
 	const body = `${heading(t, 44, 'contribution-city', counter)}
@@ -244,8 +269,7 @@ ${readout(t, FR - 36, 652, 11, 'end')}`;
 }
 
 export function cityAlt(calendar: Calendar): string {
-	const total = calendar.reduce((a, [, n]) => a + n, 0);
-	const busiest = calendar.reduce((best, cur) => (cur[1] > best[1] ? cur : best), calendar[0]);
+	const {total, busiest} = yearStats(calendar);
 	const s = sky();
 	return `Contribution city: an isometric skyline ${WHEN[s.phase]} (${s.event} ${s.at} in jdx's time zone) with one building per day of the last year, taller and brighter for busier days. ${num(total)} contributions` +
 		(busiest[1] ? `, busiest day ${monthDay(busiest[0], true)} with ${busiest[1]}.` : '.');
@@ -272,11 +296,12 @@ export async function phoneCity(t: Theme, calendar: Calendar, updated: string, c
 		high: [g.R - 34, 134], low: [g.R - 30, 286], k: 0.6, clouds: [[236, 124, 0.8], [292, 186, 0.62]], drift: 22,
 	}, {x: g.FL, w: g.FR - g.FL, h: H});
 	const st = stars(t, next, {x0: 150, w: 270, y0: 104, h: 110, n: 34, skip: (x, y) => x > 340 && y < 168}, p);
-	const busiest = calendar.reduce((best, cur) => (cur[1] > best[1] ? cur : best), calendar[0]);
+	const year = yearStats(calendar);
+	const busiest = year.busiest;
 	const info = [
-		`<tspan class="cy" font-weight="700">${num(total)}</tspan> contributions`,
+		`<tspan class="cy" font-weight="700">${num(year.total)}</tspan> contributions`,
 		busiest[1] ? `busiest day <tspan class="fg">${monthDay(busiest[0])}</tspan> · ${busiest[1]}` : '',
-		`${counts.filter(n => n).length} active days`,
+		`${year.active} active days`,
 	].filter(Boolean).map((s, i) => `<text x="${g.X}" y="${294 + i * 18}" class="dim" style="font-size:12px">${s}</text>`).join('');
 	const body = `${headingG(t, g, 44, 'contribution-city', counter)}
 ${promptG(g, 'render-city --last 365d', 0.15, '# one building per day', 90, 13)}

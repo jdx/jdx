@@ -19,7 +19,8 @@ export function trends(t: Theme, stars: Stars, projects: Project[]): {rows: Tren
 			const prior = sum(s.daily, shift(from, -days), shift(from, -1));
 			const isNew = age(s.created_at, D) < NEW_DAYS;
 			// ▲ only when the previous window is a fair comparison.
-			const ratio = !isNew && prior >= 20 && gain / prior >= 1.2 ? gain / prior : null;
+			// The window before must lie entirely after the repo was created.
+			const ratio = age(s.created_at, D) >= 2 * days && prior >= 20 && gain / prior >= 1.2 ? gain / prior : null;
 			const daily = Array.from({length: 30}, (_, i) => s.daily[shift(D, i - 29)] ?? 0);
 			return [{p, color: toolColor(t, repo), gain, gain7: sum(s.daily, shift(D, -6), D), prior, total: sum(s.daily, '0000', D), isNew, ratio, daily}];
 		}).filter(r => r.gain > 0)
@@ -32,7 +33,7 @@ export function trends(t: Theme, stars: Stars, projects: Project[]): {rows: Tren
 export async function trendingHead(t: Theme, stars: Stars, days: number, counter: string): Promise<string> {
 	const sub = `★ gained · ${days} days to ${monthDay(stars.end)} (UTC)`;
 	const m = stars.mise;
-	const right = m ? `<tspan class="cy" font-weight="700">mise</tspan> ${short(m.total)}★ · +${num(m.gain30)} in 30d` : '';
+	const right = m ? `<tspan class="cy" font-weight="700">mise</tspan> ${short(m.total)}★${m.gain30 === null ? '' : ` · +${num(m.gain30)} in 30d`}` : '';
 	const body = `${heading(t, 44, 'trending', counter)}
 ${prompt('gh api repos/jdx/{tool}/stargazers --paginate', 0.15, '# what is getting starred')}
 <g class="ln" style="animation-delay:.25s">
@@ -118,7 +119,7 @@ const CH13 = 7.8; // and at 13px
 export async function phoneTrendingHead(t: Theme, stars: Stars, days: number, counter: string): Promise<string> {
 	const sub = `★ gained · ${days} days to ${monthDay(stars.end)} (UTC)`;
 	const m = stars.mise;
-	const mise = m ? `<tspan class="cy" font-weight="700">mise</tspan> ${short(m.total)}★ · +${num(m.gain30)} in 30d` : '';
+	const mise = m ? `<tspan class="cy" font-weight="700">mise</tspan> ${short(m.total)}★${m.gain30 === null ? '' : ` · +${num(m.gain30)} in 30d`}` : '';
 	const body = `${headingG(t, P, 44, 'trending', counter)}
 ${promptG(P, 'gh api repos/jdx/{tool}/stargazers', 0.15, '# starred', 92, 13)}
 <g class="ln" style="animation-delay:.25s">
