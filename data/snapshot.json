@@ -188,12 +188,12 @@
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
 		"followers": 4309,
-		"public_repos": 383,
-		"prs": 11423,
-		"prs_merged": 10624,
+		"public_repos": 384,
+		"prs": 10952,
+		"prs_merged": 10183,
 		"year": 2026,
-		"contributions_year": 17431,
-		"contributions_all": 60446,
+		"contributions_year": 17433,
+		"contributions_all": 60448,
 		"streak_current": 76,
 		"streak_longest": 76,
 		"languages": {
