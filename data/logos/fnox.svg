@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <circle cx="100" cy="100" r="96" fill="#0a0e1a"/>
+  <circle cx="100" cy="100" r="89" fill="none" stroke="#d4af37" stroke-width="5"/>
+  <path fill="#d4af37" fill-rule="evenodd" d="
+    M44,34
+    L82,58
+    L118,58
+    L156,34
+    L150,100
+    L100,170
+    L50,100
+    Z
+    M88.5,100.6
+    A17,17 0 1 1 111.5,100.6
+    L116,140
+    L84,140
+    Z"/>
+  <path fill="#0a0e1a" d="M62,80 L78,86 L68,94 Z"/>
+  <path fill="#0a0e1a" d="M138,80 L122,86 L132,94 Z"/>
+</svg>

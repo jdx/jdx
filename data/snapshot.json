@@ -1,0 +1,182 @@
+{
+	"intro": "I build and maintain developer tools full-time at entire.io.",
+	"projects": [
+		{
+			"description": "Dev tools, environment variables, and tasks in one project config.",
+			"href": "https://mise.jdx.dev",
+			"install": "curl https://mise.run | sh",
+			"kind": "Rust CLI",
+			"logo": "https://jdx.dev/images/projects/mise.svg",
+			"name": "mise",
+			"repo": "jdx/mise",
+			"stars": "34.5k",
+			"tagline": "dev tools, env vars, and tasks"
+		},
+		{
+			"description": "Encrypted and remote secret management for development workflows.",
+			"href": "https://fnox.jdx.dev",
+			"install": "mise use -g fnox",
+			"kind": "Rust CLI",
+			"logo": "https://jdx.dev/images/projects/fnox.svg",
+			"name": "fnox",
+			"repo": "jdx/fnox",
+			"stars": "2.2k",
+			"tagline": "secrets for dev workflows"
+		},
+		{
+			"description": "A fast Node.js package manager with npm, pnpm, and yarn compatibility.",
+			"href": "https://aube.jdx.dev",
+			"install": "mise use -g aube",
+			"kind": "Rust CLI",
+			"logo": "https://jdx.dev/images/projects/aube.svg",
+			"name": "aube",
+			"repo": "aubepkg/aube",
+			"stars": "2k",
+			"tagline": "a fast Node.js package manager"
+		},
+		{
+			"description": "Fast git hooks and project lints for large repos.",
+			"href": "https://hk.jdx.dev",
+			"install": "mise use -g hk",
+			"kind": "Rust CLI",
+			"logo": "https://jdx.dev/images/projects/hk.png",
+			"name": "hk",
+			"repo": "jdx/hk",
+			"stars": "1.2k",
+			"tagline": "fast git hooks and lints"
+		},
+		{
+			"description": "A CLI specification for generating docs, completions, and parsers.",
+			"href": "https://usage.jdx.dev",
+			"install": "mise use -g usage",
+			"kind": "Rust spec",
+			"logo": "https://jdx.dev/images/projects/usage-nav.png",
+			"name": "usage",
+			"repo": "jdx/usage",
+			"stars": "1k",
+			"tagline": "a specification for CLIs"
+		},
+		{
+			"description": "Daemons with DX: long-running development processes with supervision.",
+			"href": "https://pitchfork.jdx.dev",
+			"install": "mise use -g pitchfork",
+			"kind": "Rust CLI",
+			"logo": "https://jdx.dev/images/projects/pitchfork.png",
+			"name": "pitchfork",
+			"repo": "jdx/pitchfork",
+			"stars": "675",
+			"tagline": "daemons with DX"
+		},
+		{
+			"description": "Share compiled Rust work across worktrees and CI with automatic cache pruning.",
+			"href": "https://mr-boxington.jdx.dev",
+			"install": "mise use -g mbx",
+			"kind": "Rust CLI",
+			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
+			"name": "mr boxington",
+			"repo": "jdx/mr-boxington",
+			"stars": "439",
+			"tagline": "a shared Rust build cache"
+		},
+		{
+			"description": "Prompt components for building polished Rust CLIs.",
+			"href": "https://github.com/jdx/demand",
+			"install": "cargo add demand",
+			"kind": "Rust library",
+			"logo": "https://jdx.dev/images/projects/demand.svg",
+			"name": "demand",
+			"repo": "jdx/demand",
+			"stars": "260",
+			"tagline": "prompts for Rust CLIs"
+		},
+		{
+			"description": "Editorialized release notes powered by AI.",
+			"href": "https://github.com/jdx/communique",
+			"install": "mise use -g communique",
+			"kind": "Rust CLI",
+			"logo": "https://jdx.dev/images/projects/communique.svg",
+			"name": "communique",
+			"repo": "jdx/communique",
+			"stars": "116",
+			"tagline": "AI-edited release notes"
+		},
+		{
+			"description": "A signed release manifest for vendor binaries.",
+			"href": "https://packslip.dev",
+			"install": "mise use -g packslip",
+			"kind": "Rust CLI",
+			"logo": "https://jdx.dev/images/projects/packslip.svg",
+			"name": "packslip",
+			"repo": "jdx/packslip",
+			"stars": "85",
+			"tagline": "signed vendor release manifests"
+		},
+		{
+			"description": "Precompiled Rubies for fast installs.",
+			"href": "https://mise.jdx.dev/lang/ruby.html",
+			"install": "mise use ruby",
+			"kind": "Ruby builds",
+			"logo": "https://jdx.dev/images/projects/ruby.svg",
+			"name": "ruby",
+			"repo": "jdx/ruby",
+			"stars": "45",
+			"tagline": "precompiled Rubies"
+		},
+		{
+			"description": "Benchmark CLIs and track performance over time.",
+			"href": "https://github.com/jdx/tak",
+			"install": "mise use -g tak",
+			"kind": "Rust CLI",
+			"logo": "https://jdx.dev/images/projects/tak.svg",
+			"name": "tak",
+			"repo": "jdx/tak",
+			"stars": "42",
+			"tagline": "CLI performance, tracked"
+		}
+	],
+	"posts": [
+		{
+			"title": "Dotfiles That Save Themselves",
+			"url": "https://jdx.dev/posts/2026-09-07-dotfiles-that-save-themselves/",
+			"date": "2026-09-07",
+			"description": "Track the configuration you already use, recover mistakes, and bring your setup to another machine with mise."
+		},
+		{
+			"title": "Introducing packslip",
+			"url": "https://jdx.dev/posts/2026-09-05-introducing-packslip/",
+			"date": "2026-09-05",
+			"description": "Install tools directly from vendors, with completions and agent skills that match the version you're using."
+		},
+		{
+			"title": "Introducing mr-boxington: fix target/",
+			"url": "https://jdx.dev/posts/2026-09-05-introducing-mr-boxington/",
+			"date": "2026-09-05",
+			"description": "A shared, self-pruning build cache for Rust. Keep using Cargo, reuse compilations across worktrees, and run builds together without overwhelming your machine."
+		},
+		{
+			"title": "Going Full Time on Open Source",
+			"url": "https://jdx.dev/posts/2026-04-17-going-full-time-on-open-source/",
+			"date": "2026-04-23",
+			"description": "Why I left Figma to work full-time on open source, and how I plan to make the work sustainable."
+		},
+		{
+			"title": "Top 10 Features in Mise You're Not Using",
+			"url": "https://jdx.dev/posts/2026-03-02-10-mise-features/",
+			"date": "2026-03-02",
+			"description": "Ten useful mise features for faster tasks, secure tool installs, reproducible environments, and monorepos."
+		}
+	],
+	"mau": {
+		"date": "2026-10-02",
+		"value": 952702
+	},
+	"stars": 43812,
+	"issues": {
+		"count": 48,
+		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue -author:app/greenkeeper -author:app/renovate"
+	},
+	"prs": {
+		"count": 76,
+		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
+	}
+}

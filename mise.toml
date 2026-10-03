@@ -1,0 +1,24 @@
+[tools]
+node = "26"
+aube = "2.6"
+
+[tasks.install]
+description = "install node dependencies"
+run = "aube install --frozen-lockfile"
+sources = ["package.json", "aube-lock.yaml"]
+outputs = { auto = true }
+
+[tasks.fetch]
+description = "fetch projects, posts, and counts into data/"
+depends = ["install"]
+run = "node src/fetch.ts"
+
+[tasks.render]
+description = "render assets/*.svg and README.md from data/"
+depends = ["install"]
+run = "node src/render.ts"
+
+[tasks.readme]
+description = "fetch fresh data and regenerate the profile README"
+depends = ["fetch"]
+run = "node src/render.ts"

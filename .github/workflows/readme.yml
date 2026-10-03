@@ -1,0 +1,36 @@
+name: readme
+
+on:
+  schedule:
+    - cron: "23 13 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["src/**", "mise.toml", "package.json", "aube-lock.yaml", ".github/workflows/readme.yml"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: readme
+
+jobs:
+  readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: jdx/mise-action@7a4e45a543138629540c9a1616d08632b893e492 # v5.0.1
+      - name: Regenerate README
+        run: mise run readme
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Commit changes
+        run: |
+          git add README.md assets data
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: refresh profile"
+          git push
