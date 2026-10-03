@@ -2,7 +2,11 @@ name: readme
 
 on:
   schedule:
+    # fetch fresh data and render
     - cron: "23 13 * * *"
+    # render only: the contribution city's sky follows the time of day in
+    # Dallas (src/sky.ts), so this commits when its phase changes, ~4x a day
+    - cron: "53 * * * *"
   workflow_dispatch:
   push:
     branches: [main]
@@ -21,8 +25,9 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - uses: jdx/mise-action@7a4e45a543138629540c9a1616d08632b893e492 # v5.0.1
       - name: Regenerate README
-        run: mise run readme
+        run: mise run "$TASK"
         env:
+          TASK: ${{ github.event.schedule == '53 * * * *' && 'render' || 'readme' }}
           GITHUB_TOKEN: ${{ github.token }}
           # optional PAT (read:user); adds private contributions to the stats and city
           PROFILE_TOKEN: ${{ secrets.PROFILE_TOKEN }}
