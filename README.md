@@ -12,7 +12,7 @@
 <a href="https://usage.jdx.dev"><img src="./assets/trending/6.svg" width="100%" align="top" alt="usage: +66 stars in 30 days, 1049 total"></a>
 <img src="./assets/trending/legend.svg" width="100%" align="top" alt="Legend">
 <img src="./assets/stats.svg" width="100%" align="top" alt="Stats">
-<img src="./assets/contribution-city.svg" width="100%" align="top" alt="Contribution city: an isometric night skyline with one building per day of the last year, taller and brighter for busier days. 20,069 contributions, busiest day September 5 with 392.">
+<img src="./assets/contribution-city.svg" width="100%" align="top" alt="Contribution city: an isometric night skyline with one building per day of the last year, taller and brighter for busier days. 20,071 contributions, busiest day September 5 with 390.">
 <img src="./assets/beyond-mise.svg" width="100%" align="top" alt="Beyond mise: cumulative stars of every other tool">
 <img src="./assets/installs.svg" width="100%" align="top" alt="Installs of jdx tools through mise">
 <img src="./assets/projects.svg" width="100%" align="top" alt="Projects">
