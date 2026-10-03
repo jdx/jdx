@@ -24,6 +24,8 @@ jobs:
         run: mise run readme
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          # optional PAT (read:user); adds private contributions to the stats and city
+          PROFILE_TOKEN: ${{ secrets.PROFILE_TOKEN }}
       - name: Commit changes
         run: |
           git add README.md assets data

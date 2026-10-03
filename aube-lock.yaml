@@ -14,6 +14,9 @@ importers:
       sharp:
         specifier: ^0.35.5
         version: 0.35.5
+      simple-icons:
+        specifier: ^16.33.0
+        version: 16.33.0
       subset-font:
         specifier: ^2.9.0
         version: 2.9.0
@@ -222,6 +225,10 @@ packages:
       '@types/node':
         optional: true
 
+  simple-icons@16.33.0:
+    resolution: {integrity: sha512-z14u6A8ngAg9mgERRsNO8YkjIMefehIpBk7A8Dz3Gd91945qFP19MLPSHgV4z8P5u/MRYd5e07OTzaDoB4d6qA==}
+    engines: {node: '>=0.12.18'}
+
   subset-font@2.9.0:
     resolution: {integrity: sha512-WJulQeFwbewrXIGcLJbSZFWI44fHW8gNRuPzLywfDL8w38IPRbN1JFxwG76aoohw9kcFdvjVIn2QmID1iy119A==}
 
@@ -404,6 +411,8 @@ snapshots:
       '@img/sharp-win32-arm64': 0.35.5
       '@img/sharp-win32-ia32': 0.35.5
       '@img/sharp-win32-x64': 0.35.5
+
+  simple-icons@16.33.0: {}
 
   subset-font@2.9.0:
     dependencies:

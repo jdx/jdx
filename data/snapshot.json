@@ -50,7 +50,7 @@
 			"href": "https://usage.jdx.dev",
 			"install": "mise use -g usage",
 			"kind": "Rust spec",
-			"logo": "https://jdx.dev/images/projects/usage-nav.png",
+			"logo": "https://jdx.dev/images/projects/usage.svg",
 			"name": "usage",
 			"repo": "jdx/usage",
 			"stars": "1k",
@@ -109,7 +109,7 @@
 			"name": "packslip",
 			"repo": "jdx/packslip",
 			"stars": "85",
-			"tagline": "signed vendor release manifests"
+			"tagline": "signed release manifests"
 		},
 		{
 			"description": "Precompiled Rubies for fast installs.",
@@ -139,44 +139,105 @@
 			"title": "Dotfiles That Save Themselves",
 			"url": "https://jdx.dev/posts/2026-09-07-dotfiles-that-save-themselves/",
 			"date": "2026-09-07",
-			"description": "Track the configuration you already use, recover mistakes, and bring your setup to another machine with mise."
+			"description": "Track the configuration you already use, recover mistakes, and bring your setup to another machine with mise.",
+			"reading_time": 9
 		},
 		{
 			"title": "Introducing packslip",
 			"url": "https://jdx.dev/posts/2026-09-05-introducing-packslip/",
 			"date": "2026-09-05",
-			"description": "Install tools directly from vendors, with completions and agent skills that match the version you're using."
+			"description": "Install tools directly from vendors, with completions and agent skills that match the version you're using.",
+			"reading_time": 10
 		},
 		{
 			"title": "Introducing mr-boxington: fix target/",
 			"url": "https://jdx.dev/posts/2026-09-05-introducing-mr-boxington/",
 			"date": "2026-09-05",
-			"description": "A shared, self-pruning build cache for Rust. Keep using Cargo, reuse compilations across worktrees, and run builds together without overwhelming your machine."
+			"description": "A shared, self-pruning build cache for Rust. Keep using Cargo, reuse compilations across worktrees, and run builds together without overwhelming your machine.",
+			"reading_time": 15
 		},
 		{
 			"title": "Going Full Time on Open Source",
 			"url": "https://jdx.dev/posts/2026-04-17-going-full-time-on-open-source/",
 			"date": "2026-04-23",
-			"description": "Why I left Figma to work full-time on open source, and how I plan to make the work sustainable."
+			"description": "Why I left Figma to work full-time on open source, and how I plan to make the work sustainable.",
+			"reading_time": 4
 		},
 		{
 			"title": "Top 10 Features in Mise You're Not Using",
 			"url": "https://jdx.dev/posts/2026-03-02-10-mise-features/",
 			"date": "2026-03-02",
-			"description": "Ten useful mise features for faster tasks, secure tool installs, reproducible environments, and monorepos."
+			"description": "Ten useful mise features for faster tasks, secure tool installs, reproducible environments, and monorepos.",
+			"reading_time": 6
 		}
 	],
 	"mau": {
 		"date": "2026-10-02",
-		"value": 952702
+		"value": 952702,
+		"dau": 75800
 	},
-	"stars": 43812,
+	"stars": 43819,
 	"issues": {
-		"count": 48,
+		"count": 49,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue -author:app/greenkeeper -author:app/renovate"
 	},
 	"prs": {
-		"count": 76,
+		"count": 70,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
+	},
+	"github": {
+		"created_at": "2010-03-04T23:56:27Z",
+		"followers": 4309,
+		"public_repos": 383,
+		"prs": 11423,
+		"prs_merged": 10624,
+		"year": 2026,
+		"contributions_year": 17431,
+		"contributions_all": 60446,
+		"streak_current": 76,
+		"streak_longest": 76,
+		"languages": {
+			"Rust": 46380667,
+			"Shell": 5749909,
+			"TypeScript": 1464986,
+			"Vim Script": 1006159,
+			"JavaScript": 839766,
+			"Go": 683393,
+			"Python": 599668,
+			"PowerShell": 426574,
+			"Ruby": 381485,
+			"HTML": 347517,
+			"CSS": 336255,
+			"Pkl": 299064,
+			"C": 282267,
+			"Astro": 196025,
+			"Vue": 141539,
+			"Lua": 140947,
+			"Roff": 50902,
+			"Assembly": 39003,
+			"Dockerfile": 33009,
+			"Nix": 27532,
+			"Linker Script": 24748,
+			"Less": 10634,
+			"HCL": 9698,
+			"Just": 8857,
+			"Tape": 5272,
+			"Xonsh": 5036,
+			"Nushell": 4327,
+			"C++": 4114,
+			"Objective-C": 3373,
+			"WebAssembly": 3326,
+			"Inno Setup": 2466,
+			"Gherkin": 1995,
+			"CoffeeScript": 1710,
+			"Makefile": 747,
+			"jq": 726,
+			"AppleScript": 624,
+			"Go Template": 621,
+			"Brainfuck": 176,
+			"Batchfile": 151,
+			"Standard ML": 96,
+			"GDB": 2
+		}
 	}
 }
