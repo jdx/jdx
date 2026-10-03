@@ -389,6 +389,19 @@ async function fetchInstalls(projects: Project[]): Promise<Installs> {
 	return {end, baseline_mom: baseline, tools_ranked: ranked.length, tools};
 }
 
+// mise-versions only serves the last 30 days, so every daily count we have
+// seen is kept in data/installs-history.json ({tool: {date: installs}}) for
+// longer trends later. Later fetches overwrite a day, in case the API revised it.
+async function appendInstallHistory(installs: Installs): Promise<void> {
+	const history: Record<string, Record<string, number>> = JSON.parse(await readFile('data/installs-history.json', 'utf8').catch(() => '{}'));
+	for (const [tool, v] of Object.entries(installs.tools)) {
+		history[tool] = {...history[tool], ...Object.fromEntries(v.daily)};
+	}
+	const sorted = Object.fromEntries(Object.keys(history).sort().map(tool =>
+		[tool, Object.fromEntries(Object.entries(history[tool]).sort(([a], [b]) => a.localeCompare(b)))]));
+	await writeFile('data/installs-history.json', `${JSON.stringify(sorted)}\n`);
+}
+
 // Downloads every logo before touching data/logos, so a failure part-way
 // leaves the previous set intact. Raster logos are shrunk to LOGO_SIZE since
 // each card embeds its logo as a data URI.
@@ -454,7 +467,10 @@ async function main() {
 	const stars = await attempt('star history', () => fetchStarHistory(snapshot.projects, end, iso(today), prevStars), null);
 	if (stars) await writeFile('data/stars.json', `${JSON.stringify(stars)}\n`);
 	const installs = await attempt('installs', () => fetchInstalls(snapshot.projects), null);
-	if (installs) await writeFile('data/installs.json', `${JSON.stringify(installs, null, '\t')}\n`);
+	if (installs) {
+		await writeFile('data/installs.json', `${JSON.stringify(installs, null, '\t')}\n`);
+		await appendInstallHistory(installs);
+	}
 
 	// Keeping the last value is fine for a run or two, but a source that keeps
 	// failing should turn the run red instead of freezing part of the profile.
