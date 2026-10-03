@@ -1,5 +1,5 @@
 // ~/trending: stars gained by each tool this month.
-import {DESKTOP, FL, FR, HW, M, PHONE, type Geo, type Theme, W, X, esc, f1, halfSlice, halfSliceG, heading, headingG, num, placeholder, prompt, promptG, segment, segmentG, slice, sliceG, stagger, up40, wrap} from '../console.ts';
+import {DESKTOP, FL, FR, HW, M, PHONE, type Geo, type Theme, W, X, esc, f1, halfSlice, halfSliceG, heading, headingG, num, prompt, promptG, segment, segmentG, slice, sliceG, stagger, up40, wrap} from '../console.ts';
 import {CREDIT_POST, CREDIT_URL, DAY, NEW_DAYS, age, iso, monthDay, parse, shift, short, sum, toolColor} from '../shared.ts';
 import {type Calendar, type Installs, type Post, type Project, type RepoStars, type Snapshot, type Stars, slugify} from '../data.ts';
 
@@ -45,6 +45,18 @@ ${prompt('gh api repos/jdx/{tool}/stargazers --paginate', 0.15, '# what is getti
 	});
 }
 
+const ROW_CSS = `.bar{transform-box:fill-box;transform-origin:0 50%;animation:grow .9s cubic-bezier(.2,.8,.2,1) both}
+@keyframes grow{from{transform:scaleX(0)}}
+.lbl{animation:fadein .3s ease-out both}
+.chip{animation:pulse 1s ease-in-out 3}`;
+
+const barDefs = (c: string) => `<linearGradient id="bar" x1="0" x2="1"><stop offset="0" stop-color="${c}" stop-opacity=".35"/><stop offset="1" stop-color="${c}"/></linearGradient>`;
+
+function rowDesc(r: Trend, pitch: string): string {
+	const chipText = r.isNew ? ' (new)' : r.ratio ? ` (${r.ratio.toFixed(1)}x the previous window)` : '';
+	return `${r.p.name}${chipText}: +${r.gain} stars, ${r.total} total. ${pitch}.`;
+}
+
 export async function trendingRow(t: Theme, r: Trend, i: number, max: number): Promise<string> {
 	const c = r.color;
 	const delay = 0.2 + i * 0.09;
@@ -80,15 +92,9 @@ ${chip}
 <g fill="${c}" opacity=".75">${hist}</g>
 <text x="${FR - 36}" y="25" text-anchor="end" class="dim" style="font-size:12px">${num(r.total)}★</text>
 </g>`;
-	const css = `.bar{transform-box:fill-box;transform-origin:0 50%;animation:grow .9s cubic-bezier(.2,.8,.2,1) both}
-@keyframes grow{from{transform:scaleX(0)}}
-.lbl{animation:fadein .3s ease-out both}
-.chip{animation:pulse 1s ease-in-out 3}`;
-	const defs = `<linearGradient id="bar" x1="0" x2="1"><stop offset="0" stop-color="${c}" stop-opacity=".35"/><stop offset="1" stop-color="${c}"/></linearGradient>`;
-	const chipText = r.isNew ? ' (new)' : r.ratio ? ` (${r.ratio.toFixed(1)}x the previous window)` : '';
 	return slice(t, 40, body, {
-		title: r.p.name, css, defs,
-		desc: `${r.p.name}${chipText}: +${r.gain} stars, ${r.total} total. ${pitch}.`,
+		title: r.p.name, css: ROW_CSS, defs: barDefs(c),
+		desc: rowDesc(r, pitch),
 		text: `${r.p.name}NEW▲.x${pitch}+★${r.gain}${r.total}`,
 	});
 }
@@ -100,15 +106,95 @@ export async function trendingLegend(t: Theme): Promise<string> {
 }
 
 // ─────────────────────────────── phone ────────────────────────────────
-// Phone layouts, swapped in below 600px through <picture>.
+// Phone layouts, swapped in below 600px through <picture>. A row is two
+// lines: the name, chip and bar over the tagline and the per-day ticks. The
+// total is left to the alt text; the ticks say more about a trend.
+const P = PHONE;
+const PBX = 180; // bar track start, shared by every row so the bars compare
+const PHX = P.R - 60; // per-day ticks: 30 at a 2px pitch, ending at R
+const CH11 = 6.6; // JetBrains Mono advance at 11px
+const CH13 = 7.8; // and at 13px
+
 export async function phoneTrendingHead(t: Theme, stars: Stars, days: number, counter: string): Promise<string> {
-	return placeholder(t, PHONE.W, 160, 'trending');
+	const sub = `★ gained · ${days} days to ${monthDay(stars.end)} (UTC)`;
+	const m = stars.mise;
+	const mise = m ? `<tspan class="cy" font-weight="700">mise</tspan> ${short(m.total)}★ · +${num(m.gain30)} in 30d` : '';
+	const body = `${headingG(t, P, 44, 'trending', counter)}
+${promptG(P, 'gh api repos/jdx/{tool}/stargazers', 0.15, '# starred', 92, 13)}
+<g class="ln" style="animation-delay:.25s">
+<text x="${P.X}" y="${mise ? 124 : 132}" class="dim" style="font-size:12px">${esc(sub)}</text>
+${mise ? `<text x="${P.X}" y="144" class="dim" style="font-size:12px">${mise}</text>` : ''}
+</g>`;
+	return sliceG(t, P, 160, body, {
+		title: 'Trending', desc: `Stars gained by jdx's tools in the ${days} days to ${monthDay(stars.end)}.`,
+		text: `~/trending${counter}$ gh api repos/jdx/{tool}/stargazers # starred${sub}mise★·+, in30d`,
+	});
+}
+
+// Cut at a word so the text fits `chars` columns.
+function fit(s: string, chars: number): string {
+	if (s.length <= chars) return s;
+	const cut = s.slice(0, chars - 1).replace(/\s+\S*$/, '');
+	return `${cut}…`;
 }
 
 export async function phoneTrendingRow(t: Theme, r: Trend, i: number, max: number): Promise<string> {
-	return placeholder(t, PHONE.W, 40, r.p.name);
+	const c = r.color;
+	const delay = 0.2 + i * 0.09;
+	const label = r.isNew ? 'NEW' : r.ratio ? `▲${r.ratio.toFixed(1)}x` : '';
+	const chipW = label ? label.length * (CH11 + 0.5) + 9.5 : 0;
+	// A long name shrinks rather than run into the bars.
+	const room = PBX - 10 - P.X - (label ? chipW + 8 : 0);
+	const size = Math.min(15, Math.floor((room / (r.p.name.length * 0.6)) * 2) / 2);
+	let chip = '';
+	if (label) {
+		const cc = r.isNew ? t.accent2 : t.ok;
+		const cx = P.X + r.p.name.length * size * 0.6 + 8;
+		chip = `<rect class="chip" x="${f1(cx)}" y="5" width="${f1(chipW)}" height="15" fill="none" stroke="${cc}" stroke-opacity=".85"/>
+<text class="chip" x="${f1(cx + 5)}" y="16.5" fill="${cc}" letter-spacing=".5" style="font-size:11px">${esc(label)}</text>`;
+	}
+	// The widest label is the top row's, so the track leaves room for it.
+	const bw = Math.min(170, P.R - PBX - 6 - `+${num(max)}`.length * CH13);
+	const w = Math.max(2, (r.gain / max) * bw);
+	const hmax = Math.max(1, ...r.daily);
+	const hist = r.daily.map((n, k) => {
+		const h = n ? Math.max(1.5, (n / hmax) * 11) : 0;
+		return h ? `<rect x="${PHX + k * 2}" y="${f1(33 - h)}" width="1.5" height="${f1(h)}"/>` : '';
+	}).join('');
+	const pitch = r.p.tagline || r.p.kind;
+	const tag = fit(pitch, Math.floor((PHX - 10 - P.X) / CH11));
+	const body = `<g class="ln" style="animation-delay:${delay.toFixed(2)}s">
+<rect x="${P.X - 10}" y="2" width="${P.R - P.X + 20}" height="36" fill="${t.accent}" fill-opacity="${i % 2 === 0 ? '.04' : '0'}"/>
+<text x="${P.X}" y="18" font-weight="700" fill="${c}" style="font-size:${size}px">${esc(r.p.name)}</text>
+${chip}
+<text x="${P.X}" y="32" class="dim" style="font-size:11px">${esc(tag)}</text>
+<rect x="${PBX}" y="7" width="${f1(bw)}" height="11" fill="${t.well}"/>
+<g class="bar" style="animation-delay:${(delay + 0.15).toFixed(2)}s">
+<rect x="${PBX}" y="7" width="${f1(w)}" height="11" fill="${c}" filter="url(#g)" opacity=".55"/>
+<rect x="${PBX}" y="7" width="${f1(w)}" height="11" fill="url(#bar)"/>
+</g>
+<text class="lbl" x="${f1(PBX + w + 6)}" y="17.5" font-weight="700" fill="${c}" style="font-size:13px;animation-delay:${(delay + 0.6).toFixed(2)}s">+${num(r.gain)}</text>
+<g fill="${c}" opacity=".75">${hist}</g>
+</g>`;
+	return sliceG(t, P, 40, body, {
+		title: r.p.name, css: ROW_CSS, defs: barDefs(c),
+		desc: rowDesc(r, pitch),
+		text: `${r.p.name}NEW▲.x${tag}+${r.gain}`,
+	});
 }
 
 export async function phoneTrendingLegend(t: Theme): Promise<string> {
-	return placeholder(t, PHONE.W, 40, 'legend');
+	const text = 'bar: stars gained · ticks: stars per day · NEW: under 60 days old · ▲: faster than the window before';
+	// Two lines at phone width, broken between entries.
+	const cols = Math.floor((P.R - P.X) / CH11);
+	const lines: string[] = [];
+	for (const part of text.split(' · ')) {
+		const last = lines.at(-1);
+		if (last && last.length + 3 + part.length <= cols) lines[lines.length - 1] = `${last} · ${part}`;
+		else lines.push(part);
+	}
+	const h = up40(lines.length * 15 + 10);
+	const y0 = (h - lines.length * 15) / 2 + 11;
+	const body = `<g class="ln" style="animation-delay:.8s">${lines.map((l, k) => `<text x="${P.X}" y="${y0 + k * 15}" class="fainter" style="font-size:11px">${esc(l)}</text>`).join('')}</g>`;
+	return sliceG(t, P, h, body, {title: 'Legend', desc: text, text});
 }
