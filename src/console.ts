@@ -108,7 +108,10 @@ export const X = 52; // text left edge
 export const HW = W / 2; // half-slice width, a multiple of 40
 
 export function esc(s: string | number): string {
-	return String(s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#x27;'})[c]!);
+	return String(s)
+		// Control characters are not allowed in XML at all.
+		.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\uFFFE\uFFFF]/g, '')
+		.replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#x27;'})[c]!);
 }
 
 function unescape(s: string): string {
@@ -153,9 +156,13 @@ export function baseCss(t: Theme): string {
 }
 
 export function baseDefs(t: Theme, gridX = 0): string {
+	// #glow and #gl cover the whole image: a filter region relative to the
+	// bounding box is empty for a perfectly straight line (a lone rail, an
+	// underline), so those glows would not render at all.
 	return `<pattern id="grid" x="${gridX}" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="${t.accent}" stroke-opacity=".06"/></pattern>
-<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
-<filter id="g" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="4"/></filter>`;
+<filter id="glow" filterUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><feGaussianBlur stdDeviation="6"/></filter>
+<filter id="g" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="4"/></filter>
+<filter id="gl" filterUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><feGaussianBlur stdDeviation="4"/></filter>`;
 }
 
 type Doc = {
@@ -263,7 +270,7 @@ export function headingG(t: Theme, g: Geo, y: number, name: string, counter: str
 <text x="${R}" y="${y}" text-anchor="end" letter-spacing="2" fill="${t.faint}" style="font-size:12px">${esc(counter)}</text>
 <line x1="${X}" y1="${y + 14}" x2="${R}" y2="${y + 14}" stroke="${t.accent}" stroke-opacity=".4"/>
 <line x1="${X}" y1="${y + 14}" x2="${X + 120}" y2="${y + 14}" stroke="${t.accent}" stroke-width="2"/>
-<line x1="${X}" y1="${y + 14}" x2="${X + 120}" y2="${y + 14}" stroke="${t.accent}" stroke-width="3" filter="url(#g)"/>`;
+<line x1="${X}" y1="${y + 14}" x2="${X + 120}" y2="${y + 14}" stroke="${t.accent}" stroke-width="3" filter="url(#gl)"/>`;
 }
 
 // A `$ cmd # comment` line. `size` overrides the 15px default (phones).

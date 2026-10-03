@@ -4,9 +4,11 @@ import {type Theme} from './console.ts';
 export const CREDIT_URL = 'https://github.com/georgekobaidze/georgekobaidze';
 export const CREDIT_POST = 'https://dev.to/georgekobaidze/i-turned-my-github-profile-into-a-cyberpunk-console-with-a-city-built-from-my-contributions-h4c';
 
+// 3 significant figures: 952702 → 953k, 43812 → 43.8k, 999700 → 1M.
 export function short(n: number): string {
-	const [div, unit] = n >= 1e6 ? [1e6, 'M'] : n >= 1e3 ? [1e3, 'k'] : [1, ''];
-	return `${Number((n / div).toPrecision(3))}${unit}`;
+	const r = Number(n.toPrecision(3));
+	const [div, unit] = r >= 1e6 ? [1e6, 'M'] : r >= 1e3 ? [1e3, 'k'] : [1, ''];
+	return `${Number((r / div).toPrecision(3))}${unit}`;
 }
 
 export function monthDay(iso: string, long = false): string {

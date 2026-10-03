@@ -21,6 +21,11 @@ const LOGO_SIZE = 96;
 
 const token = process.env.GITHUB_TOKEN;
 
+// Shows up as an annotation on the Actions run, not just in the log.
+function warn(title: string, message: string): void {
+	console.warn(process.env.GITHUB_ACTIONS ? `::warning title=${title}::${message}` : `warn: ${title}: ${message}`);
+}
+
 async function get(url: string, init: RequestInit = {}): Promise<Response> {
 	const res = await fetch(url, {...init, signal: AbortSignal.timeout(30_000)});
 	if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
@@ -65,15 +70,24 @@ async function fetchMau(): Promise<Snapshot['mau']> {
 // Contributions, streaks, PRs and languages, after Giorgi Kobaidze's fetch.py
 // (github.com/georgekobaidze/georgekobaidze, MIT). With the Actions token these
 // are public contributions only; a PROFILE_TOKEN PAT adds private ones.
-const graphqlToken = process.env.PROFILE_TOKEN || token;
+// An expired or revoked PROFILE_TOKEN falls back to the Actions token rather
+// than freezing the stats.
+let graphqlToken = process.env.PROFILE_TOKEN || token;
 
 async function graphql<T>(query: string, variables: Record<string, unknown>): Promise<T> {
 	if (!graphqlToken) throw new Error('GraphQL needs GITHUB_TOKEN or PROFILE_TOKEN');
-	const res = await get('https://api.github.com/graphql', {
+	const res = await fetch('https://api.github.com/graphql', {
 		method: 'POST',
 		headers: {authorization: `bearer ${graphqlToken}`, 'content-type': 'application/json'},
 		body: JSON.stringify({query, variables}),
+		signal: AbortSignal.timeout(60_000),
 	});
+	if ((res.status === 401 || res.status === 403) && graphqlToken !== token && token) {
+		warn('PROFILE_TOKEN', `GraphQL returned HTTP ${res.status}; using GITHUB_TOKEN (public contributions only)`);
+		graphqlToken = token;
+		return graphql(query, variables);
+	}
+	if (!res.ok) throw new Error(`GraphQL: HTTP ${res.status}`);
 	const body = await res.json() as {data: T; errors?: {message: string}[]};
 	if (body.errors?.length) throw new Error(`GraphQL: ${body.errors.map(e => e.message).join('; ')}`);
 	return body.data;
@@ -228,7 +242,7 @@ async function fetchCount(kind: 'issue' | 'pr'): Promise<Count> {
 	].join(' ');
 	const linked = await github<{total_count: number}>(`search/issues?q=${encodeURIComponent(query)}&per_page=1`);
 	if (linked.total_count !== kept.length) {
-		console.warn(`warn: ${kind} count ${kept.length} but its linked search shows ${linked.total_count}`);
+		warn(`${kind} count`, `${kept.length} counted but its linked search shows ${linked.total_count}`);
 	}
 	return {count: kept.length, query};
 }
@@ -258,14 +272,20 @@ async function fetchStargazers(repo: string): Promise<RepoStars> {
 }
 
 // mise is too big for the stargazers API (it stops at 40k), so its 30-day
-// gain comes from the daily snapshots in jdx/mise-analytics.
-async function fetchMiseStars(): Promise<Stars['mise']> {
+// gain comes from the daily snapshots in jdx/mise-analytics. The CSV has gaps,
+// so each end of the window takes the nearest earlier row; a gap wider than
+// 3 days gives no gain rather than a wrong one.
+async function fetchMiseStars(end: string): Promise<Stars['mise']> {
 	const csv = await (await get('https://raw.githubusercontent.com/jdx/mise-analytics/main/mise.csv')).text();
 	const rows = csv.trim().split('\n').slice(1).map(l => l.split(',')).filter(r => r[4]).map(r => [r[0], Number(r[4])] as const);
-	const [lastDate, total] = rows.at(-1)!;
-	const before = iso(addDays(new Date(`${lastDate}T00:00:00Z`), -30));
-	const prior = rows.find(([d]) => d === before);
-	return prior ? {total, gain30: total - prior[1]} : {total, gain30: 0};
+	const days = (a: string, b: string) => Math.round((Date.parse(b) - Date.parse(a)) / 864e5);
+	// A row dated D+1 is the snapshot taken early that morning, i.e. the end of D.
+	const target = iso(addDays(new Date(`${end}T00:00:00Z`), 1));
+	const cur = rows.findLast(([d]) => d <= target);
+	if (!cur || days(cur[0], target) > 3) throw new Error(`mise.csv has nothing near ${target}`);
+	const before = iso(addDays(new Date(`${cur[0]}T00:00:00Z`), -30));
+	const prior = rows.findLast(([d]) => d <= before);
+	return {total: cur[1], gain30: prior && days(prior[0], before) <= 3 ? cur[1] - prior[1] : null};
 }
 
 async function fetchStarHistory(projects: Project[], end: string, previous: Stars | null): Promise<Stars> {
@@ -276,16 +296,16 @@ async function fetchStarHistory(projects: Project[], end: string, previous: Star
 			repos[repo] = await fetchStargazers(repo);
 			ok++;
 		} catch (err) {
-			console.warn(`warn: stargazers for ${repo} failed: ${(err as Error).message}`);
+			warn(`stargazers for ${repo}`, `keeping the last value: ${(err as Error).message}`);
 			if (previous?.repos[repo]) repos[repo] = previous.repos[repo];
 		}
 	}
 	if (!ok) throw new Error('no stargazer data');
 	let mise = previous?.mise ?? null;
 	try {
-		mise = await fetchMiseStars();
+		mise = await fetchMiseStars(end);
 	} catch (err) {
-		console.warn(`warn: mise star history failed: ${(err as Error).message}`);
+		warn('mise star history', `keeping the last value: ${(err as Error).message}`);
 	}
 	return {end, repos, mise};
 }
@@ -310,24 +330,28 @@ async function fetchInstalls(projects: Project[]): Promise<Installs> {
 	const ranked = Object.entries(map).sort((a, b) => b[1] - a[1]);
 	const rank = new Map(ranked.map(([k], i) => [k, i + 1]));
 	const baseline = await mv<{global: {mom: number}}>('/stats/growth').then(g => g.global.mom).catch(() => null);
-	const tools: Record<string, ToolInstalls> = {};
+	// Every series ends on the same day: the latest the API has data for.
+	// Days with no installs are missing from the API, so they are filled with 0.
+	const fetched: {tool: string; repo: string; growth: {thisMonth: number; lastMonth: number; mom: number}; byDate: Map<string, number>}[] = [];
 	let end = '';
 	for (const repo of toolRepos(projects).filter(r => !NOT_INSTALLS.has(r))) {
 		const tool = repo.split('/')[1];
 		if (!map[tool]) continue;
 		const growth = await mv<{thisMonth: number; lastMonth: number; mom: number}>(`/downloads/${tool}/growth`);
 		const {daily} = await mv<{daily: {date: string; count: number}[]}>(`/downloads/${tool}`);
-		const byDate = new Map(daily.map(d => [d.date, d.count]));
-		const last = daily.map(d => d.date).sort().at(-1)!;
-		end = end > last ? end : last;
+		for (const d of daily) if (d.date > end) end = d.date;
+		fetched.push({tool, repo, growth, byDate: new Map(daily.map(d => [d.date, d.count]))});
+	}
+	if (!fetched.length || !end) throw new Error('no install data for any jdx tool');
+	const tools: Record<string, ToolInstalls> = {};
+	for (const {tool, repo, growth, byDate} of fetched) {
 		const series: [string, number][] = [];
 		for (let i = 29; i >= 0; i--) {
-			const d = iso(addDays(new Date(`${last}T00:00:00Z`), -i));
+			const d = iso(addDays(new Date(`${end}T00:00:00Z`), -i));
 			series.push([d, byDate.get(d) ?? 0]);
 		}
 		tools[tool] = {repo, this_month: growth.thisMonth, last_month: growth.lastMonth, mom: growth.mom, rank: rank.get(tool)!, daily: series};
 	}
-	if (!Object.keys(tools).length) throw new Error('no install data for any jdx tool');
 	return {end, baseline_mom: baseline, tools_ranked: ranked.length, tools};
 }
 
@@ -363,7 +387,7 @@ async function main() {
 			return await fn();
 		} catch (err) {
 			failures++;
-			console.warn(`warn: ${name} failed, keeping last value: ${(err as Error).message}`);
+			warn(`${name} fetch failed`, `keeping the last value: ${(err as Error).message}`);
 			return fallback;
 		}
 	}
@@ -397,6 +421,17 @@ async function main() {
 	if (stars) await writeFile('data/stars.json', `${JSON.stringify(stars)}\n`);
 	const installs = await attempt('installs', () => fetchInstalls(snapshot.projects), null);
 	if (installs) await writeFile('data/installs.json', `${JSON.stringify(installs, null, '\t')}\n`);
+
+	// Keeping the last value is fine for a run or two, but a source that keeps
+	// failing should turn the run red instead of freezing part of the profile.
+	if (!gh) {
+		const cal: Calendar | null = JSON.parse(await readFile('data/calendar.json', 'utf8').catch(() => 'null'));
+		const last = cal?.at(-1)?.[0];
+		if (!last || (today.getTime() - Date.parse(`${last}T00:00:00Z`)) / 864e5 > 7) {
+			process.exitCode = 1;
+			console.error(`error: GitHub stats have not refreshed since ${last ?? 'ever'}`);
+		}
+	}
 	console.log(
 		`projects ${snapshot.projects.length} · posts ${snapshot.posts.length} · mau ${snapshot.mau?.value} · ` +
 		`stars ${snapshot.stars} · issues ${snapshot.issues?.count} · prs ${snapshot.prs?.count} · ` +

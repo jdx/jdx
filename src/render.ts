@@ -10,7 +10,7 @@
 //   node src/render.ts [--theme neon|amber] [--root <dir>]
 import {mkdir, readFile, rm, writeFile} from 'node:fs/promises';
 import {parseArgs} from 'node:util';
-import {THEMES, type Theme, esc} from './console.ts';
+import {PHONE, THEMES, type Theme, esc, segment, segmentG} from './console.ts';
 import {type Calendar, type Installs, type Project, type Snapshot, type Stars, slugify} from './data.ts';
 import {beyondMise, phoneBeyondMise} from './sections/beyond.ts';
 import {city, cityAlt, phoneCity} from './sections/city.ts';
@@ -23,6 +23,9 @@ import {CREDIT_POST, CREDIT_URL} from './shared.ts';
 
 const DEFAULT_THEME = 'neon';
 const CARDS = 8;
+// The smaller projects sit in rows of this many buttons; short rows are
+// padded with empty framed cells so the console rails stay continuous.
+const ALSO_COLS = 4;
 // <source srcset> is not rewritten like a relative <img src>, so it is absolute.
 const RAW = 'https://github.com/jdx/jdx/raw/main/assets';
 const PHONE_QUERY = '(max-width: 600px)';
@@ -37,7 +40,9 @@ class Page {
 	add(file: string, [desktop, phone]: [string, string], width: string, alt: string, href?: string, sameRow = false): void {
 		this.files.set(file, desktop);
 		this.files.set(`phone/${file}`, phone);
-		const img = `<picture><source media="${PHONE_QUERY}" srcset="${RAW}/phone/${file}"><img src="./assets/${file}" width="${width}" align="top" alt="${esc(alt)}"></picture>`;
+		// A blank line in an alt would end the README's HTML block.
+		const text = esc(alt.replace(/\s+/g, ' ').trim());
+		const img = `<picture><source media="${PHONE_QUERY}" srcset="${RAW}/phone/${file}"><img src="./assets/${file}" width="${width}" align="top" alt="${text}"></picture>`;
 		const html = href ? `<a href="${esc(href)}">${img}</a>` : img;
 		if (sameRow && this.rows.length) this.rows.at(-1)!.push(html);
 		else this.rows.push([html]);
@@ -66,8 +71,10 @@ async function main() {
 	const starData: Stars | null = JSON.parse(await readFile('data/stars.json', 'utf8').catch(() => 'null'));
 	const installData: Installs | null = JSON.parse(await readFile('data/installs.json', 'utf8').catch(() => 'null'));
 	const updated = calendar?.at(-1)?.[0] ?? s.mau?.date ?? '';
-	const carded = s.projects.slice(0, CARDS);
-	const rest = s.projects.slice(CARDS);
+	// Cards come in pairs; an odd one out joins the button rows instead.
+	const nCards = Math.min(CARDS, s.projects.length - (s.projects.length % 2));
+	const carded = s.projects.slice(0, nCards);
+	const rest = s.projects.slice(nCards);
 	let n = 0;
 	const counter = () => `// ${String(++n).padStart(2, '0')}`;
 	const both = (a: Promise<string>, b: Promise<string>) => Promise.all([a, b]);
@@ -125,12 +132,21 @@ async function main() {
 		page.add(`projects/${slugify(p.name)}.svg`, await both(card(t, p, side, 0.3 + i * 0.12), phoneCard(t, p, side, 0.3 + i * 0.12)), '50%',
 			`${p.name}: ${p.description} Install: ${p.install}`, p.href, i % 2 === 1);
 	}
-	for (const [k, p] of rest.entries()) {
-		const logo = await logoHref(p);
-		const icon = (_t: Theme, x: number, y: number) => (logo ? `<image href="${logo}" x="${x}" y="${y}" width="18" height="18"/>` : '');
-		const b = {label: p.name, handle: p.tagline || p.kind, url: p.href, icon};
-		page.add(`projects/also-${slugify(p.name)}.svg`, await both(button(t, b, k, rest.length, 0.3), phoneButton(t, b, k, rest.length, 0.3)),
-			`${100 / rest.length}%`, `${p.name}: ${p.description}`, p.href, k > 0);
+	for (let i = 0; i < rest.length; i += ALSO_COLS) {
+		for (let k = 0; k < ALSO_COLS; k++) {
+			const p = rest[i + k];
+			if (!p) {
+				const blank = {title: '', desc: '', text: ''};
+				page.add(`projects/also-blank-${i + k}.svg`, await both(segment(t, k, ALSO_COLS, 80, '', blank), segmentG(t, PHONE, k, ALSO_COLS, 80, '', blank)),
+					`${100 / ALSO_COLS}%`, '', undefined, true);
+				continue;
+			}
+			const logo = await logoHref(p);
+			const icon = (_t: Theme, x: number, y: number) => (logo ? `<image href="${logo}" x="${x}" y="${y}" width="18" height="18"/>` : '');
+			const b = {label: p.name, handle: p.tagline || p.kind, url: p.href, icon};
+			page.add(`projects/also-${slugify(p.name)}.svg`, await both(button(t, b, k, ALSO_COLS, 0.3), phoneButton(t, b, k, ALSO_COLS, 0.3)),
+				`${100 / ALSO_COLS}%`, `${p.name}: ${p.description}`, p.href, k > 0);
+		}
 	}
 	if (s.posts.length) {
 		page.add('writing.svg', await head('writing', 'tail -n 5 ~/jdx.dev/posts.log', '# auto-updated'), '100%', 'Writing: latest posts on jdx.dev');

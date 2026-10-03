@@ -45,7 +45,7 @@ export type RepoStars = {created_at: string; total: number; daily: Record<string
 export type Stars = {
 	end: string; // last complete UTC day counted
 	repos: Record<string, RepoStars>;
-	mise: {total: number; gain30: number} | null;
+	mise: {total: number; gain30: number | null} | null;
 };
 
 // Installs of jdx tools through mise (mise-versions; CI excluded, one per

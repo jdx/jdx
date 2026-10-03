@@ -1,8 +1,9 @@
 name: readme
 
 on:
+  # Every 5 hours, which also moves the city between day and night.
   schedule:
-    - cron: "23 13 * * *"
+    - cron: "23 */5 * * *"
   workflow_dispatch:
   push:
     branches: [main]
@@ -35,4 +36,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "chore: refresh profile"
-          git push
+          # If main moved during the run, replay this commit on top, keeping
+          # the freshly generated files on conflict.
+          for i in 1 2 3; do
+            git push && exit 0
+            git fetch origin main
+            git rebase -X theirs origin/main || { git rebase --abort; exit 1; }
+          done
+          exit 1
