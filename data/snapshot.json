@@ -9,7 +9,7 @@
 			"logo": "https://jdx.dev/images/projects/mise.svg",
 			"name": "mise",
 			"repo": "jdx/mise",
-			"stars": "34.5k",
+			"stars": "34.6k",
 			"tagline": "dev tools, env vars, and tasks"
 		},
 		{
@@ -53,7 +53,7 @@
 			"logo": "https://jdx.dev/images/projects/usage.svg",
 			"name": "usage",
 			"repo": "jdx/usage",
-			"stars": "1k",
+			"stars": "1.1k",
 			"tagline": "a specification for CLIs"
 		},
 		{
@@ -64,7 +64,7 @@
 			"logo": "https://jdx.dev/images/projects/pitchfork.png",
 			"name": "pitchfork",
 			"repo": "jdx/pitchfork",
-			"stars": "675",
+			"stars": "676",
 			"tagline": "daemons with DX"
 		},
 		{
@@ -75,7 +75,7 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "439",
+			"stars": "452",
 			"tagline": "a shared Rust build cache"
 		},
 		{
@@ -108,7 +108,7 @@
 			"logo": "https://jdx.dev/images/projects/packslip.svg",
 			"name": "packslip",
 			"repo": "jdx/packslip",
-			"stars": "85",
+			"stars": "105",
 			"tagline": "signed release manifests"
 		},
 		{
@@ -176,30 +176,30 @@
 		"value": 945017,
 		"dau": 52999
 	},
-	"stars": 43854,
+	"stars": 43864,
 	"issues": {
 		"count": 14,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue -author:app/greenkeeper -author:app/renovate"
 	},
 	"prs": {
-		"count": 23,
+		"count": 22,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
 		"followers": 4314,
 		"public_repos": 384,
-		"prs": 11001,
-		"prs_merged": 10283,
+		"prs": 11006,
+		"prs_merged": 10288,
 		"year": 2026,
-		"contributions_year": 17606,
-		"contributions_all": 60621,
+		"contributions_year": 17616,
+		"contributions_all": 60631,
 		"streak_current": 77,
 		"streak_longest": 77,
 		"languages": {
-			"Rust": 43758370,
+			"Rust": 43834499,
 			"Shell": 5938577,
-			"TypeScript": 1720102,
+			"TypeScript": 1723799,
 			"Vim Script": 1006159,
 			"JavaScript": 865562,
 			"Go": 683393,
