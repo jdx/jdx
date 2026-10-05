@@ -1,18 +1,18 @@
 {
 	"end": "2026-10-03",
-	"baseline_mom": 15.98500721048712,
-	"tools_ranked": 1056,
+	"baseline_mom": 11.137767213501174,
+	"tools_ranked": 1055,
 	"tools": {
 		"fnox": {
 			"repo": "jdx/fnox",
-			"this_month": 42974,
-			"last_month": 36922,
-			"mom": 16.391311413249554,
+			"this_month": 41577,
+			"last_month": 37319,
+			"mom": 11.409737667140064,
 			"rank": 53,
 			"daily": [
 				[
 					"2026-09-04",
-					1397
+					0
 				],
 				[
 					"2026-09-05",
@@ -134,14 +134,14 @@
 		},
 		"aube": {
 			"repo": "aubepkg/aube",
-			"this_month": 12013,
-			"last_month": 12658,
-			"mom": -5.0955917206509715,
-			"rank": 138,
+			"this_month": 11519,
+			"last_month": 12877,
+			"mom": -10.54593461209909,
+			"rank": 139,
 			"daily": [
 				[
 					"2026-09-04",
-					494
+					0
 				],
 				[
 					"2026-09-05",
@@ -263,14 +263,14 @@
 		},
 		"hk": {
 			"repo": "jdx/hk",
-			"this_month": 60563,
-			"last_month": 40446,
-			"mom": 49.73792216782871,
+			"this_month": 58903,
+			"last_month": 40840,
+			"mom": 44.22869735553379,
 			"rank": 34,
 			"daily": [
 				[
 					"2026-09-04",
-					1660
+					0
 				],
 				[
 					"2026-09-05",
@@ -392,14 +392,14 @@
 		},
 		"usage": {
 			"repo": "jdx/usage",
-			"this_month": 52798,
-			"last_month": 53259,
-			"mom": -0.8655814040819393,
+			"this_month": 51193,
+			"last_month": 53072,
+			"mom": -3.540473319264396,
 			"rank": 38,
 			"daily": [
 				[
 					"2026-09-04",
-					1605
+					0
 				],
 				[
 					"2026-09-05",
@@ -521,14 +521,14 @@
 		},
 		"pitchfork": {
 			"repo": "jdx/pitchfork",
-			"this_month": 14877,
-			"last_month": 12023,
-			"mom": 23.737835814688513,
+			"this_month": 14387,
+			"last_month": 12267,
+			"mom": 17.282139072307817,
 			"rank": 124,
 			"daily": [
 				[
 					"2026-09-04",
-					490
+					0
 				],
 				[
 					"2026-09-05",
@@ -650,14 +650,14 @@
 		},
 		"mr-boxington": {
 			"repo": "jdx/mr-boxington",
-			"this_month": 3302,
-			"last_month": 340,
-			"mom": 871.1764705882352,
-			"rank": 245,
+			"this_month": 3216,
+			"last_month": 426,
+			"mom": 654.9295774647887,
+			"rank": 242,
 			"daily": [
 				[
 					"2026-09-04",
-					86
+					0
 				],
 				[
 					"2026-09-05",
@@ -779,14 +779,14 @@
 		},
 		"communique": {
 			"repo": "jdx/communique",
-			"this_month": 1089,
-			"last_month": 688,
-			"mom": 58.28488372093024,
+			"this_month": 1060,
+			"last_month": 697,
+			"mom": 52.08034433285509,
 			"rank": 346,
 			"daily": [
 				[
 					"2026-09-04",
-					29
+					0
 				],
 				[
 					"2026-09-05",
@@ -911,7 +911,7 @@
 			"this_month": 46,
 			"last_month": 0,
 			"mom": null,
-			"rank": 774,
+			"rank": 772,
 			"daily": [
 				[
 					"2026-09-04",
@@ -1040,7 +1040,7 @@
 			"this_month": 102,
 			"last_month": 7,
 			"mom": 1357.142857142857,
-			"rank": 679,
+			"rank": 676,
 			"daily": [
 				[
 					"2026-09-04",
