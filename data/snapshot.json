@@ -75,7 +75,7 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "464",
+			"stars": "471",
 			"tagline": "a shared Rust build cache"
 		},
 		{
@@ -97,7 +97,7 @@
 			"logo": "https://jdx.dev/images/projects/packslip.svg",
 			"name": "packslip",
 			"repo": "jdx/packslip",
-			"stars": "121",
+			"stars": "122",
 			"tagline": "signed release manifests"
 		},
 		{
@@ -176,30 +176,30 @@
 		"value": 945023,
 		"dau": 77041
 	},
-	"stars": 43980,
+	"stars": 44002,
 	"issues": {
 		"count": 18,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 39,
+		"count": 40,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4325,
+		"followers": 4326,
 		"public_repos": 411,
-		"prs": 11172,
-		"prs_merged": 10435,
+		"prs": 11195,
+		"prs_merged": 10446,
 		"year": 2026,
-		"contributions_year": 18001,
-		"contributions_all": 61050,
+		"contributions_year": 18048,
+		"contributions_all": 61097,
 		"streak_current": 79,
 		"streak_longest": 79,
 		"languages": {
-			"Rust": 48941954,
-			"Shell": 6058496,
-			"TypeScript": 1727333,
+			"Rust": 48953156,
+			"Shell": 6073645,
+			"TypeScript": 1729242,
 			"Go": 1577018,
 			"Vim Script": 1006159,
 			"Python": 664324,
