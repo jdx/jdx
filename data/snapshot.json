@@ -9,7 +9,7 @@
 			"logo": "https://jdx.dev/images/projects/mise.svg",
 			"name": "mise",
 			"repo": "jdx/mise",
-			"stars": "34.6k",
+			"stars": "34.7k",
 			"tagline": "dev tools, env vars, and tasks"
 		},
 		{
@@ -75,7 +75,7 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "471",
+			"stars": "474",
 			"tagline": "a shared Rust build cache"
 		},
 		{
@@ -97,7 +97,7 @@
 			"logo": "https://jdx.dev/images/projects/packslip.svg",
 			"name": "packslip",
 			"repo": "jdx/packslip",
-			"stars": "122",
+			"stars": "125",
 			"tagline": "signed release manifests"
 		},
 		{
@@ -176,44 +176,44 @@
 		"value": 945023,
 		"dau": 77041
 	},
-	"stars": 44002,
+	"stars": 44019,
 	"issues": {
-		"count": 18,
+		"count": 12,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 40,
-		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
+		"count": 36,
+		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4326,
-		"public_repos": 411,
-		"prs": 11195,
-		"prs_merged": 10446,
+		"followers": 4327,
+		"public_repos": 412,
+		"prs": 11227,
+		"prs_merged": 10477,
 		"year": 2026,
-		"contributions_year": 18048,
-		"contributions_all": 61097,
+		"contributions_year": 18134,
+		"contributions_all": 61169,
 		"streak_current": 79,
 		"streak_longest": 79,
 		"languages": {
-			"Rust": 48953156,
-			"Shell": 6073645,
+			"Rust": 49118509,
+			"Shell": 6099777,
 			"TypeScript": 1729242,
 			"Go": 1577018,
 			"Vim Script": 1006159,
-			"Python": 664324,
+			"Python": 664305,
 			"JavaScript": 558923,
 			"PowerShell": 471505,
 			"Pkl": 445819,
 			"HTML": 303789,
 			"C": 282267,
-			"Lua": 258437,
+			"Lua": 262035,
 			"CSS": 250570,
 			"Astro": 196025,
 			"Ruby": 152380,
 			"Vue": 122342,
-			"Roff": 55302,
+			"Roff": 55577,
 			"Assembly": 39003,
 			"Dockerfile": 35506,
 			"Nix": 29810,
