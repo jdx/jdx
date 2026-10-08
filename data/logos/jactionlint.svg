@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="jactionlint">
+  <rect width="256" height="256" rx="0" fill="#0F131A"/>
+  <g transform="translate(128,128) scale(0.88) translate(-128,-128)">
+    <rect x="40" y="40" width="176" height="176" rx="28" stroke="#3E4959" fill="none" stroke-width="18"/>
+    <path d="M 78 94 H 130" stroke="#F2F5F9" stroke-width="18" stroke-linecap="round"/>
+    <path d="M 78 130 H 112" stroke="#F2F5F9" stroke-width="18" stroke-linecap="round"/>
+    <path d="M 118 168 L 148 196 L 204 128" stroke="#2FBF71" fill="none" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

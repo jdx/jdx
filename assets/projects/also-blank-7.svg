@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="80" viewBox="0 0 220 80" role="img" aria-labelledby="t d">
+<title id="t"></title>
+<desc id="d"></desc>
+<style>
+@font-face{font-family:'JBM';font-weight:400;src:url(data:font/woff2;base64,d09GMgABAAAAAAS0AA8AAAAACOgAAARbAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGx4cKAZgP1NUQVReADQRCAqHFIYSCxgAATYCJAMYBCAFhD4HIAwHG0gHUVRQ1pD9LHDKbhH1xavrRAYvZyEIZ9OToQvit3I4pPjN/9lL8P/fWnnfrxrq6g0A4fGx07Yn7EloRL3AlbCNkEBDdtlsRB+44MGIXD5cQSXs7t0CbD+Ei/vd2DIOA/cqgWP+j5nu2yLBqkVGMx5V/FVidNJGo72JNa8vmoNvolO7cLqldgcGaYGvPomAhEEG0ao1cj1IwwP8XwIYoY0xhl1bsJ6pEZADMGebt326TgEszwMANorzOsJAlgEMKnii4hvaMADwxjTz++dfO9wfdQ1Dd75FsDH2EQxTQIgyBvTigFHs0tnwFAScP08c6ooYo48iDmHqBoAAB5i8roO9AKzepCMAvUOPwW0MlZI8w4AHgvOfaJ72xq4WAkCo/ZVdAQgA9AFdQaNBdwEADwA45EOTt1iPLmkYOCwd2SetDBzE33Y87+yUy2IMtY4OrNrevqcWG97OJG8XH+zYm79S9jrUXlJ9ERQKu7Q3+EDQ3raoGY4kAiXMv2tXNptpgiMxrFGjlYn2pqpjVzhgS3udUp0Np8iUWpsX2hNuNTByXj8oOViX7grjshjiXPlaTVmceTBzX+9DRyhOqGAS1hwupiSqY5B9mse099IAohU023iGyQpm5RsHOy8Kz0PnHizZ/zQj757uM9s239qZjnuHWG4UwViuzI0TngqbC0NQlrsSkwsZuQgRMYaKVAm+V0JVlaAy+B9CwKq9K7qz0b97YXH1Ti2w259/XT/o7BJhJB9haNgKoVy3fxDH3AODDlSMzksVpy4otKAO5h1iOWCriCBEYpzmD4lxXCyznj7Wpl1mvXk50z897h6C2Q7fENhxV7qh7rC37Vrbz3sHdoN2lnFbusIq/T8XFuNiWiwv37rthtVvrGrbE36/0CtlwWbgHfHRnvEx0IUK83kRilMTeXm2xX9fNqMTrW4Xmji9AYriRYJ8SoUo9IXEMCDOfnDBr+oVt169Z/6T8S6X7GGZBCjlkDe5e0734u19H9jsj31tPfgyd7eqiXZilpmwXyWixKzObnK3q0fVQltgbr/G1gnDREIyuDBt1rb1NS/rIjrYFAwuHY8UmGuCJM0Lh/jk9bBhemKW4zTvBgACYHOSKp8lTHflCv+VnfsOfGrduyN9+uPD3z95S51mTnxNDYoYAPL7NfRJRpD/hs4AwtOqXW2lZsWgUo8BIYD6eggI3KDMA4qQODhs5HSOQ74CvOBHyRCDfGYYXWhkOBa5yfBMcoZRYIBN9CITjBAQpPSBfgtFyehKSvKX6kYC7DBqmMcIiSkecRE+JgERIWFTpAKmYCZ4RIyYpDBqxKhuOwSETIvzmGAUMGFSxKgRdWaYYobppsNNdVJIXSdgsxbaACM4vLs2+IGtuFFj5k08UX5VOC30DLOrBQJDXPnQNhNGRQX4oIeWmzYlbNTELDhuS8+UsVo931RTnRUZzZ/m1ePkt4/qPWDc3uf62zk88f4HDACR+0T/Vxz3VwAAAA==) format('woff2')}@font-face{font-family:'JBM';font-weight:700;src:url(data:font/woff2;base64,d09GMgABAAAAAASoAA8AAAAACLwAAARRAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGx4cKAZgP1NUQVRMADQRCAqHFIYBCxgAATYCJAMYBCAFhCYHIAwHGw0HUVRR9pJ9cWDT4R5aiBdpqWJtSJcdMlYaa3gxvH6PwzffUzx8rZXv98zR9B2HSRIoIgfA5WN37V6wPKloQhdhECWBpiG9ah7yyhEXPIArJSdXL6ATK7iiK5twcb+LLeMwcJ/Njc5Sm0Hxy24i4EUj4eJw2thC8zHxjKO1lo01zrvE87VoWoGlnXeRJRqAZA3TSxzIrzsFKiNM1WvJssxCMFAJ///DDG0Sld6vjj5vkwCGw5ppZdqU7qGJ1Cj9gNVsfeyAZgGQaBMwh79l1QLgAqZi5s+/mxR/ehnG6HX+PydNSq8wRj8htEoYoDcm6H3sYKSpFw6/N9GrSxigr0JI0Q0gkCCa0z1Im4D0HSQUGKCPwAB9jQGUSoF5/Y+p/f//oQAh/v/XBTIYBOgiJgJxCkAJKASVJb4l9Xa25+Fj2scPam8bPoIet7vxnkVR5/PcH0+lmj/Z0G8dz60ah92oGxsS9Zb7q1rJkYt1sTGXWY6N9xkrDNXznWziW7dumNPE2WMrrcVsdhUb26PDulCk2U86oj0O5n2GRE7rghvy2U3IjTyk2lrQvi5PqTM/X8s7qqTOGRVDNg08cAf3gW5G/ZHVrhb5aKWKDtuWBTZuPLWe5auNWUWM+yFffc4vnqx66cuHu5rmrYP2etUYHp1aWn76lGD9oJQwQXsdrCNhFyMpqaFGsSeOP0BZ9AFuErHL09zTp2PRL0CAQuHsX1k0c0/bysQ6AeS0v3j5wZitw9pg4jTZDdxsIE6luoMYVWV3unoyUtesROuBIiWCMVW2HmQ2jrfCDNKC59dvXTkpvrb++mlNorvey9iYqigGZi9zH5m4YqHhsOr6ru6dQBdsD/Qr7iZSIbwYSUELccm9ox19l22oV/a6Me2uKRW3lAJfwpvi76gH+jSB54U0XFb/7MD4BXcKCizOGTquiIL8zhQ+mmDTo5TTw3CUQFEEjnlmsGFA8FWs+/HLln9++tQozJTxjrSqVImIwvMU2lyTyauVr4MENFvmrrZV9sQSMfyCUb7Z1kI6Z3hKLTRRFIDcbh9EFtFWd4lzRitl3SQ3XgR7byaxxVel8pEkm5aR5PlkOiZt+HhgfP/W6xXUc7qAQz2E7Hvw9RV3zQj+K2Zrn+IjvH50cT28fvXg90/+/4y0tfgsNEsgcG112jRD+NczRi/Bp4q0STmXAhyOnQeFZ0PphewMWl1D8x5bIaHVDRSibMM9fKghjHAOklb3oDDbbChNUgtNhvHQm00gYwjaDYJmre5Bl3bVd9RtMNYQJXkJ0jTxSojyKxEUFRbRJF1QE4cGXlGCRllEApGRgyghoFhQg0ZRIoEEygSFQHaqJBwnqV47eU46B+5GAW7+/EonUZ12DX/hvkwGxxaJwh4i2MoLLbkaeCwmyL+30K5ZkwjxvzYJzZmHmtRpxIJAwqKz72vmY+InSoJuGBb6o0+rj4C1/0EoIMTfSv9nXSpPAA==) format('woff2')}
+text{font-family:'JBM',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:15px}
+.dim{fill:#8b949e}.cy{fill:#00d9ff}.fg{fill:#c9d1d9}.gr{fill:#3fb950}.wh{fill:#f0fbff}.fainter{fill:#484f58}
+@keyframes fadein{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.ln{animation:fadein .35s ease-out both}
+.cursor{animation:blink 1.05s step-end infinite}
+.dot{animation:pulse 2s ease-in-out infinite}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<defs>
+<pattern id="grid" x="20" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#00d9ff" stroke-opacity=".06"/></pattern>
+<filter id="glow" filterUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><feGaussianBlur stdDeviation="6"/></filter>
+<filter id="g" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="4"/></filter>
+<filter id="gl" filterUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><feGaussianBlur stdDeviation="4"/></filter>
+</defs>
+<path d="M204 -40V120" fill="none" stroke="#00d9ff" stroke-width="3" opacity=".55" filter="url(#glow)"/>
+<rect x="0" y="0" width="204" height="80" fill="#03040a"/>
+<rect x="0" y="0" width="204" height="80" fill="url(#grid)"/>
+
+<path d="M204 0V80" fill="none" stroke="#00d9ff" stroke-width="1.2"/>
+</svg>
