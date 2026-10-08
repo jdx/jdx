@@ -32,7 +32,7 @@ text{font-family:'JBM',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font
 <g class="ln" style="animation-delay:0.15s"><text x="52" y="96" class="dim"><tspan class="gr">$</tspan> gh api repos/jdx/{tool}/stargazers --paginate <tspan class="fainter"># what is getting starred</tspan></text></g>
 <g class="ln" style="animation-delay:.25s">
 <text x="52" y="140" class="dim" style="font-size:12px">★ gained · 30 days to Oct 7 (UTC)</text>
-<text x="828" y="140" text-anchor="end" class="dim" style="font-size:12px"><tspan class="cy" font-weight="700">mise</tspan> 34.7k★ · +1,113 in 30d</text>
+<text x="828" y="140" text-anchor="end" class="dim" style="font-size:12px"><tspan class="cy" font-weight="700">mise</tspan> 34.8k★ · +1,131 in 30d</text>
 </g>
 <path d="M16 0V160M864 0V160" fill="none" stroke="#00d9ff" stroke-width="1.2"/>
 <g fill="none" stroke="#00d9ff" stroke-width="2"></g>
