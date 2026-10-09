@@ -28,6 +28,8 @@ const CARDS = 8;
 const ALSO_COLS = 4;
 // <source srcset> is not rewritten like a relative <img src>, so it is absolute.
 const RAW = 'https://github.com/jdx/jdx/raw/main/assets';
+const ENTIRE_URL = 'https://entire.io';
+const ANALYTICS_URL = 'https://github.com/jdx/mise-analytics';
 const PHONE_QUERY = '(max-width: 600px)';
 
 // The page is built as rows of images; each add() writes a desktop and a
@@ -84,7 +86,10 @@ async function main() {
 	};
 
 	const page = new Page();
-	page.add('header.svg', await both(header(t, s), phoneHeader(t, s)), '100%', headerAlt(s));
+	const [headerTop, headerEntire] = await header(t, s);
+	const [phoneTop, phoneEntire] = await phoneHeader(t, s);
+	page.add('header.svg', [headerTop, phoneTop], '100%', headerAlt(s));
+	page.add('header-entire.svg', [headerEntire, phoneEntire], '100%', 'Full-time on open source at entire.io', ENTIRE_URL);
 	page.add('links.svg', await head('links', 'ping jdx --all-channels'), '100%', 'Links');
 	for (const [k, b] of LINKS.entries()) {
 		page.add(`links/${k + 1}.svg`, await both(button(t, b, k, LINKS.length), phoneButton(t, b, k, LINKS.length)), '20%', b.label, b.url, k > 0);
@@ -122,7 +127,7 @@ async function main() {
 		const phone = await phoneInstalls(t, installData, starData, s.projects, c);
 		if (svg && phone) {
 			n++;
-			page.add('installs.svg', [svg, phone], '100%', 'Release downloads of jdx tools');
+			page.add('installs.svg', [svg, phone], '100%', 'Release downloads of jdx tools', ANALYTICS_URL);
 		}
 	}
 
@@ -156,7 +161,7 @@ async function main() {
 		}
 		page.add('writing/all-posts.svg', await both(writingMore(t), phoneWritingMore(t)), '100%', 'Read all posts on jdx.dev', 'https://jdx.dev/posts/');
 	}
-	page.add('footer.svg', await both(footer(t), phoneFooter(t)), '100%', 'Connection closed.');
+	page.add('footer.svg', await both(footer(t), phoneFooter(t)), '100%', 'Connection closed.', CREDIT_URL);
 
 	await rm(`${root}/assets`, {recursive: true, force: true});
 	for (const [name, content] of page.files) {

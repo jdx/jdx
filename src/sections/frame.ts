@@ -14,17 +14,23 @@ const HEADER_CSS = `@keyframes type{from{width:0}}
 .name{animation:flicker .9s linear 1.1s both}
 .gm{animation:gm 6s linear 2s infinite}.gc{animation:gc 6s linear 2s infinite}`;
 
-export async function header(t: Theme, s: Snapshot): Promise<string> {
+// The header is two images so the second, the line naming entire.io, can be
+// a link: a link inside an SVG isn't clickable on GitHub, but an image is.
+// The first ends with its last line's baseline 6px above its bottom edge and
+// the second puts its line 18px below its top, so the seam reads as one
+// 24px line height.
+export async function header(t: Theme, s: Snapshot): Promise<[string, string]> {
 	const barLeft = 'SYS://ENTIRE.IO // NODE:JDX';
 	const barRight = 'ONLINE · ALL SYSTEMS NOMINAL';
 	const name = 'JEFF DICKEY';
 	const tools = s.projects.slice(0, 7).map(p => p.name).join(' · ');
 	const lines = ['open source maintainer · developer tools in Rust', tools, 'full-time on open source at '];
-	const h = 360;
+	const h = 240;
 	const css = HEADER_CSS;
-	const defs = `<pattern id="scan" width="4" height="3" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#000" fill-opacity=".2"/></pattern>
+	const scan = `<pattern id="scan" width="4" height="3" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#000" fill-opacity=".2"/></pattern>
+<filter id="sglow" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="3"/></filter>`;
+	const defs = `${scan}
 <filter id="tglow" x="-5%" y="-40%" width="110%" height="180%"><feGaussianBlur stdDeviation="9"/></filter>
-<filter id="sglow" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="3"/></filter>
 <clipPath id="typeclip"><rect class="typing" x="${X}" y="80" width="140" height="30"/></clipPath>`;
 	const dotx = FR - 20 - barRight.length * 8.2 - 16;
 	const rows = [
@@ -32,7 +38,8 @@ export async function header(t: Theme, s: Snapshot): Promise<string> {
 		`<text class="fg" x="${X}" y="{y}"><tspan class="cy">&gt;&gt;</tspan> ${esc(lines[1])}</text>`,
 		`<text class="fg" x="${X}" y="{y}"><tspan class="cy">&gt;&gt;</tspan> ${esc(lines[2])}<tspan class="cy" font-weight="700">ENTIRE.IO</tspan></text>`,
 	];
-	const [descLines] = stagger(rows, 218, 24, 1.75, 0.25);
+	const [descLines] = stagger(rows.slice(0, 2), h - 6 - 24, 24, 1.75, 0.25);
+	const [entireLine] = stagger(rows.slice(2), 18, 24, 2.25, 0.25);
 	const big = (x: number, fill: string, extra = '') => `<text x="${x}" y="172" fill="${fill}"${extra} style="font-size:56px">${name}</text>`;
 	const body = `<rect x="${FL}" y="${M}" width="${FR - FL}" height="34" fill="${t.accent}" fill-opacity=".08"/>
 <line x1="${FL}" y1="${M + 34}" x2="${FR}" y2="${M + 34}" stroke="${t.accent}" stroke-opacity=".5"/>
@@ -48,17 +55,25 @@ ${big(X, t.accent, ' opacity=".55" filter="url(#tglow)"')}
 ${big(X, t.bright)}
 </g>
 ${descLines}
-<g class="ln" style="animation-delay:2.8s">
-<text x="${X}" y="304" class="gr">$</text>
-<rect class="cursor" x="${X + 18}" y="291" width="10" height="17" fill="${t.accent}"/>
-<rect class="cursor" x="${X + 18}" y="291" width="10" height="17" fill="${t.accent}" filter="url(#sglow)"/>
-</g>
 <rect x="${FL}" y="${M + 35}" width="${FR - FL}" height="${h - M - 35}" fill="url(#scan)"/>`;
-	return slice(t, h, body, {
-		title: 'Jeff Dickey', desc: headerAlt(s),
-		text: barLeft + barRight + name + '$ whoami>>' + lines.join('') + 'ENTIRE.IO',
-		top: true, css, defs, weights: [400, 700, 800],
-	});
+	const tail = `${entireLine}
+<g class="ln" style="animation-delay:2.8s">
+<text x="${X}" y="56" class="gr">$</text>
+<rect class="cursor" x="${X + 18}" y="43" width="10" height="17" fill="${t.accent}"/>
+<rect class="cursor" x="${X + 18}" y="43" width="10" height="17" fill="${t.accent}" filter="url(#sglow)"/>
+</g>
+<rect x="${FL}" y="0" width="${FR - FL}" height="${80 - M}" fill="url(#scan)"/>`;
+	return Promise.all([
+		slice(t, h, body, {
+			title: 'Jeff Dickey', desc: headerAlt(s),
+			text: barLeft + barRight + name + '$ whoami>>' + lines.slice(0, 2).join(''),
+			top: true, css, defs, weights: [400, 700, 800],
+		}),
+		slice(t, 80, tail, {
+			title: 'entire.io', desc: 'Full-time on open source at entire.io', css: HEADER_CSS, defs: scan,
+			text: '>>' + lines[2] + 'ENTIRE.IO$', bottom: true,
+		}),
+	]);
 }
 
 export function headerAlt(s: Snapshot): string {
@@ -148,18 +163,18 @@ function pack(items: string[], cols: number): string[] {
 	return lines;
 }
 
-export async function phoneHeader(t: Theme, s: Snapshot): Promise<string> {
+export async function phoneHeader(t: Theme, s: Snapshot): Promise<[string, string]> {
 	const {FL, FR, M, X, R} = PHONE;
 	const barLeft = 'SYS://ENTIRE.IO // JDX';
 	const barRight = 'ONLINE · NOMINAL';
 	const name = 'JEFF DICKEY';
 	// 52px keeps the name and its 5px glitch offset inside the text column.
 	const nameSize = 52;
-	const h = 360;
 	const css = HEADER_CSS;
-	const defs = `<pattern id="scan" width="4" height="3" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#000" fill-opacity=".2"/></pattern>
+	const scan = `<pattern id="scan" width="4" height="3" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#000" fill-opacity=".2"/></pattern>
+<filter id="sglow" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="3"/></filter>`;
+	const defs = `${scan}
 <filter id="tglow" x="-5%" y="-40%" width="110%" height="180%"><feGaussianBlur stdDeviation="8"/></filter>
-<filter id="sglow" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="3"/></filter>
 <clipPath id="typeclip"><rect class="typing" x="${X}" y="64" width="140" height="30"/></clipPath>`;
 	const dotx = FR - 14 - barRight.length * 8.2 - 16;
 	// The desktop's three ">>" lines, wrapped at " · " to fit 15px text after the ">> ".
@@ -170,8 +185,13 @@ export async function phoneHeader(t: Theme, s: Snapshot): Promise<string> {
 		...pack(s.projects.slice(0, 7).map(p => p.name), cols).map(l => row(esc(l))),
 		row(`full-time on open source at <tspan class="cy" font-weight="700">ENTIRE.IO</tspan>`),
 	];
-	const [descLines, yEnd] = stagger(rows, 194, 24, 1.75, Math.min(0.25, 0.75 / rows.length));
-	const cy = yEnd + 14;
+	// The wrapped lines sit in the first image, which ends 6px below the last of
+	// them (see the desktop header); the entire.io line opens the second.
+	const upper = rows.slice(0, -1);
+	const h = Math.ceil((194 + (upper.length - 1) * 24 + 6) / 40) * 40;
+	const step = Math.min(0.25, 0.75 / rows.length);
+	const [descLines] = stagger(upper, h - 6 - (upper.length - 1) * 24, 24, 1.75, step);
+	const [entireLine] = stagger(rows.slice(-1), 18, 24, 1.75 + upper.length * step, step);
 	const big = (x: number, fill: string, extra = '') => `<text x="${x}" y="150" fill="${fill}"${extra} style="font-size:${nameSize}px">${name}</text>`;
 	const body = `<rect x="${FL}" y="${M}" width="${FR - FL}" height="34" fill="${t.accent}" fill-opacity=".08"/>
 <line x1="${FL}" y1="${M + 34}" x2="${FR}" y2="${M + 34}" stroke="${t.accent}" stroke-opacity=".5"/>
@@ -187,17 +207,24 @@ ${big(X, t.accent, ' opacity=".55" filter="url(#tglow)"')}
 ${big(X, t.bright)}
 </g>
 ${descLines}
-<g class="ln" style="animation-delay:2.8s">
-<text x="${X}" y="${cy}" class="gr">$</text>
-<rect class="cursor" x="${X + 18}" y="${cy - 13}" width="10" height="17" fill="${t.accent}"/>
-<rect class="cursor" x="${X + 18}" y="${cy - 13}" width="10" height="17" fill="${t.accent}" filter="url(#sglow)"/>
-</g>
 <rect x="${FL}" y="${M + 35}" width="${FR - FL}" height="${h - M - 35}" fill="url(#scan)"/>`;
-	if (cy + 20 > h) throw new Error(`phone header overflows: cursor at ${cy}`);
-	return sliceG(t, PHONE, h, body, {
-		title: 'Jeff Dickey', desc: headerAlt(s),
-		text: barLeft + barRight + name + '$ whoami>>·ENTIRE.IO', top: true, css, defs, weights: [400, 700, 800],
-	});
+	const tail = `${entireLine}
+<g class="ln" style="animation-delay:2.8s">
+<text x="${X}" y="52" class="gr">$</text>
+<rect class="cursor" x="${X + 18}" y="39" width="10" height="17" fill="${t.accent}"/>
+<rect class="cursor" x="${X + 18}" y="39" width="10" height="17" fill="${t.accent}" filter="url(#sglow)"/>
+</g>
+<rect x="${FL}" y="0" width="${FR - FL}" height="${80 - M}" fill="url(#scan)"/>`;
+	return Promise.all([
+		sliceG(t, PHONE, h, body, {
+			title: 'Jeff Dickey', desc: headerAlt(s),
+			text: barLeft + barRight + name + '$ whoami>>·' + upper.join(''), top: true, css, defs, weights: [400, 700, 800],
+		}),
+		sliceG(t, PHONE, 80, tail, {
+			title: 'entire.io', desc: 'Full-time on open source at entire.io', css, defs: scan,
+			text: '>>·full-time on open source at ENTIRE.IO$', bottom: true,
+		}),
+	]);
 }
 
 export async function phoneFooter(t: Theme): Promise<string> {

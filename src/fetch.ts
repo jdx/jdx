@@ -344,8 +344,8 @@ async function fetchStarHistory(projects: Project[], end: string, today: string,
 	return {end, repos, mise};
 }
 
-// ruby counts Ruby itself through mise's core plugin elsewhere; mise is only the baseline.
-const NOT_INSTALLS = new Set(['jdx/mise']);
+// mise is only the baseline, and ruby counts Ruby itself through mise's core plugin.
+const NOT_INSTALLS = new Set(['jdx/mise', 'jdx/ruby']);
 
 // Daily cumulative GitHub release downloads per repo, CI included, kept by
 // jdx/mise-analytics (one row per repo per day since 2026-05).
