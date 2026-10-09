@@ -319,7 +319,9 @@ async function fetchMiseStars(end: string): Promise<Stars['mise']> {
 	if (!cur || days(cur[0], target) > 3) throw new Error(`mise.csv has nothing near ${target}`);
 	const before = iso(addDays(new Date(`${cur[0]}T00:00:00Z`), -30));
 	const prior = rows.findLast(([d]) => d <= before);
-	return {total: cur[1], gain30: prior && days(prior[0], before) <= 3 ? cur[1] - prior[1] : null};
+	// Dated by the day each count ended, like the rest of the star data.
+	const history = rows.filter(([d]) => d <= target).map(([d, n]) => [iso(addDays(new Date(`${d}T00:00:00Z`), -1)), n] as [string, number]);
+	return {total: cur[1], gain30: prior && days(prior[0], before) <= 3 ? cur[1] - prior[1] : null, history};
 }
 
 async function fetchStarHistory(projects: Project[], end: string, today: string, previous: Stars | null): Promise<Stars> {

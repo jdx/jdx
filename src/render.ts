@@ -16,6 +16,7 @@ import {beyondMise, phoneBeyondMise} from './sections/beyond.ts';
 import {city, cityAlt, phoneCity} from './sections/city.ts';
 import {LINKS, button, footer, header, headerAlt, phoneButton, phoneFooter, phoneHeader, phoneSectionHead, sectionHead} from './sections/frame.ts';
 import {installs, phoneInstalls} from './sections/installs.ts';
+import {miseStars, miseStarsAlt, phoneMiseStars} from './sections/miseStars.ts';
 import {articleRow, card, logoHref, phoneArticleRow, phoneCard, phoneWritingMore, writingMore} from './sections/projects.ts';
 import {phoneStats, stats} from './sections/stats.ts';
 import {phoneTrendingHead, phoneTrendingLegend, phoneTrendingRow, trendingHead, trendingLegend, trendingRow, trends} from './sections/trending.ts';
@@ -115,6 +116,15 @@ async function main() {
 	if (calendar) {
 		const c = counter();
 		page.add('contribution-city.svg', await both(city(t, calendar, updated, c), phoneCity(t, calendar, updated, c)), '100%', cityAlt(calendar));
+	}
+	if (starData?.mise?.history) {
+		const c = `// ${String(n + 1).padStart(2, '0')}`;
+		const svg = await miseStars(t, starData, c);
+		const phone = await phoneMiseStars(t, starData, c);
+		if (svg && phone) {
+			n++;
+			page.add('mise-stars.svg', [svg, phone], '100%', miseStarsAlt(starData));
+		}
 	}
 	if (starData) {
 		const c = counter();
