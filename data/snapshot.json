@@ -20,7 +20,7 @@
 			"logo": "https://jdx.dev/images/projects/fnox.svg",
 			"name": "fnox",
 			"repo": "jdx/fnox",
-			"stars": "2.2k",
+			"stars": "2.3k",
 			"tagline": "secrets for dev workflows"
 		},
 		{
@@ -42,7 +42,7 @@
 			"logo": "https://jdx.dev/images/projects/hk.png",
 			"name": "hk",
 			"repo": "jdx/hk",
-			"stars": "1.2k",
+			"stars": "1.3k",
 			"tagline": "fast git hooks and lints"
 		},
 		{
@@ -64,7 +64,7 @@
 			"logo": "https://jdx.dev/images/projects/pitchfork.png",
 			"name": "pitchfork",
 			"repo": "jdx/pitchfork",
-			"stars": "677",
+			"stars": "678",
 			"tagline": "daemons with DX"
 		},
 		{
@@ -75,7 +75,7 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "480",
+			"stars": "482",
 			"tagline": "a shared Rust build cache"
 		},
 		{
@@ -86,7 +86,7 @@
 			"logo": "https://jdx.dev/images/projects/demand.svg",
 			"name": "demand",
 			"repo": "jdx/demand",
-			"stars": "261",
+			"stars": "262",
 			"tagline": "prompts for Rust CLIs"
 		},
 		{
@@ -97,7 +97,7 @@
 			"logo": "https://jdx.dev/images/projects/packslip.svg",
 			"name": "packslip",
 			"repo": "jdx/packslip",
-			"stars": "131",
+			"stars": "136",
 			"tagline": "signed release manifests"
 		},
 		{
@@ -108,8 +108,19 @@
 			"logo": "https://jdx.dev/images/projects/communique.svg",
 			"name": "communique",
 			"repo": "jdx/communique",
-			"stars": "118",
+			"stars": "119",
 			"tagline": "AI-edited release notes"
+		},
+		{
+			"description": "A static checker for GitHub Actions workflow files.",
+			"href": "https://github.com/jdx/jactionlint",
+			"install": "mise use -g jactionlint",
+			"kind": "Go CLI",
+			"logo": "https://jdx.dev/images/projects/jactionlint.svg",
+			"name": "jactionlint",
+			"repo": "jdx/jactionlint",
+			"stars": "94",
+			"tagline": "GitHub Actions workflow linter"
 		},
 		{
 			"description": "Precompiled Rubies for fast installs.",
@@ -132,17 +143,6 @@
 			"repo": "jdx/tak",
 			"stars": "42",
 			"tagline": "CLI performance, tracked"
-		},
-		{
-			"description": "A static checker for GitHub Actions workflow files.",
-			"href": "https://github.com/jdx/jactionlint",
-			"install": "mise use -g jactionlint",
-			"kind": "Go CLI",
-			"logo": "https://jdx.dev/images/projects/jactionlint.svg",
-			"name": "jactionlint",
-			"repo": "jdx/jactionlint",
-			"stars": "27",
-			"tagline": "GitHub Actions workflow linter"
 		}
 	],
 	"posts": [
@@ -187,29 +187,29 @@
 		"value": 963468,
 		"dau": 81346
 	},
-	"stars": 44318,
+	"stars": 44352,
 	"issues": {
-		"count": 3,
+		"count": 0,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 32,
-		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
+		"count": 40,
+		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4337,
+		"followers": 4339,
 		"public_repos": 412,
-		"prs": 11506,
-		"prs_merged": 10738,
+		"prs": 11529,
+		"prs_merged": 10750,
 		"year": 2026,
-		"contributions_year": 18660,
-		"contributions_all": 61673,
+		"contributions_year": 18701,
+		"contributions_all": 61714,
 		"streak_current": 82,
 		"streak_longest": 82,
 		"languages": {
-			"Rust": 50446007,
-			"Shell": 6408002,
+			"Rust": 50524666,
+			"Shell": 6422039,
 			"TypeScript": 1710761,
 			"Go": 1577018,
 			"Vim Script": 1006159,

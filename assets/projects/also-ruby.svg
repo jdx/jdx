@@ -15,22 +15,22 @@ text{font-family:'JBM',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 <defs>
-<pattern id="grid" x="0" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#00d9ff" stroke-opacity=".06"/></pattern>
+<pattern id="grid" x="20" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#00d9ff" stroke-opacity=".06"/></pattern>
 <filter id="glow" filterUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><feGaussianBlur stdDeviation="6"/></filter>
 <filter id="g" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="4"/></filter>
 <filter id="gl" filterUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><feGaussianBlur stdDeviation="4"/></filter>
 </defs>
-
-<rect x="0" y="0" width="220" height="80" fill="#03040a"/>
-<rect x="0" y="0" width="220" height="80" fill="url(#grid)"/>
-<g class="ln" style="animation-delay:0.46s">
-<path d="M17.3 12H173.3L185.3 24V68H17.3Z" fill="#00d9ff" fill-opacity=".05"/>
-<path d="M17.3 12H173.3L185.3 24V68H17.3Z" fill="none" stroke="#00d9ff" stroke-opacity=".55"/>
-<path d="M173.3 12L185.3 24" stroke="#00d9ff" stroke-width="2"/>
-<g filter="url(#g)" opacity=".5"><image href="data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8dGl0bGU+UnVieTwvdGl0bGU+CiAgPHBhdGggZmlsbD0iI0NDMzQyRCIgZD0iTTIwLjE1Ni4wODNjMy4wMzMuNTI1IDMuODkzIDIuNTk4IDMuODI5IDQuNzdMMjQgNC44MjIgMjIuNjM1IDIyLjcxIDQuODkgMjMuOTI2aC4wMTZDMy40MzMgMjMuODY0LjE1IDIzLjcyOSAwIDE5LjEzOWwxLjY0NS0zIDIuODE5IDYuNTg2LjUwMyAxLjE3MiAyLjgwNS05LjE0NC0uMDMuMDA3LjAxNi0uMDMgOS4yNTUgMi45NTYtMS4zOTYtNS40MzEtLjk5LTMuOSA4LjgyLS41NjktLjYxNS0uNTFMMTYuNSAyLjExNCAyMC4xNTkuMDczbC0uMDAzLjAxek0wIDE5LjA4OXpNNS4xMyA1LjA3M2MzLjU2MS0zLjUzMyA4LjE1Ny01LjYyMSA5LjkyMi0zLjg0IDEuNzYyIDEuNzc3LS4xMDUgNi4xMDUtMy42NzMgOS42MzYtMy41NjMgMy41MzItOC4xMDMgNS43MzQtOS44NjQgMy45NTctMS43NjYtMS43NzcuMDQ1LTYuMjE3IDMuNjEyLTkuNzVsLjAwMy0uMDAzeiIvPgo8L3N2Zz4K" x="29" y="23" width="18" height="18"/></g>
-<image href="data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8dGl0bGU+UnVieTwvdGl0bGU+CiAgPHBhdGggZmlsbD0iI0NDMzQyRCIgZD0iTTIwLjE1Ni4wODNjMy4wMzMuNTI1IDMuODkzIDIuNTk4IDMuODI5IDQuNzdMMjQgNC44MjIgMjIuNjM1IDIyLjcxIDQuODkgMjMuOTI2aC4wMTZDMy40MzMgMjMuODY0LjE1IDIzLjcyOSAwIDE5LjEzOWwxLjY0NS0zIDIuODE5IDYuNTg2LjUwMyAxLjE3MiAyLjgwNS05LjE0NC0uMDMuMDA3LjAxNi0uMDMgOS4yNTUgMi45NTYtMS4zOTYtNS40MzEtLjk5LTMuOSA4LjgyLS41NjktLjYxNS0uNTFMMTYuNSAyLjExNCAyMC4xNTkuMDczbC0uMDAzLjAxek0wIDE5LjA4OXpNNS4xMyA1LjA3M2MzLjU2MS0zLjUzMyA4LjE1Ny01LjYyMSA5LjkyMi0zLjg0IDEuNzYyIDEuNzc3LS4xMDUgNi4xMDUtMy42NzMgOS42MzYtMy41NjMgMy41MzItOC4xMDMgNS43MzQtOS44NjQgMy45NTctMS43NjYtMS43NzcuMDQ1LTYuMjE3IDMuNjEyLTkuNzVsLjAwMy0uMDAzeiIvPgo8L3N2Zz4K" x="29" y="23" width="18" height="18"/>
-<text x="55.3" y="37" font-weight="700" class="cy" style="font-size:13px">ruby</text>
-<text x="29.3" y="58" class="dim" style="font-size:10px">precompiled Rubies</text>
+<path d="M204 -40V120" fill="none" stroke="#00d9ff" stroke-width="3" opacity=".55" filter="url(#glow)"/>
+<rect x="0" y="0" width="204" height="80" fill="#03040a"/>
+<rect x="0" y="0" width="204" height="80" fill="url(#grid)"/>
+<g class="ln" style="animation-delay:0.54s">
+<path d="M0.0 12H156.0L168.0 24V68H0.0Z" fill="#00d9ff" fill-opacity=".05"/>
+<path d="M0.0 12H156.0L168.0 24V68H0.0Z" fill="none" stroke="#00d9ff" stroke-opacity=".55"/>
+<path d="M156.0 12L168.0 24" stroke="#00d9ff" stroke-width="2"/>
+<g filter="url(#g)" opacity=".5"><image href="data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8dGl0bGU+UnVieTwvdGl0bGU+CiAgPHBhdGggZmlsbD0iI0NDMzQyRCIgZD0iTTIwLjE1Ni4wODNjMy4wMzMuNTI1IDMuODkzIDIuNTk4IDMuODI5IDQuNzdMMjQgNC44MjIgMjIuNjM1IDIyLjcxIDQuODkgMjMuOTI2aC4wMTZDMy40MzMgMjMuODY0LjE1IDIzLjcyOSAwIDE5LjEzOWwxLjY0NS0zIDIuODE5IDYuNTg2LjUwMyAxLjE3MiAyLjgwNS05LjE0NC0uMDMuMDA3LjAxNi0uMDMgOS4yNTUgMi45NTYtMS4zOTYtNS40MzEtLjk5LTMuOSA4LjgyLS41NjktLjYxNS0uNTFMMTYuNSAyLjExNCAyMC4xNTkuMDczbC0uMDAzLjAxek0wIDE5LjA4OXpNNS4xMyA1LjA3M2MzLjU2MS0zLjUzMyA4LjE1Ny01LjYyMSA5LjkyMi0zLjg0IDEuNzYyIDEuNzc3LS4xMDUgNi4xMDUtMy42NzMgOS42MzYtMy41NjMgMy41MzItOC4xMDMgNS43MzQtOS44NjQgMy45NTctMS43NjYtMS43NzcuMDQ1LTYuMjE3IDMuNjEyLTkuNzVsLjAwMy0uMDAzeiIvPgo8L3N2Zz4K" x="12" y="23" width="18" height="18"/></g>
+<image href="data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8dGl0bGU+UnVieTwvdGl0bGU+CiAgPHBhdGggZmlsbD0iI0NDMzQyRCIgZD0iTTIwLjE1Ni4wODNjMy4wMzMuNTI1IDMuODkzIDIuNTk4IDMuODI5IDQuNzdMMjQgNC44MjIgMjIuNjM1IDIyLjcxIDQuODkgMjMuOTI2aC4wMTZDMy40MzMgMjMuODY0LjE1IDIzLjcyOSAwIDE5LjEzOWwxLjY0NS0zIDIuODE5IDYuNTg2LjUwMyAxLjE3MiAyLjgwNS05LjE0NC0uMDMuMDA3LjAxNi0uMDMgOS4yNTUgMi45NTYtMS4zOTYtNS40MzEtLjk5LTMuOSA4LjgyLS41NjktLjYxNS0uNTFMMTYuNSAyLjExNCAyMC4xNTkuMDczbC0uMDAzLjAxek0wIDE5LjA4OXpNNS4xMyA1LjA3M2MzLjU2MS0zLjUzMyA4LjE1Ny01LjYyMSA5LjkyMi0zLjg0IDEuNzYyIDEuNzc3LS4xMDUgNi4xMDUtMy42NzMgOS42MzYtMy41NjMgMy41MzItOC4xMDMgNS43MzQtOS44NjQgMy45NTctMS43NjYtMS43NzcuMDQ1LTYuMjE3IDMuNjEyLTkuNzVsLjAwMy0uMDAzeiIvPgo8L3N2Zz4K" x="12" y="23" width="18" height="18"/>
+<text x="38.0" y="37" font-weight="700" class="cy" style="font-size:13px">ruby</text>
+<text x="12.0" y="58" class="dim" style="font-size:10px">precompiled Rubies</text>
 </g>
-
+<path d="M204 0V80" fill="none" stroke="#00d9ff" stroke-width="1.2"/>
 </svg>
