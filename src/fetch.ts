@@ -344,62 +344,60 @@ async function fetchStarHistory(projects: Project[], end: string, today: string,
 	return {end, repos, mise};
 }
 
-const MISE_VERSIONS = 'https://mise-versions.jdx.dev/api';
-const UA = {'user-agent': 'jdx-profile (github.com/jdx/jdx)'};
-// ruby counts installs of Ruby itself through mise's core plugin, not jdx/ruby.
-const NOT_INSTALLS = new Set(['jdx/mise', 'jdx/ruby']);
+// ruby counts Ruby itself through mise's core plugin elsewhere; mise is only the baseline.
+const NOT_INSTALLS = new Set(['jdx/mise']);
 
-async function mv<T>(path: string): Promise<T> {
-	for (let attempt = 1; ; attempt++) {
-		try {
-			return await (await get(`${MISE_VERSIONS}${path}`, {headers: UA})).json() as T;
-		} catch (err) {
-			if (attempt >= 3) throw err;
-		}
-	}
-}
+// Daily cumulative GitHub release downloads per repo, CI included, kept by
+// jdx/mise-analytics (one row per repo per day since 2026-05).
+const DOWNLOADS_CSV = 'https://raw.githubusercontent.com/jdx/mise-analytics/main/top-repos-downloads.csv';
 
 async function fetchInstalls(projects: Project[]): Promise<Installs> {
-	const map = await mv<Record<string, number>>('/downloads/30d');
-	const ranked = Object.entries(map).sort((a, b) => b[1] - a[1]);
-	const rank = new Map(ranked.map(([k], i) => [k, i + 1]));
-	const baseline = await mv<{global: {mom: number}}>('/stats/growth').then(g => g.global.mom).catch(() => null);
-	// Every series ends on the same day: the latest the API has data for.
-	// Days with no installs are missing from the API, so they are filled with 0.
-	const fetched: {tool: string; repo: string; growth: {thisMonth: number; lastMonth: number; mom: number}; byDate: Map<string, number>}[] = [];
+	const cumulative = new Map<string, Map<string, number>>();
 	let end = '';
+	for (const line of (await (await get(DOWNLOADS_CSV, {headers: {'user-agent': 'jdx-profile (github.com/jdx/jdx)'}})).text()).split('\n').slice(1)) {
+		const [date, name, count] = line.split(',');
+		if (!name || !/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isFinite(Number(count))) continue;
+		if (!cumulative.has(name)) cumulative.set(name, new Map());
+		cumulative.get(name)!.set(date, Number(count));
+		if (date > end) end = date;
+	}
+	if (!end) throw new Error('no release download data');
+	// The total as of `date`, or the nearest earlier row; null before tracking began.
+	const at = (rows: Map<string, number>, date: string) => {
+		let best = '';
+		for (const d of rows.keys()) if (d <= date && d > best) best = d;
+		return best ? rows.get(best)! : null;
+	};
+	const weekAgo = iso(addDays(new Date(`${end}T00:00:00Z`), -7));
+	const twoWeeksAgo = iso(addDays(new Date(`${end}T00:00:00Z`), -14));
+	// Average daily downloads over the 7 days to `end` and the 7 before; when
+	// tracking began later than that, from the first row on.
+	const window = (rows: Map<string, number>) => {
+		const total = rows.get(end) ?? at(rows, end)!;
+		const before = at(rows, weekAgo) ?? Math.min(...rows.values());
+		const earlier = at(rows, twoWeeksAgo);
+		const rate = Math.max(0, total - before) / 7;
+		const prev = earlier === null ? null : Math.max(0, before - earlier) / 7;
+		return {total, rate, prev, wow: prev ? (rate / prev - 1) * 100 : null};
+	};
+	const baseline = cumulative.has('mise') ? window(cumulative.get('mise')!).wow : null;
+	const tools: Record<string, ToolInstalls> = {};
 	for (const repo of toolRepos(projects).filter(r => !NOT_INSTALLS.has(r))) {
 		const tool = repo.split('/')[1];
-		if (!map[tool]) continue;
-		const growth = await mv<{thisMonth: number; lastMonth: number; mom: number}>(`/downloads/${tool}/growth`);
-		const {daily} = await mv<{daily: {date: string; count: number}[]}>(`/downloads/${tool}`);
-		for (const d of daily) if (d.date > end) end = d.date;
-		fetched.push({tool, repo, growth, byDate: new Map(daily.map(d => [d.date, d.count]))});
-	}
-	if (!fetched.length || !end) throw new Error('no install data for any jdx tool');
-	const tools: Record<string, ToolInstalls> = {};
-	for (const {tool, repo, growth, byDate} of fetched) {
+		const rows = cumulative.get(tool);
+		if (!rows || !rows.has(end)) continue;
+		const {total, rate, prev, wow} = window(rows);
 		const series: [string, number][] = [];
 		for (let i = 29; i >= 0; i--) {
 			const d = iso(addDays(new Date(`${end}T00:00:00Z`), -i));
-			series.push([d, byDate.get(d) ?? 0]);
+			const now = rows.get(d);
+			const prev = at(rows, iso(addDays(new Date(`${d}T00:00:00Z`), -1)));
+			series.push([d, now === undefined || prev === null ? 0 : Math.max(0, now - prev)]);
 		}
-		tools[tool] = {repo, this_month: growth.thisMonth, last_month: growth.lastMonth, mom: growth.mom, rank: rank.get(tool)!, daily: series};
+		tools[tool] = {repo, rate, prev_rate: prev, wow, total, daily: series};
 	}
-	return {end, baseline_mom: baseline, tools_ranked: ranked.length, tools};
-}
-
-// mise-versions only serves the last 30 days, so every daily count we have
-// seen is kept in data/installs-history.json ({tool: {date: installs}}) for
-// longer trends later. Later fetches overwrite a day, in case the API revised it.
-async function appendInstallHistory(installs: Installs): Promise<void> {
-	const history: Record<string, Record<string, number>> = JSON.parse(await readFile('data/installs-history.json', 'utf8').catch(() => '{}'));
-	for (const [tool, v] of Object.entries(installs.tools)) {
-		history[tool] = {...history[tool], ...Object.fromEntries(v.daily)};
-	}
-	const sorted = Object.fromEntries(Object.keys(history).sort().map(tool =>
-		[tool, Object.fromEntries(Object.entries(history[tool]).sort(([a], [b]) => a.localeCompare(b)))]));
-	await writeFile('data/installs-history.json', `${JSON.stringify(sorted)}\n`);
+	if (!Object.keys(tools).length) throw new Error('no release downloads for any jdx tool');
+	return {end, baseline_wow: baseline, tools};
 }
 
 // Downloads every logo before touching data/logos, so a failure part-way
@@ -469,7 +467,6 @@ async function main() {
 	const installs = await attempt('installs', () => fetchInstalls(snapshot.projects), null);
 	if (installs) {
 		await writeFile('data/installs.json', `${JSON.stringify(installs, null, '\t')}\n`);
-		await appendInstallHistory(installs);
 	}
 
 	// Keeping the last value is fine for a run or two, but a source that keeps

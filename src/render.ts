@@ -122,7 +122,7 @@ async function main() {
 		const phone = await phoneInstalls(t, installData, starData, s.projects, c);
 		if (svg && phone) {
 			n++;
-			page.add('installs.svg', [svg, phone], '100%', 'Installs of jdx tools through mise');
+			page.add('installs.svg', [svg, phone], '100%', 'Release downloads of jdx tools');
 		}
 	}
 

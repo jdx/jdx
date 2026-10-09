@@ -1,41 +1,42 @@
-// ~/installs: installs of jdx tools through mise.
+// ~/downloads: GitHub release downloads of jdx tools, CI included.
 import {DESKTOP, FL, FR, HW, M, PHONE, type Geo, type Theme, W, X, esc, f1, halfSlice, halfSliceG, heading, headingG, num, placeholder, prompt, promptG, segment, segmentG, slice, sliceG, stagger, up40, wrap} from '../console.ts';
 import {CREDIT_POST, CREDIT_URL, DAY, NEW_DAYS, age, iso, monthDay, parse, shift, short, sum, toolColor} from '../shared.ts';
 import {type Calendar, type Installs, type Post, type Project, type RepoStars, type Snapshot, type Stars, type ToolInstalls, slugify} from '../data.ts';
 
 // ───────────────────────────── ~/installs ─────────────────────────────
-// isNew: launched in the last 60 days. lowBase: older, but under 1,000 installs the
-// month before, so a percentage would mostly measure the small base.
+// isNew: launched in the last 60 days. lowBase: older, but under 30 downloads a
+// day the week before, so a percentage would mostly measure the small base.
 type Card = {tool: string; v: ToolInstalls; p: Project; isNew: boolean; lowBase: boolean};
 type Picked = {cards: Card[]; combined: number | null; baseline: number | null; hottest: Card | undefined};
 
-// The tools both layouts show (up to six, NEW first, then by month-over-month
-// growth), or null, meaning no section, when fewer than three qualify.
+// The tools both layouts show (up to six, most downloaded first), or null, meaning no section, when fewer than three qualify.
 function pick(data: Installs, stars: Stars | null, projects: Project[]): Picked | null {
 	const byRepo = new Map(projects.map(p => [p.repo, p]));
 	const created = (repo: string) => stars?.repos[repo]?.created_at;
 	const all = Object.entries(data.tools);
-	const cards = all.filter(([, v]) => v.this_month >= 1000 && byRepo.has(v.repo))
-		.sort((a, b) => b[1].this_month - a[1].this_month).slice(0, 6)
+	const cards = all.filter(([, v]) => v.rate >= MIN_RATE && byRepo.has(v.repo))
+		.sort((a, b) => b[1].rate - a[1].rate).slice(0, 6)
 		.map(([tool, v]) => {
 			const c = created(v.repo);
-			const isNew = c ? age(c, data.end) < NEW_DAYS : v.last_month < 1000;
-			return {tool, v, p: byRepo.get(v.repo)!, isNew, lowBase: !isNew && v.last_month < 1000};
-		})
-		.sort((a, b) => Number(b.isNew) - Number(a.isNew) || b.v.mom - a.v.mom);
+			const isNew = c ? age(c, data.end) < NEW_DAYS : (v.prev_rate ?? 0) < MIN_RATE;
+			return {tool, v, p: byRepo.get(v.repo)!, isNew, lowBase: !isNew && v.prev_rate !== null && v.prev_rate < MIN_RATE};
+		});
 	if (cards.length < 3) return null;
-	const lastSum = all.reduce((a, [, v]) => a + v.last_month, 0);
-	const combined = lastSum >= 1000 ? (all.reduce((a, [, v]) => a + v.this_month, 0) / lastSum - 1) * 100 : null;
-	const baseline = data.baseline_mom;
-	const hottest = cards.find(c => !c.isNew && !c.lowBase && c.v.mom > (baseline ?? 0));
+	const known = all.filter(([, v]) => v.prev_rate !== null);
+	const lastSum = known.reduce((a, [, v]) => a + v.prev_rate!, 0);
+	const combined = lastSum >= MIN_RATE ? (known.reduce((a, [, v]) => a + v.rate, 0) / lastSum - 1) * 100 : null;
+	const baseline = data.baseline_wow;
+	const hottest = cards.find(c => !c.isNew && !c.lowBase && c.v.wow !== null && c.v.wow > (baseline ?? 0));
 	return {cards, combined, baseline, hottest};
 }
 
-// A card's NEW or month-over-month chip, as [label, color].
+// A card's NEW or week-over-week chip, as [label, color].
 function chipOf(t: Theme, c: Card, baseline: number | null): [string, string] {
 	if (c.isNew) return ['NEW', t.accent2];
-	if (c.lowBase) return [`from ${short(c.v.last_month)}`, t.accent];
-	return [`${c.v.mom >= 0 ? '+' : ''}${Math.round(c.v.mom)}%`, c.v.mom < 0 ? t.faint : baseline !== null && c.v.mom > baseline + 2 ? t.ok : t.accent];
+	if (c.lowBase) return [`from ${short(c.v.prev_rate!)}`, t.accent];
+	const {wow} = c.v;
+	if (wow === null) return ['n/a', t.faint];
+	return [`${wow >= 0 ? '+' : ''}${Math.round(wow)}%`, wow < 0 ? t.faint : baseline !== null && wow > baseline + 2 ? t.ok : t.accent];
 }
 
 // Sparkline in the box [sx, sy, sw, sh]: 30 daily values, faint area plus a
@@ -62,9 +63,10 @@ function spark(t: Theme, c: Card, color: string, [sx, sy, sw, sh]: number[], lw:
 <circle class="pulse" cx="${f1(sx + sw)}" cy="${f1(lastY)}" r="${r}" fill="${color}"/>`;
 }
 
-const API = 'mise-versions.jdx.dev/api/downloads/hk/growth';
-const CMD = `curl -s ${API}`;
-const FOOT = "counted once per IP, tool, version and day, so these are installs, not unique users. aube also ships inside mise's npm backend and through npm and Homebrew, which isn't counted here.";
+const API = 'raw.githubusercontent.com/jdx/mise-analytics/main/top-repos-downloads.csv';
+const CMD = `curl -sL ${API}`;
+const MIN_RATE = 30;
+const FOOT = "GitHub release downloads from mise-analytics, CI included. Every asset counts, so one install can be several downloads and these are not unique users. Installs through npm and Homebrew aren't counted here.";
 const CSS = `.spark{stroke-dasharray:1;stroke-dashoffset:0;animation:draw 1.2s ease-out both .5s}
 @keyframes draw{from{stroke-dashoffset:1}}
 .pulse{animation:pulse 1s ease-in-out 3 1.6s}`;
@@ -75,13 +77,13 @@ function growth({combined, baseline}: Picked): string {
 		...(combined !== null ? [`jdx tools <tspan class="gr">${combined >= 0 ? '+' : ''}${Math.round(combined)}%</tspan>`] : []),
 		...(baseline !== null ? [`all of mise ${baseline >= 0 ? '+' : ''}${Math.round(baseline)}%`] : []),
 	];
-	return parts.length ? `${parts.join(' · ')} MoM` : '';
+	return parts.length ? `${parts.join(' · ')} WoW` : '';
 }
 
 function describe(data: Installs, {cards, combined, baseline}: Picked): string {
-	return `Installs of jdx's tools through mise in the 30 days to ${monthDay(data.end)}, CI excluded: ` +
-		cards.map(c => `${c.p.name} ${num(c.v.this_month)}${c.isNew ? ' (new)' : c.lowBase ? ` (up from ${num(c.v.last_month)})` : ` (${Math.round(c.v.mom)}% month over month)`}`).join(', ') +
-		(combined !== null ? `. jdx tools combined ${Math.round(combined)}% month over month` : '') + (baseline !== null ? `, all of mise ${Math.round(baseline)}%.` : '.');
+	return `GitHub release downloads per day of jdx's tools, averaged over the 7 days to ${monthDay(data.end)}, CI included: ` +
+		cards.map(c => `${c.p.name} ${num(Math.round(c.v.rate))}${c.isNew ? ' (new)' : c.lowBase ? ` (up from ${num(Math.round(c.v.prev_rate!))})` : c.v.wow !== null ? ` (${Math.round(c.v.wow)}% week over week)` : ''}`).join(', ') +
+		(combined !== null ? `. jdx tools combined ${Math.round(combined)}% week over week` : '') + (baseline !== null ? `, all of mise ${Math.round(baseline)}%.` : '.');
 }
 
 export async function installs(t: Theme, data: Installs, stars: Stars | null, projects: Project[], counter: string): Promise<string | null> {
@@ -97,7 +99,7 @@ export async function installs(t: Theme, data: Installs, stars: Stars | null, pr
 		const [chip, cc] = chipOf(t, c, baseline);
 		const chipW = chip.length * 6.6 + 10;
 		const hot = c === hottest;
-		const value = short(c.v.this_month);
+		const value = short(c.v.rate);
 		return `<g class="ln" style="animation-delay:${(0.3 + i * 0.07).toFixed(2)}s">
 <rect x="${f1(x)}" y="${y}" width="${f1(cw)}" height="${ch}" fill="${t.accent}" fill-opacity="${hot ? '.07' : '.035'}" stroke="${hot ? color : t.accent}" stroke-opacity="${hot ? '.9' : '.35'}"/>
 <path d="M${f1(x)} ${y + 12}V${y}H${f1(x + 12)}" fill="none" stroke="${hot ? color : t.accent}" stroke-width="2"/>
@@ -107,22 +109,22 @@ export async function installs(t: Theme, data: Installs, stars: Stars | null, pr
 ${hot ? `<text x="${f1(x + cw - 14 - chipW - 6)}" y="${y + 25}" text-anchor="end" fill="${color}" letter-spacing="1" style="font-size:9.5px">HOTTEST</text>` : ''}
 <text x="${f1(x + 14)}" y="${y + 60}" font-weight="700" fill="${t.accent}" filter="url(#g)" opacity=".5" style="font-size:26px">${value}</text>
 <text x="${f1(x + 14)}" y="${y + 60}" font-weight="700" fill="${t.accent}" style="font-size:26px">${value}</text>
-<text x="${f1(x + 14 + value.length * 15.6 + 8)}" y="${y + 60}" class="dim" style="font-size:10.5px">installs / 30d</text>
-<text x="${f1(x + 14)}" y="${y + 78}" class="fainter" style="font-size:11px">#${c.v.rank} of ${num(data.tools_ranked)} tools</text>
+<text x="${f1(x + 14 + value.length * 15.6 + 8)}" y="${y + 60}" class="dim" style="font-size:10.5px">downloads / day</text>
+<text x="${f1(x + 14)}" y="${y + 78}" class="fainter" style="font-size:11px">${short(c.v.total)} all time</text>
 ${spark(t, c, color, [x + 14, y + 88, cw - 28, 36], 1.8, 2.5)}
 </g>`;
 	});
-	const sub = `installs through mise · 30 days to ${monthDay(data.end)} · CI excluded`;
+	const sub = `release downloads · 7-day average to ${monthDay(data.end)} · CI included`;
 	const footLines = wrap(FOOT, Math.floor((FR - 36 - X) / 6));
-	const body = `${heading(t, 44, 'installs', counter)}
+	const body = `${heading(t, 44, 'downloads', counter)}
 ${prompt(CMD, 0.15)}
 <g class="ln" style="animation-delay:.2s"><text x="${X}" y="136" class="dim" style="font-size:12px">${esc(sub)}</text>
 <text x="${FR - 36}" y="136" text-anchor="end" class="dim" style="font-size:12px">${growth(picked)}</text></g>
 ${parts.join('\n')}
 <g class="ln" style="animation-delay:1s">${footLines.map((l, i) => `<text x="${X}" y="${458 + i * 13}" class="fainter" style="font-size:10px">${esc(l)}</text>`).join('')}</g>`;
 	return slice(t, 480, body, {
-		title: 'Installs', desc: describe(data, picked), css: CSS,
-		text: `~/installs${counter}$ ${CMD}${sub}jdx tools all of mise MoM+-%NEWHOTTEST installs / 30d#oftools${FOOT}0123456789k.M`,
+		title: 'Downloads', desc: describe(data, picked), css: CSS,
+		text: `~/installs${counter}$ ${CMD}${sub}jdx tools all of mise WoW+-%NEWHOTTEST downloads / day all time n/a${FOOT}0123456789k.M`,
 	});
 }
 
@@ -132,7 +134,7 @@ ${parts.join('\n')}
 // The same cards in two columns. A 186px card can't fit the number and
 // "installs / 30d" on one line, so the label and the rank stack under the
 // number, and HOTTEST moves from beside the chip to a tag on the card's top
-// edge. The command breaks after `curl -s \`, as a shell would continue it.
+// edge. The command breaks after `curl -sL \`, as a shell would continue it.
 export async function phoneInstalls(t: Theme, data: Installs, stars: Stars | null, projects: Project[], counter: string): Promise<string | null> {
 	const picked = pick(data, stars, projects);
 	if (!picked) return null;
@@ -148,7 +150,7 @@ export async function phoneInstalls(t: Theme, data: Installs, stars: Stars | nul
 		const [chip, cc] = chipOf(t, c, baseline);
 		const chipW = chip.length * 7.2 + 8;
 		const hot = c === hottest;
-		const value = short(c.v.this_month);
+		const value = short(c.v.rate);
 		// The name shrinks from 17px, in half-pixel steps, rather than run into the chip.
 		const nameSize = Math.min(17, Math.floor(((cw - 24 - chipW - 6) / (0.6 * c.p.name.length)) * 2) / 2);
 		const tagW = 7 * 7.6 + 8;
@@ -165,25 +167,25 @@ ${tag}<text x="${f1(x + 12)}" y="${y + 29}" font-weight="700" fill="${color}" st
 <text x="${f1(x + cw - 12 - chipW + 4)}" y="${y + 28}" fill="${cc}" style="font-size:12px">${esc(chip)}</text>
 <text x="${f1(x + 12)}" y="${y + 62}" font-weight="700" fill="${t.accent}" filter="url(#g)" opacity=".5" style="font-size:26px">${value}</text>
 <text x="${f1(x + 12)}" y="${y + 62}" font-weight="700" fill="${t.accent}" style="font-size:26px">${value}</text>
-<text x="${f1(x + 12)}" y="${y + 80}" class="dim" style="font-size:12px">installs / 30d</text>
-<text x="${f1(x + 12)}" y="${y + 96}" fill="${t.faint}" style="font-size:12px">#${c.v.rank} of ${num(data.tools_ranked)} tools</text>
+<text x="${f1(x + 12)}" y="${y + 80}" class="dim" style="font-size:12px">downloads / day</text>
+<text x="${f1(x + 12)}" y="${y + 96}" fill="${t.faint}" style="font-size:12px">${short(c.v.total)} all time</text>
 ${spark(t, c, color, [x + 12, y + 104, cw - 24, 30], 2, 3)}
 </g>`;
 	});
 	const rows = Math.ceil(cards.length / 2);
-	const sub = `installs through mise · 30d to ${monthDay(data.end)} · CI excluded`;
+	const sub = `downloads · 7-day avg to ${monthDay(data.end)} · CI included`;
 	// 58 columns of 11px JetBrains Mono (6.6px each) fill the 384px text column.
 	const footLines = wrap(FOOT, 58);
 	const footY = y0 + rows * ch + (rows - 1) * gap + 24;
-	const body = `${headingG(t, PHONE, 44, 'installs', counter)}
-${promptG(PHONE, 'curl -s \\', 0.15, '', 92, 13)}
-<g class="ln" style="animation-delay:.18s"><text x="${X}" y="110" class="dim" style="font-size:13px"><tspan class="fainter">&gt;</tspan> ${esc(API)}</text></g>
+	const body = `${headingG(t, PHONE, 44, 'downloads', counter)}
+${promptG(PHONE, 'curl -sL \\', 0.15, '', 92, 13)}
+<g class="ln" style="animation-delay:.18s"><text x="${X}" y="110" class="dim" style="font-size:13px"><tspan class="fainter">&gt;</tspan> ${esc(API.replace('raw.githubusercontent.com/jdx/', ''))}</text></g>
 <g class="ln" style="animation-delay:.2s"><text x="${X}" y="140" class="dim" style="font-size:12px">${esc(sub)}</text>
 <text x="${X}" y="157" class="dim" style="font-size:12px">${growth(picked)}</text></g>
 ${parts.join('\n')}
 <g class="ln" style="animation-delay:1s">${footLines.map((l, i) => `<text x="${X}" y="${footY + i * 14}" class="fainter" style="font-size:11px">${esc(l)}</text>`).join('')}</g>`;
 	return sliceG(t, PHONE, up40(footY + (footLines.length - 1) * 14 + 14), body, {
-		title: 'Installs', desc: describe(data, picked), css: CSS,
-		text: `~/installs${counter}$ ${CMD}\\>${sub}jdx tools all of mise MoM+-%NEWHOTTEST installs / 30d#oftools${FOOT}0123456789k.M`,
+		title: 'Downloads', desc: describe(data, picked), css: CSS,
+		text: `~/installs${counter}$ ${CMD}\\>${sub}jdx tools all of mise WoW+-%NEWHOTTEST downloads / day all time n/a${FOOT}0123456789k.M`,
 	});
 }

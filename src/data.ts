@@ -48,20 +48,21 @@ export type Stars = {
 	mise: {total: number; gain30: number | null} | null;
 };
 
-// Installs of jdx tools through mise (mise-versions; CI excluded, one per
-// IP/tool/version/day, so not unique users).
+// GitHub release asset downloads of jdx tools (mise-analytics; CI included,
+// every asset counts, so not unique users). rate is the daily average over the
+// last 7 days; prev_rate and wow, the week before and the change, are null when
+// the history doesn't reach back 14 days.
 export type ToolInstalls = {
 	repo: string;
-	this_month: number;
-	last_month: number;
-	mom: number;
-	rank: number;
+	rate: number;
+	prev_rate: number | null;
+	wow: number | null;
+	total: number;
 	daily: [string, number][];
 };
 export type Installs = {
 	end: string;
-	baseline_mom: number | null;
-	tools_ranked: number;
+	baseline_wow: number | null;
 	tools: Record<string, ToolInstalls>;
 };
 
