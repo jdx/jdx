@@ -183,33 +183,33 @@
 		}
 	],
 	"mau": {
-		"date": "2026-10-07",
-		"value": 959942,
-		"dau": 78605
+		"date": "2026-10-08",
+		"value": 963468,
+		"dau": 81346
 	},
-	"stars": 44244,
+	"stars": 44280,
 	"issues": {
-		"count": 1,
+		"count": 0,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 22,
+		"count": 26,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4336,
+		"followers": 4337,
 		"public_repos": 412,
-		"prs": 11474,
-		"prs_merged": 10714,
+		"prs": 11503,
+		"prs_merged": 10737,
 		"year": 2026,
-		"contributions_year": 18604,
-		"contributions_all": 61617,
+		"contributions_year": 18656,
+		"contributions_all": 61669,
 		"streak_current": 82,
 		"streak_longest": 82,
 		"languages": {
-			"Rust": 50406920,
-			"Shell": 6394511,
+			"Rust": 50446007,
+			"Shell": 6408002,
 			"TypeScript": 1710761,
 			"Go": 1577018,
 			"Vim Script": 1006159,
@@ -224,9 +224,9 @@
 			"Astro": 196025,
 			"Ruby": 153567,
 			"Vue": 122342,
-			"Roff": 55039,
+			"Roff": 55429,
 			"Assembly": 39003,
-			"Dockerfile": 35493,
+			"Dockerfile": 36544,
 			"Nix": 29810,
 			"Linker Script": 24748,
 			"Less": 10634,
