@@ -34,14 +34,15 @@ function model(stars: Stars) {
 	const points: Point[] = [];
 	for (const p of history) if (!points.length || parse(p[0]) - parse(points.at(-1)![0]) >= 7 * DAY) points.push(p);
 	if (points.at(-1)![0] !== D) points.push(history.at(-1)!);
-	return {start: first[0], D, cur, points, passed, next, eta, perDay, last: passed.at(-1)};
+	return {start: first[0], D, cur, points, passed, next, eta, perDay, last: passed.at(-1), downloads: stars.mise?.downloads};
 }
 
 type Model = NonNullable<ReturnType<typeof model>>;
 
 function describe(m: Model): string {
 	const done = m.last ? ` Passed ${label(m.last.m)} on ${date(m.last.day)}.` : '';
-	return `Line chart of mise's GitHub stars since ${date(m.start)}: ${m.cur.toLocaleString('en-US')} stars.${done} On pace for ${label(m.next)} around ${date(m.eta)}.`;
+	const dl = m.downloads ? ` Release downloads: ${short(m.downloads.total)}, about ${short(m.downloads.rate)} a day.` : '';
+	return `Line chart of mise's GitHub stars since ${date(m.start)}: ${m.cur.toLocaleString('en-US')} stars.${done} On pace for ${label(m.next)} around ${date(m.eta)}.${dl}`;
 }
 
 function plot(t: Theme, g: Geo, m: Model, py0: number, py1: number): string {
@@ -105,16 +106,21 @@ function summary(t: Theme, g: Geo, m: Model, y: number): string {
 		: '';
 	const pace = `<tspan class="dim">On pace for </tspan><tspan class="gr" font-weight="700">${label(m.next)}</tspan><tspan class="dim"> · ${date(m.eta)} · in ${days} day${days === 1 ? '' : 's'}</tspan>`;
 	const sub = 'cumulative stars since launch';
+	const dl = m.downloads
+		? `<tspan class="cy" font-weight="700">${short(m.downloads.total)}</tspan><tspan class="dim"> downloads · ${short(m.downloads.rate)}/day</tspan>`
+		: '';
 	if (g.narrow) {
 		return `<g class="ln" style="animation-delay:.2s"><text x="${g.X}" y="${y}" font-weight="700" fill="${t.accent}" filter="url(#g)" opacity=".6" style="font-size:22px">${short(m.cur)}★</text>
 <text x="${g.X}" y="${y}"><tspan class="cy" font-weight="700" style="font-size:22px">${short(m.cur)}★</tspan><tspan class="fg" style="font-size:13px"> mise on GitHub</tspan></text>
 <text x="${g.X}" y="${y + 22}" class="dim" style="font-size:12px">${sub}</text>
 <text x="${g.X}" y="${y + 46}" style="font-size:12px">${passed}</text>
-<text x="${g.X}" y="${y + 66}" style="font-size:12px">${pace}</text></g>`;
+<text x="${g.X}" y="${y + 66}" style="font-size:12px">${pace}</text>
+<text x="${g.X}" y="${y + 90}" style="font-size:12px">${dl}</text></g>`;
 	}
 	return `<g class="ln" style="animation-delay:.2s"><text x="${g.X}" y="${y}" class="dim" style="font-size:12px"><tspan class="cy" font-weight="700" style="font-size:15px">${short(m.cur)}★</tspan> ${sub}</text>
 <text x="${g.R - 36}" y="${y}" text-anchor="end" style="font-size:12px">${passed}</text>
-<text x="${g.R - 36}" y="${y + 20}" text-anchor="end" style="font-size:12px">${pace}</text></g>`;
+<text x="${g.R - 36}" y="${y + 20}" text-anchor="end" style="font-size:12px">${pace}</text>
+<text x="${g.X}" y="${y + 20}" style="font-size:12px">${dl}</text></g>`;
 }
 
 async function render(t: Theme, g: Geo, stars: Stars, counter: string): Promise<string | null> {
@@ -128,7 +134,7 @@ async function render(t: Theme, g: Geo, stars: Stars, counter: string): Promise<
 		const body = `${headingG(t, g, 44, 'mise-stars', counter)}
 ${promptG(g, cmd, 0.15, '', 92, 12)}
 ${summary(t, g, m, 132)}
-${plot(t, g, m, 232, py1)}`;
+${plot(t, g, m, 256, py1)}`;
 		return sliceG(t, g, up40(py1 + 36), body, {title: 'mise stars', desc: describe(m), css, text: "~/mise-stars$ ★·0123456789k.'"});
 	}
 	const body = `${headingG(t, g, 44, 'mise-stars', counter)}

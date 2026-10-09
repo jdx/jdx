@@ -309,7 +309,7 @@ async function repoStars(repo: string, prev: RepoStars | undefined, today: strin
 // gain comes from the daily snapshots in jdx/mise-analytics. The CSV has gaps,
 // so each end of the window takes the nearest earlier row; a gap wider than
 // 3 days gives no gain rather than a wrong one.
-async function fetchMiseStars(end: string): Promise<Stars['mise']> {
+async function fetchMiseStars(end: string, previous: Stars['mise']): Promise<Stars['mise']> {
 	const csv = await (await get('https://raw.githubusercontent.com/jdx/mise-analytics/main/mise.csv')).text();
 	const rows = csv.trim().split('\n').slice(1).map(l => l.split(',')).filter(r => r[4]).map(r => [r[0], Number(r[4])] as const);
 	const days = (a: string, b: string) => Math.round((Date.parse(b) - Date.parse(a)) / 864e5);
@@ -321,7 +321,26 @@ async function fetchMiseStars(end: string): Promise<Stars['mise']> {
 	const prior = rows.findLast(([d]) => d <= before);
 	// Dated by the day each count ended, like the rest of the star data.
 	const history = rows.filter(([d]) => d <= target).map(([d, n]) => [iso(addDays(new Date(`${d}T00:00:00Z`), -1)), n] as [string, number]);
-	return {total: cur[1], gain30: prior && days(prior[0], before) <= 3 ? cur[1] - prior[1] : null, history};
+	let downloads = previous?.downloads;
+	try {
+		downloads = await fetchMiseDownloads();
+	} catch (err) {
+		warn('mise downloads', `keeping the last value: ${(err as Error).message}`);
+	}
+	return {total: cur[1], gain30: prior && days(prior[0], before) <= 3 ? cur[1] - prior[1] : null, history, downloads};
+}
+
+// mise's release downloads: the latest counter and the average gain per day
+// over the 7 days before it.
+async function fetchMiseDownloads(): Promise<{total: number; rate: number}> {
+	const csv = await (await get(DOWNLOADS_CSV, {headers: {'user-agent': 'jdx-profile (github.com/jdx/jdx)'}})).text();
+	const rows = csv.trim().split('\n').map(l => l.split(',')).filter(r => r[1] === 'mise' && Number.isFinite(Number(r[2]))).map(r => [r[0], Number(r[2])] as const);
+	const last = rows.at(-1);
+	if (!last) throw new Error('no mise row in the downloads csv');
+	const weekAgo = iso(addDays(new Date(`${last[0]}T00:00:00Z`), -7));
+	const prior = rows.findLast(([d]) => d <= weekAgo);
+	if (!prior) throw new Error('downloads csv does not reach back 7 days');
+	return {total: last[1], rate: Math.round((last[1] - prior[1]) / 7)};
 }
 
 async function fetchStarHistory(projects: Project[], end: string, today: string, previous: Stars | null): Promise<Stars> {
@@ -339,7 +358,7 @@ async function fetchStarHistory(projects: Project[], end: string, today: string,
 	if (!ok) throw new Error('no stargazer data');
 	let mise = previous?.mise ?? null;
 	try {
-		mise = await fetchMiseStars(end);
+		mise = await fetchMiseStars(end, mise);
 	} catch (err) {
 		warn('mise star history', `keeping the last value: ${(err as Error).message}`);
 	}

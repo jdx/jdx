@@ -46,7 +46,8 @@ export type Stars = {
 	end: string; // last complete UTC day counted
 	repos: Record<string, RepoStars>;
 	// history is one [day, stars] pair per day from mise-analytics, starting at the first snapshot.
-	mise: {total: number; gain30: number | null; history?: [string, number][]} | null;
+	// downloads is the GitHub release-asset counter (CI included, tracked since 2026-05) and its 7-day daily average.
+	mise: {total: number; gain30: number | null; history?: [string, number][]; downloads?: {total: number; rate: number}} | null;
 };
 
 // GitHub release asset downloads of jdx tools (mise-analytics; CI included,
