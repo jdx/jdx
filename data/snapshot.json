@@ -187,24 +187,24 @@
 		"value": 963468,
 		"dau": 81346
 	},
-	"stars": 44280,
+	"stars": 44318,
 	"issues": {
-		"count": 0,
+		"count": 3,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 26,
-		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
+		"count": 32,
+		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
 		"followers": 4337,
 		"public_repos": 412,
-		"prs": 11503,
-		"prs_merged": 10737,
+		"prs": 11506,
+		"prs_merged": 10738,
 		"year": 2026,
-		"contributions_year": 18656,
-		"contributions_all": 61669,
+		"contributions_year": 18660,
+		"contributions_all": 61673,
 		"streak_current": 82,
 		"streak_longest": 82,
 		"languages": {
@@ -218,8 +218,8 @@
 			"PowerShell": 483786,
 			"Pkl": 457698,
 			"HTML": 303697,
+			"Lua": 296657,
 			"C": 282267,
-			"Lua": 263144,
 			"CSS": 250570,
 			"Astro": 196025,
 			"Ruby": 153567,
@@ -241,9 +241,9 @@
 			"Inno Setup": 2466,
 			"Makefile": 2139,
 			"jq": 726,
-			"CoffeeScript": 655,
 			"AppleScript": 624,
 			"Go Template": 621,
+			"CoffeeScript": 280,
 			"Batchfile": 233,
 			"Brainfuck": 176,
 			"Standard ML": 96,
