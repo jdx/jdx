@@ -45,7 +45,8 @@ export type RepoStars = {created_at: string; total: number; daily: Record<string
 export type Stars = {
 	end: string; // last complete UTC day counted
 	repos: Record<string, RepoStars>;
-	mise: {total: number; gain30: number | null} | null;
+	// history is one [day, stars] pair per day from mise-analytics, starting at the first snapshot.
+	mise: {total: number; gain30: number | null; history?: [string, number][]} | null;
 };
 
 // GitHub release asset downloads of jdx tools (mise-analytics; CI included,

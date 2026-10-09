@@ -26,7 +26,7 @@ text{font-family:'JBM',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font
 <rect x="10" y="0" width="420" height="520" fill="url(#grid)"/>
 <text x="28" y="44" font-weight="700" fill="#00d9ff" filter="url(#g)" opacity=".8" style="font-size:20px">~/</text>
 <text x="28" y="44" font-weight="700" style="font-size:20px"><tspan class="cy">~/</tspan><tspan class="wh">beyond-mise</tspan></text>
-<text x="412" y="44" text-anchor="end" letter-spacing="2" fill="#6e7681" style="font-size:12px">// 05</text>
+<text x="412" y="44" text-anchor="end" letter-spacing="2" fill="#6e7681" style="font-size:12px">// 06</text>
 <line x1="28" y1="58" x2="412" y2="58" stroke="#00d9ff" stroke-opacity=".4"/>
 <line x1="28" y1="58" x2="148" y2="58" stroke="#00d9ff" stroke-width="2"/>
 <line x1="28" y1="58" x2="148" y2="58" stroke="#00d9ff" stroke-width="3" filter="url(#gl)"/>
