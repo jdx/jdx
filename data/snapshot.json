@@ -9,7 +9,7 @@
 			"logo": "https://jdx.dev/images/projects/mise.svg",
 			"name": "mise",
 			"repo": "jdx/mise",
-			"stars": "34.8k",
+			"stars": "34.9k",
 			"tagline": "dev tools, env vars, and tasks"
 		},
 		{
@@ -75,7 +75,7 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "482",
+			"stars": "484",
 			"tagline": "a shared Rust build cache"
 		},
 		{
@@ -86,8 +86,19 @@
 			"logo": "https://jdx.dev/images/projects/demand.svg",
 			"name": "demand",
 			"repo": "jdx/demand",
-			"stars": "262",
+			"stars": "263",
 			"tagline": "prompts for Rust CLIs"
+		},
+		{
+			"description": "A static checker for GitHub Actions workflow files.",
+			"href": "https://github.com/jdx/jactionlint",
+			"install": "mise use -g jactionlint",
+			"kind": "Go CLI",
+			"logo": "https://jdx.dev/images/projects/jactionlint.svg",
+			"name": "jactionlint",
+			"repo": "jdx/jactionlint",
+			"stars": "161",
+			"tagline": "GitHub Actions workflow linter"
 		},
 		{
 			"description": "A signed release manifest for vendor binaries.",
@@ -110,17 +121,6 @@
 			"repo": "jdx/communique",
 			"stars": "119",
 			"tagline": "AI-edited release notes"
-		},
-		{
-			"description": "A static checker for GitHub Actions workflow files.",
-			"href": "https://github.com/jdx/jactionlint",
-			"install": "mise use -g jactionlint",
-			"kind": "Go CLI",
-			"logo": "https://jdx.dev/images/projects/jactionlint.svg",
-			"name": "jactionlint",
-			"repo": "jdx/jactionlint",
-			"stars": "94",
-			"tagline": "GitHub Actions workflow linter"
 		},
 		{
 			"description": "Precompiled Rubies for fast installs.",
@@ -187,36 +187,36 @@
 		"value": 961746,
 		"dau": 77385
 	},
-	"stars": 44449,
+	"stars": 44475,
 	"issues": {
-		"count": 24,
+		"count": 12,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 31,
-		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
+		"count": 13,
+		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
 		"followers": 4348,
 		"public_repos": 412,
-		"prs": 11570,
-		"prs_merged": 10801,
+		"prs": 11606,
+		"prs_merged": 10854,
 		"year": 2026,
-		"contributions_year": 18819,
-		"contributions_all": 61832,
-		"streak_current": 82,
-		"streak_longest": 82,
+		"contributions_year": 18913,
+		"contributions_all": 61926,
+		"streak_current": 83,
+		"streak_longest": 83,
 		"languages": {
-			"Rust": 50549750,
-			"Shell": 6437052,
-			"Go": 4141658,
+			"Rust": 50562723,
+			"Shell": 6437095,
+			"Go": 4275628,
 			"TypeScript": 1714220,
 			"Vim Script": 1006159,
 			"Python": 693425,
-			"JavaScript": 558867,
+			"JavaScript": 558862,
 			"PowerShell": 483786,
-			"Pkl": 458617,
+			"Pkl": 463370,
 			"HTML": 303697,
 			"Lua": 296657,
 			"C": 282267,

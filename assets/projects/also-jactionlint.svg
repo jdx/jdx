@@ -20,17 +20,17 @@ text{font-family:'JBM',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font
 <filter id="g" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="4"/></filter>
 <filter id="gl" filterUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><feGaussianBlur stdDeviation="4"/></filter>
 </defs>
-
-<rect x="0" y="0" width="220" height="80" fill="#03040a"/>
-<rect x="0" y="0" width="220" height="80" fill="url(#grid)"/>
-<g class="ln" style="animation-delay:0.46s">
-<path d="M17.3 12H173.3L185.3 24V68H17.3Z" fill="#00d9ff" fill-opacity=".05"/>
-<path d="M17.3 12H173.3L185.3 24V68H17.3Z" fill="none" stroke="#00d9ff" stroke-opacity=".55"/>
-<path d="M173.3 12L185.3 24" stroke="#00d9ff" stroke-width="2"/>
-<g filter="url(#g)" opacity=".5"><image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiB3aWR0aD0iMjU2IiBoZWlnaHQ9IjI1NiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJqYWN0aW9ubGludCI+CiAgPHJlY3Qgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiIHJ4PSIwIiBmaWxsPSIjMEYxMzFBIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTI4LDEyOCkgc2NhbGUoMC44OCkgdHJhbnNsYXRlKC0xMjgsLTEyOCkiPgogICAgPHJlY3QgeD0iNDAiIHk9IjQwIiB3aWR0aD0iMTc2IiBoZWlnaHQ9IjE3NiIgcng9IjI4IiBzdHJva2U9IiMzRTQ5NTkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMTgiLz4KICAgIDxwYXRoIGQ9Ik0gNzggOTQgSCAxMzAiIHN0cm9rZT0iI0YyRjVGOSIgc3Ryb2tlLXdpZHRoPSIxOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNIDc4IDEzMCBIIDExMiIgc3Ryb2tlPSIjRjJGNUY5IiBzdHJva2Utd2lkdGg9IjE4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxwYXRoIGQ9Ik0gMTE4IDE2OCBMIDE0OCAxOTYgTCAyMDQgMTI4IiBzdHJva2U9IiMyRkJGNzEiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDwvZz4KPC9zdmc+Cg==" x="29" y="23" width="18" height="18"/></g>
-<image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiB3aWR0aD0iMjU2IiBoZWlnaHQ9IjI1NiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJqYWN0aW9ubGludCI+CiAgPHJlY3Qgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiIHJ4PSIwIiBmaWxsPSIjMEYxMzFBIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTI4LDEyOCkgc2NhbGUoMC44OCkgdHJhbnNsYXRlKC0xMjgsLTEyOCkiPgogICAgPHJlY3QgeD0iNDAiIHk9IjQwIiB3aWR0aD0iMTc2IiBoZWlnaHQ9IjE3NiIgcng9IjI4IiBzdHJva2U9IiMzRTQ5NTkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMTgiLz4KICAgIDxwYXRoIGQ9Ik0gNzggOTQgSCAxMzAiIHN0cm9rZT0iI0YyRjVGOSIgc3Ryb2tlLXdpZHRoPSIxOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNIDc4IDEzMCBIIDExMiIgc3Ryb2tlPSIjRjJGNUY5IiBzdHJva2Utd2lkdGg9IjE4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxwYXRoIGQ9Ik0gMTE4IDE2OCBMIDE0OCAxOTYgTCAyMDQgMTI4IiBzdHJva2U9IiMyRkJGNzEiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDwvZz4KPC9zdmc+Cg==" x="29" y="23" width="18" height="18"/>
-<text x="55.3" y="37" font-weight="700" class="cy" style="font-size:13px">jactionlint</text>
-<text x="29.3" y="58" class="dim" style="font-size:10px">GitHub Actions workflow…</text>
+<path d="M16 -40V120" fill="none" stroke="#00d9ff" stroke-width="3" opacity=".55" filter="url(#glow)"/>
+<rect x="16" y="0" width="204" height="80" fill="#03040a"/>
+<rect x="16" y="0" width="204" height="80" fill="url(#grid)"/>
+<g class="ln" style="animation-delay:0.30s">
+<path d="M52.0 12H208.0L220.0 24V68H52.0Z" fill="#00d9ff" fill-opacity=".05"/>
+<path d="M52.0 12H208.0L220.0 24V68H52.0Z" fill="none" stroke="#00d9ff" stroke-opacity=".55"/>
+<path d="M208.0 12L220.0 24" stroke="#00d9ff" stroke-width="2"/>
+<g filter="url(#g)" opacity=".5"><image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiB3aWR0aD0iMjU2IiBoZWlnaHQ9IjI1NiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJqYWN0aW9ubGludCI+CiAgPHJlY3Qgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiIHJ4PSIwIiBmaWxsPSIjMEYxMzFBIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTI4LDEyOCkgc2NhbGUoMC44OCkgdHJhbnNsYXRlKC0xMjgsLTEyOCkiPgogICAgPHJlY3QgeD0iNDAiIHk9IjQwIiB3aWR0aD0iMTc2IiBoZWlnaHQ9IjE3NiIgcng9IjI4IiBzdHJva2U9IiMzRTQ5NTkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMTgiLz4KICAgIDxwYXRoIGQ9Ik0gNzggOTQgSCAxMzAiIHN0cm9rZT0iI0YyRjVGOSIgc3Ryb2tlLXdpZHRoPSIxOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNIDc4IDEzMCBIIDExMiIgc3Ryb2tlPSIjRjJGNUY5IiBzdHJva2Utd2lkdGg9IjE4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxwYXRoIGQ9Ik0gMTE4IDE2OCBMIDE0OCAxOTYgTCAyMDQgMTI4IiBzdHJva2U9IiMyRkJGNzEiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDwvZz4KPC9zdmc+Cg==" x="64" y="23" width="18" height="18"/></g>
+<image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiB3aWR0aD0iMjU2IiBoZWlnaHQ9IjI1NiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJqYWN0aW9ubGludCI+CiAgPHJlY3Qgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiIHJ4PSIwIiBmaWxsPSIjMEYxMzFBIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTI4LDEyOCkgc2NhbGUoMC44OCkgdHJhbnNsYXRlKC0xMjgsLTEyOCkiPgogICAgPHJlY3QgeD0iNDAiIHk9IjQwIiB3aWR0aD0iMTc2IiBoZWlnaHQ9IjE3NiIgcng9IjI4IiBzdHJva2U9IiMzRTQ5NTkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMTgiLz4KICAgIDxwYXRoIGQ9Ik0gNzggOTQgSCAxMzAiIHN0cm9rZT0iI0YyRjVGOSIgc3Ryb2tlLXdpZHRoPSIxOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNIDc4IDEzMCBIIDExMiIgc3Ryb2tlPSIjRjJGNUY5IiBzdHJva2Utd2lkdGg9IjE4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxwYXRoIGQ9Ik0gMTE4IDE2OCBMIDE0OCAxOTYgTCAyMDQgMTI4IiBzdHJva2U9IiMyRkJGNzEiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDwvZz4KPC9zdmc+Cg==" x="64" y="23" width="18" height="18"/>
+<text x="90.0" y="37" font-weight="700" class="cy" style="font-size:13px">jactionlint</text>
+<text x="64.0" y="58" class="dim" style="font-size:10px">GitHub Actions workflow…</text>
 </g>
-
+<path d="M16 0V80" fill="none" stroke="#00d9ff" stroke-width="1.2"/>
 </svg>

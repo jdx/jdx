@@ -15,21 +15,21 @@ text{font-family:'JBM',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 <defs>
-<pattern id="grid" x="20" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#00d9ff" stroke-opacity=".06"/></pattern>
+<pattern id="grid" x="0" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#00d9ff" stroke-opacity=".06"/></pattern>
 <filter id="glow" filterUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><feGaussianBlur stdDeviation="6"/></filter>
 <filter id="g" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="4"/></filter>
 <filter id="gl" filterUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><feGaussianBlur stdDeviation="4"/></filter>
 </defs>
-
-<rect x="0" y="0" width="110" height="80" fill="#03040a"/>
-<rect x="0" y="0" width="110" height="80" fill="url(#grid)"/>
-<g class="ln" style="animation-delay:0.46s">
-<path d="M7.3 12H86.3L96.3 22V68H7.3Z" fill="#00d9ff" fill-opacity=".05"/>
-<path d="M7.3 12H86.3L96.3 22V68H7.3Z" fill="none" stroke="#00d9ff" stroke-opacity=".55"/>
-<path d="M86.3 12L96.3 22" stroke="#00d9ff" stroke-width="2"/>
-<g filter="url(#g)" opacity=".5"><image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiB3aWR0aD0iMjU2IiBoZWlnaHQ9IjI1NiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJqYWN0aW9ubGludCI+CiAgPHJlY3Qgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiIHJ4PSIwIiBmaWxsPSIjMEYxMzFBIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTI4LDEyOCkgc2NhbGUoMC44OCkgdHJhbnNsYXRlKC0xMjgsLTEyOCkiPgogICAgPHJlY3QgeD0iNDAiIHk9IjQwIiB3aWR0aD0iMTc2IiBoZWlnaHQ9IjE3NiIgcng9IjI4IiBzdHJva2U9IiMzRTQ5NTkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMTgiLz4KICAgIDxwYXRoIGQ9Ik0gNzggOTQgSCAxMzAiIHN0cm9rZT0iI0YyRjVGOSIgc3Ryb2tlLXdpZHRoPSIxOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNIDc4IDEzMCBIIDExMiIgc3Ryb2tlPSIjRjJGNUY5IiBzdHJva2Utd2lkdGg9IjE4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxwYXRoIGQ9Ik0gMTE4IDE2OCBMIDE0OCAxOTYgTCAyMDQgMTI4IiBzdHJva2U9IiMyRkJGNzEiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDwvZz4KPC9zdmc+Cg==" x="43" y="22" width="18" height="18"/></g>
-<image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiB3aWR0aD0iMjU2IiBoZWlnaHQ9IjI1NiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJqYWN0aW9ubGludCI+CiAgPHJlY3Qgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiIHJ4PSIwIiBmaWxsPSIjMEYxMzFBIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTI4LDEyOCkgc2NhbGUoMC44OCkgdHJhbnNsYXRlKC0xMjgsLTEyOCkiPgogICAgPHJlY3QgeD0iNDAiIHk9IjQwIiB3aWR0aD0iMTc2IiBoZWlnaHQ9IjE3NiIgcng9IjI4IiBzdHJva2U9IiMzRTQ5NTkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMTgiLz4KICAgIDxwYXRoIGQ9Ik0gNzggOTQgSCAxMzAiIHN0cm9rZT0iI0YyRjVGOSIgc3Ryb2tlLXdpZHRoPSIxOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNIDc4IDEzMCBIIDExMiIgc3Ryb2tlPSIjRjJGNUY5IiBzdHJva2Utd2lkdGg9IjE4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxwYXRoIGQ9Ik0gMTE4IDE2OCBMIDE0OCAxOTYgTCAyMDQgMTI4IiBzdHJva2U9IiMyRkJGNzEiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDwvZz4KPC9zdmc+Cg==" x="43" y="22" width="18" height="18"/>
-<text x="51.8" y="57" text-anchor="middle" font-weight="700" class="cy" style="font-size:12px">jactionlint</text>
+<path d="M10 -40V120" fill="none" stroke="#00d9ff" stroke-width="3" opacity=".55" filter="url(#glow)"/>
+<rect x="10" y="0" width="100" height="80" fill="#03040a"/>
+<rect x="10" y="0" width="100" height="80" fill="url(#grid)"/>
+<g class="ln" style="animation-delay:0.30s">
+<path d="M20.0 12H99.0L109.0 22V68H20.0Z" fill="#00d9ff" fill-opacity=".05"/>
+<path d="M20.0 12H99.0L109.0 22V68H20.0Z" fill="none" stroke="#00d9ff" stroke-opacity=".55"/>
+<path d="M99.0 12L109.0 22" stroke="#00d9ff" stroke-width="2"/>
+<g filter="url(#g)" opacity=".5"><image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiB3aWR0aD0iMjU2IiBoZWlnaHQ9IjI1NiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJqYWN0aW9ubGludCI+CiAgPHJlY3Qgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiIHJ4PSIwIiBmaWxsPSIjMEYxMzFBIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTI4LDEyOCkgc2NhbGUoMC44OCkgdHJhbnNsYXRlKC0xMjgsLTEyOCkiPgogICAgPHJlY3QgeD0iNDAiIHk9IjQwIiB3aWR0aD0iMTc2IiBoZWlnaHQ9IjE3NiIgcng9IjI4IiBzdHJva2U9IiMzRTQ5NTkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMTgiLz4KICAgIDxwYXRoIGQ9Ik0gNzggOTQgSCAxMzAiIHN0cm9rZT0iI0YyRjVGOSIgc3Ryb2tlLXdpZHRoPSIxOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNIDc4IDEzMCBIIDExMiIgc3Ryb2tlPSIjRjJGNUY5IiBzdHJva2Utd2lkdGg9IjE4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxwYXRoIGQ9Ik0gMTE4IDE2OCBMIDE0OCAxOTYgTCAyMDQgMTI4IiBzdHJva2U9IiMyRkJGNzEiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDwvZz4KPC9zdmc+Cg==" x="56" y="22" width="18" height="18"/></g>
+<image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiB3aWR0aD0iMjU2IiBoZWlnaHQ9IjI1NiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJqYWN0aW9ubGludCI+CiAgPHJlY3Qgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiIHJ4PSIwIiBmaWxsPSIjMEYxMzFBIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTI4LDEyOCkgc2NhbGUoMC44OCkgdHJhbnNsYXRlKC0xMjgsLTEyOCkiPgogICAgPHJlY3QgeD0iNDAiIHk9IjQwIiB3aWR0aD0iMTc2IiBoZWlnaHQ9IjE3NiIgcng9IjI4IiBzdHJva2U9IiMzRTQ5NTkiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMTgiLz4KICAgIDxwYXRoIGQ9Ik0gNzggOTQgSCAxMzAiIHN0cm9rZT0iI0YyRjVGOSIgc3Ryb2tlLXdpZHRoPSIxOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNIDc4IDEzMCBIIDExMiIgc3Ryb2tlPSIjRjJGNUY5IiBzdHJva2Utd2lkdGg9IjE4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxwYXRoIGQ9Ik0gMTE4IDE2OCBMIDE0OCAxOTYgTCAyMDQgMTI4IiBzdHJva2U9IiMyRkJGNzEiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDwvZz4KPC9zdmc+Cg==" x="56" y="22" width="18" height="18"/>
+<text x="64.5" y="57" text-anchor="middle" font-weight="700" class="cy" style="font-size:12px">jactionlint</text>
 </g>
-
+<path d="M10 0V80" fill="none" stroke="#00d9ff" stroke-width="1.2"/>
 </svg>
