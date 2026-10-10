@@ -32,7 +32,7 @@ text{font-family:'JBM',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font
 <g class="ln" style="animation-delay:0.15s"><text x="28" y="92" class="dim" style="font-size:13px"><tspan class="gr">$</tspan> gh api repos/jdx/{tool}/stargazers <tspan class="fainter"># starred</tspan></text></g>
 <g class="ln" style="animation-delay:.25s">
 <text x="28" y="124" class="dim" style="font-size:12px">★ gained · 30 days to Oct 9 (UTC)</text>
-<text x="28" y="144" class="dim" style="font-size:12px"><tspan class="cy" font-weight="700">mise</tspan> 34.8k★ · +1,120 in 30d</text>
+<text x="28" y="144" class="dim" style="font-size:12px"><tspan class="cy" font-weight="700">mise</tspan> 34.9k★ · +1,131 in 30d</text>
 </g>
 <path d="M10 0V160M430 0V160" fill="none" stroke="#00d9ff" stroke-width="1.2"/>
 <g fill="none" stroke="#00d9ff" stroke-width="2"></g>
