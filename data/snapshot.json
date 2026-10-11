@@ -64,7 +64,7 @@
 			"logo": "https://jdx.dev/images/projects/pitchfork.png",
 			"name": "pitchfork",
 			"repo": "jdx/pitchfork",
-			"stars": "678",
+			"stars": "680",
 			"tagline": "daemons with DX"
 		},
 		{
@@ -75,7 +75,7 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "484",
+			"stars": "488",
 			"tagline": "a shared Rust build cache"
 		},
 		{
@@ -97,7 +97,7 @@
 			"logo": "https://jdx.dev/images/projects/jactionlint.svg",
 			"name": "jactionlint",
 			"repo": "jdx/jactionlint",
-			"stars": "161",
+			"stars": "194",
 			"tagline": "GitHub Actions workflow linter"
 		},
 		{
@@ -108,7 +108,7 @@
 			"logo": "https://jdx.dev/images/projects/packslip.svg",
 			"name": "packslip",
 			"repo": "jdx/packslip",
-			"stars": "136",
+			"stars": "137",
 			"tagline": "signed release manifests"
 		},
 		{
@@ -119,7 +119,7 @@
 			"logo": "https://jdx.dev/images/projects/communique.svg",
 			"name": "communique",
 			"repo": "jdx/communique",
-			"stars": "119",
+			"stars": "120",
 			"tagline": "AI-edited release notes"
 		},
 		{
@@ -187,36 +187,36 @@
 		"value": 948494,
 		"dau": 53537
 	},
-	"stars": 44529,
+	"stars": 44541,
 	"issues": {
-		"count": 19,
+		"count": 15,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 11,
+		"count": 12,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4352,
+		"followers": 4351,
 		"public_repos": 412,
-		"prs": 11610,
-		"prs_merged": 10863,
+		"prs": 11629,
+		"prs_merged": 10881,
 		"year": 2026,
-		"contributions_year": 18927,
-		"contributions_all": 61940,
+		"contributions_year": 18965,
+		"contributions_all": 61978,
 		"streak_current": 84,
 		"streak_longest": 84,
 		"languages": {
-			"Rust": 50574476,
-			"Shell": 6437892,
+			"Rust": 50641076,
+			"Shell": 6444386,
 			"Go": 4275628,
 			"TypeScript": 1714220,
 			"Vim Script": 1006159,
 			"Python": 693425,
 			"JavaScript": 558862,
 			"PowerShell": 483786,
-			"Pkl": 463370,
+			"Pkl": 463623,
 			"HTML": 303697,
 			"Lua": 296657,
 			"C": 282267,
@@ -224,9 +224,9 @@
 			"Astro": 196025,
 			"Ruby": 153567,
 			"Vue": 122342,
-			"Roff": 55429,
+			"Roff": 55959,
 			"Assembly": 39003,
-			"Dockerfile": 36571,
+			"Dockerfile": 36641,
 			"Nix": 29810,
 			"Linker Script": 24748,
 			"Less": 10634,
