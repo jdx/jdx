@@ -183,17 +183,17 @@
 		}
 	],
 	"mau": {
-		"date": "2026-10-09",
-		"value": 961746,
-		"dau": 77385
+		"date": "2026-10-10",
+		"value": 948494,
+		"dau": 53537
 	},
-	"stars": 44502,
+	"stars": 44510,
 	"issues": {
-		"count": 13,
+		"count": 14,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 9,
+		"count": 10,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
 	},
 	"github": {
