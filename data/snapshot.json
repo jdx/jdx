@@ -187,26 +187,26 @@
 		"value": 940008,
 		"dau": 51994
 	},
-	"stars": 44577,
+	"stars": 44594,
 	"issues": {
-		"count": 17,
+		"count": 19,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 10,
-		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
+		"count": 11,
+		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
 		"followers": 4353,
 		"public_repos": 412,
-		"prs": 11632,
-		"prs_merged": 10887,
+		"prs": 11634,
+		"prs_merged": 10889,
 		"year": 2026,
-		"contributions_year": 18975,
-		"contributions_all": 61988,
-		"streak_current": 84,
-		"streak_longest": 84,
+		"contributions_year": 18979,
+		"contributions_all": 61992,
+		"streak_current": 85,
+		"streak_longest": 85,
 		"languages": {
 			"Rust": 50736401,
 			"Shell": 6457834,
