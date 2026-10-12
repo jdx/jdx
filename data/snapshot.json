@@ -187,13 +187,13 @@
 		"value": 940008,
 		"dau": 51994
 	},
-	"stars": 44619,
+	"stars": 44625,
 	"issues": {
-		"count": 21,
+		"count": 22,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 12,
+		"count": 13,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
