@@ -64,7 +64,7 @@
 			"logo": "https://jdx.dev/images/projects/pitchfork.png",
 			"name": "pitchfork",
 			"repo": "jdx/pitchfork",
-			"stars": "680",
+			"stars": "683",
 			"tagline": "daemons with DX"
 		},
 		{
@@ -75,7 +75,7 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "488",
+			"stars": "495",
 			"tagline": "a shared Rust build cache"
 		},
 		{
@@ -97,7 +97,7 @@
 			"logo": "https://jdx.dev/images/projects/jactionlint.svg",
 			"name": "jactionlint",
 			"repo": "jdx/jactionlint",
-			"stars": "194",
+			"stars": "211",
 			"tagline": "GitHub Actions workflow linter"
 		},
 		{
@@ -141,7 +141,7 @@
 			"logo": "https://jdx.dev/images/projects/tak.svg",
 			"name": "tak",
 			"repo": "jdx/tak",
-			"stars": "42",
+			"stars": "43",
 			"tagline": "CLI performance, tracked"
 		}
 	],
@@ -187,28 +187,28 @@
 		"value": 940008,
 		"dau": 51994
 	},
-	"stars": 44594,
+	"stars": 44619,
 	"issues": {
-		"count": 19,
+		"count": 21,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 11,
+		"count": 12,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
 		"followers": 4353,
 		"public_repos": 412,
-		"prs": 11634,
-		"prs_merged": 10889,
+		"prs": 11636,
+		"prs_merged": 10890,
 		"year": 2026,
-		"contributions_year": 18979,
-		"contributions_all": 61992,
+		"contributions_year": 18983,
+		"contributions_all": 61996,
 		"streak_current": 85,
 		"streak_longest": 85,
 		"languages": {
-			"Rust": 50736401,
+			"Rust": 50736395,
 			"Shell": 6457834,
 			"Go": 4275628,
 			"TypeScript": 1714220,
