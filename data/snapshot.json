@@ -187,18 +187,18 @@
 		"value": 963262,
 		"dau": 79645
 	},
-	"stars": 44692,
+	"stars": 44702,
 	"issues": {
-		"count": 2,
+		"count": 10,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 9,
-		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
+		"count": 12,
+		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4356,
+		"followers": 4358,
 		"public_repos": 413,
 		"prs": 11847,
 		"prs_merged": 11091,
@@ -227,7 +227,7 @@
 			"Roff": 55959,
 			"Assembly": 39003,
 			"Dockerfile": 36866,
-			"Nix": 29810,
+			"Nix": 29811,
 			"Linker Script": 24748,
 			"Less": 10634,
 			"HCL": 9698,
