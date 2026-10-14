@@ -75,7 +75,7 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "503",
+			"stars": "506",
 			"tagline": "a shared Rust build cache"
 		},
 		{
@@ -97,7 +97,7 @@
 			"logo": "https://jdx.dev/images/projects/jactionlint.svg",
 			"name": "jactionlint",
 			"repo": "jdx/jactionlint",
-			"stars": "222",
+			"stars": "227",
 			"tagline": "GitHub Actions workflow linter"
 		},
 		{
@@ -130,7 +130,7 @@
 			"logo": "https://jdx.dev/images/projects/ruby.svg",
 			"name": "ruby",
 			"repo": "jdx/ruby",
-			"stars": "45",
+			"stars": "46",
 			"tagline": "precompiled Rubies"
 		},
 		{
@@ -187,14 +187,14 @@
 		"value": 963262,
 		"dau": 79645
 	},
-	"stars": 44702,
+	"stars": 44716,
 	"issues": {
-		"count": 10,
+		"count": 1,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 12,
-		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions NOT \"chore: release\" in:title"
+		"count": 15,
+		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
