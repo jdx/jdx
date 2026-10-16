@@ -183,36 +183,36 @@
 		}
 	],
 	"mau": {
-		"date": "2026-10-14",
-		"value": 966188,
-		"dau": 83873
+		"date": "2026-10-15",
+		"value": 969520,
+		"dau": 83201
 	},
-	"stars": 44812,
+	"stars": 44822,
 	"issues": {
-		"count": 0,
+		"count": 4,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 4,
+		"count": 6,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4369,
+		"followers": 4370,
 		"public_repos": 413,
-		"prs": 11980,
-		"prs_merged": 11227,
+		"prs": 11982,
+		"prs_merged": 11228,
 		"year": 2026,
-		"contributions_year": 19607,
-		"contributions_all": 62620,
+		"contributions_year": 19610,
+		"contributions_all": 62623,
 		"streak_current": 88,
 		"streak_longest": 88,
 		"languages": {
-			"Rust": 51778089,
+			"Rust": 51778640,
 			"Go": 6952360,
-			"Shell": 6625902,
-			"TypeScript": 1904689,
-			"JavaScript": 1014976,
+			"Shell": 6628108,
+			"TypeScript": 1910495,
+			"JavaScript": 1029288,
 			"Vim Script": 1006159,
 			"Python": 707150,
 			"PowerShell": 493727,
