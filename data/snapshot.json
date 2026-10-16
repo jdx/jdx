@@ -9,7 +9,7 @@
 			"logo": "https://jdx.dev/images/projects/mise.svg",
 			"name": "mise",
 			"repo": "jdx/mise",
-			"stars": "35k",
+			"stars": "35.1k",
 			"tagline": "dev tools, env vars, and tasks"
 		},
 		{
@@ -64,7 +64,7 @@
 			"logo": "https://jdx.dev/images/projects/pitchfork.png",
 			"name": "pitchfork",
 			"repo": "jdx/pitchfork",
-			"stars": "686",
+			"stars": "687",
 			"tagline": "daemons with DX"
 		},
 		{
@@ -75,7 +75,7 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "508",
+			"stars": "514",
 			"tagline": "a shared Rust build cache"
 		},
 		{
@@ -97,7 +97,7 @@
 			"logo": "https://jdx.dev/images/projects/jactionlint.svg",
 			"name": "jactionlint",
 			"repo": "jdx/jactionlint",
-			"stars": "242",
+			"stars": "250",
 			"tagline": "GitHub Actions workflow linter"
 		},
 		{
@@ -108,7 +108,7 @@
 			"logo": "https://jdx.dev/images/projects/packslip.svg",
 			"name": "packslip",
 			"repo": "jdx/packslip",
-			"stars": "142",
+			"stars": "144",
 			"tagline": "signed release manifests"
 		},
 		{
@@ -119,7 +119,7 @@
 			"logo": "https://jdx.dev/images/projects/communique.svg",
 			"name": "communique",
 			"repo": "jdx/communique",
-			"stars": "121",
+			"stars": "122",
 			"tagline": "AI-edited release notes"
 		},
 		{
@@ -187,41 +187,41 @@
 		"value": 969520,
 		"dau": 83201
 	},
-	"stars": 44834,
+	"stars": 44844,
 	"issues": {
-		"count": 7,
+		"count": 2,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 8,
+		"count": 11,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4370,
+		"followers": 4371,
 		"public_repos": 413,
-		"prs": 11983,
-		"prs_merged": 11230,
+		"prs": 12006,
+		"prs_merged": 11248,
 		"year": 2026,
-		"contributions_year": 19614,
-		"contributions_all": 62627,
+		"contributions_year": 19657,
+		"contributions_all": 62670,
 		"streak_current": 89,
 		"streak_longest": 89,
 		"languages": {
-			"Rust": 51778640,
-			"Go": 6952360,
-			"Shell": 6628108,
-			"TypeScript": 1910495,
-			"JavaScript": 1029288,
+			"Rust": 51832692,
+			"Go": 6953560,
+			"Shell": 6639121,
+			"TypeScript": 1917206,
+			"JavaScript": 1030101,
 			"Vim Script": 1006159,
 			"Python": 707150,
 			"PowerShell": 493727,
-			"Pkl": 476552,
+			"Pkl": 477178,
 			"HTML": 304302,
 			"Lua": 296657,
 			"C": 282267,
 			"CSS": 251014,
-			"Astro": 200057,
+			"Astro": 202405,
 			"Ruby": 154115,
 			"Vue": 122346,
 			"Roff": 55959,
