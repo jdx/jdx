@@ -187,7 +187,7 @@
 		"value": 962588,
 		"dau": 65494
 	},
-	"stars": 44884,
+	"stars": 44901,
 	"issues": {
 		"count": 2,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
@@ -201,12 +201,12 @@
 		"followers": 4376,
 		"public_repos": 413,
 		"prs": 12055,
-		"prs_merged": 11301,
+		"prs_merged": 11302,
 		"year": 2026,
-		"contributions_year": 19780,
-		"contributions_all": 62793,
-		"streak_current": 89,
-		"streak_longest": 89,
+		"contributions_year": 19782,
+		"contributions_all": 62795,
+		"streak_current": 90,
+		"streak_longest": 90,
 		"languages": {
 			"Rust": 51944309,
 			"Go": 6993538,
