@@ -187,28 +187,28 @@
 		"value": 944523,
 		"dau": 32648
 	},
-	"stars": 44951,
+	"stars": 44964,
 	"issues": {
-		"count": 0,
+		"count": 1,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 6,
+		"count": 13,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
 		"followers": 4382,
 		"public_repos": 413,
-		"prs": 12152,
-		"prs_merged": 11398,
+		"prs": 12164,
+		"prs_merged": 11404,
 		"year": 2026,
-		"contributions_year": 19980,
-		"contributions_all": 62993,
-		"streak_current": 91,
-		"streak_longest": 91,
+		"contributions_year": 20015,
+		"contributions_all": 63028,
+		"streak_current": 92,
+		"streak_longest": 92,
 		"languages": {
-			"Rust": 52566234,
+			"Rust": 52727677,
 			"Go": 6993538,
 			"Shell": 6709758,
 			"TypeScript": 1937888,
@@ -218,7 +218,7 @@
 			"PowerShell": 512660,
 			"Pkl": 478031,
 			"HTML": 304658,
-			"Lua": 296657,
+			"Lua": 298755,
 			"C": 282267,
 			"CSS": 252556,
 			"Astro": 202405,
