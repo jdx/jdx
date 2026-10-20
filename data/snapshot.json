@@ -183,13 +183,13 @@
 		}
 	],
 	"mau": {
-		"date": "2026-10-18",
-		"value": 926488,
-		"dau": 28498
+		"date": "2026-10-19",
+		"value": 925175,
+		"dau": 48972
 	},
-	"stars": 45031,
+	"stars": 45042,
 	"issues": {
-		"count": 1,
+		"count": 2,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
@@ -198,7 +198,7 @@
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4384,
+		"followers": 4385,
 		"public_repos": 413,
 		"prs": 12206,
 		"prs_merged": 11452,
