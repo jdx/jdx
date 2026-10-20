@@ -9,7 +9,7 @@
 			"logo": "https://jdx.dev/images/projects/mise.svg",
 			"name": "mise",
 			"repo": "jdx/mise",
-			"stars": "35.1k",
+			"stars": "35.2k",
 			"tagline": "dev tools, env vars, and tasks"
 		},
 		{
@@ -64,7 +64,7 @@
 			"logo": "https://jdx.dev/images/projects/pitchfork.png",
 			"name": "pitchfork",
 			"repo": "jdx/pitchfork",
-			"stars": "688",
+			"stars": "690",
 			"tagline": "daemons with DX"
 		},
 		{
@@ -75,7 +75,7 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "522",
+			"stars": "529",
 			"tagline": "a shared Rust build cache"
 		},
 		{
@@ -86,7 +86,7 @@
 			"logo": "https://jdx.dev/images/projects/demand.svg",
 			"name": "demand",
 			"repo": "jdx/demand",
-			"stars": "265",
+			"stars": "266",
 			"tagline": "prompts for Rust CLIs"
 		},
 		{
@@ -97,7 +97,7 @@
 			"logo": "https://jdx.dev/images/projects/jactionlint.svg",
 			"name": "jactionlint",
 			"repo": "jdx/jactionlint",
-			"stars": "259",
+			"stars": "266",
 			"tagline": "GitHub Actions workflow linter"
 		},
 		{
@@ -108,7 +108,7 @@
 			"logo": "https://jdx.dev/images/projects/packslip.svg",
 			"name": "packslip",
 			"repo": "jdx/packslip",
-			"stars": "148",
+			"stars": "151",
 			"tagline": "signed release manifests"
 		},
 		{
@@ -187,30 +187,30 @@
 		"value": 926488,
 		"dau": 28498
 	},
-	"stars": 45019,
+	"stars": 45031,
 	"issues": {
-		"count": 0,
+		"count": 1,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 2,
+		"count": 6,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
 		"followers": 4384,
 		"public_repos": 413,
-		"prs": 12204,
-		"prs_merged": 11450,
+		"prs": 12206,
+		"prs_merged": 11452,
 		"year": 2026,
-		"contributions_year": 20116,
-		"contributions_all": 63129,
-		"streak_current": 92,
-		"streak_longest": 92,
+		"contributions_year": 20121,
+		"contributions_all": 63134,
+		"streak_current": 93,
+		"streak_longest": 93,
 		"languages": {
-			"Rust": 52982307,
+			"Rust": 52985744,
 			"Go": 6994070,
-			"Shell": 6727661,
+			"Shell": 6728864,
 			"TypeScript": 1937978,
 			"JavaScript": 1063250,
 			"Vim Script": 1006159,
