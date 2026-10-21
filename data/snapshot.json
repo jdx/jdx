@@ -75,8 +75,19 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "529",
+			"stars": "531",
 			"tagline": "a shared Rust build cache"
+		},
+		{
+			"description": "A static checker for GitHub Actions workflow files.",
+			"href": "https://github.com/jdx/jactionlint",
+			"install": "mise use -g jactionlint",
+			"kind": "Go CLI",
+			"logo": "https://jdx.dev/images/projects/jactionlint.svg",
+			"name": "jactionlint",
+			"repo": "jdx/jactionlint",
+			"stars": "272",
+			"tagline": "GitHub Actions workflow linter"
 		},
 		{
 			"description": "Prompt components for building polished Rust CLIs.",
@@ -90,17 +101,6 @@
 			"tagline": "prompts for Rust CLIs"
 		},
 		{
-			"description": "A static checker for GitHub Actions workflow files.",
-			"href": "https://github.com/jdx/jactionlint",
-			"install": "mise use -g jactionlint",
-			"kind": "Go CLI",
-			"logo": "https://jdx.dev/images/projects/jactionlint.svg",
-			"name": "jactionlint",
-			"repo": "jdx/jactionlint",
-			"stars": "266",
-			"tagline": "GitHub Actions workflow linter"
-		},
-		{
 			"description": "A signed release manifest for vendor binaries.",
 			"href": "https://packslip.dev",
 			"install": "mise use -g packslip",
@@ -108,7 +108,7 @@
 			"logo": "https://jdx.dev/images/projects/packslip.svg",
 			"name": "packslip",
 			"repo": "jdx/packslip",
-			"stars": "151",
+			"stars": "154",
 			"tagline": "signed release manifests"
 		},
 		{
@@ -187,30 +187,30 @@
 		"value": 925175,
 		"dau": 48972
 	},
-	"stars": 45074,
+	"stars": 45084,
 	"issues": {
-		"count": 3,
+		"count": 1,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 28,
+		"count": 26,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4386,
+		"followers": 4387,
 		"public_repos": 413,
-		"prs": 12274,
-		"prs_merged": 11500,
+		"prs": 12278,
+		"prs_merged": 11504,
 		"year": 2026,
-		"contributions_year": 20231,
-		"contributions_all": 63244,
-		"streak_current": 93,
-		"streak_longest": 93,
+		"contributions_year": 20242,
+		"contributions_all": 63255,
+		"streak_current": 94,
+		"streak_longest": 94,
 		"languages": {
-			"Rust": 53122016,
+			"Rust": 53128632,
 			"Go": 6994070,
-			"Shell": 6740965,
+			"Shell": 6743435,
 			"TypeScript": 1937978,
 			"JavaScript": 1105193,
 			"Vim Script": 1006159,
