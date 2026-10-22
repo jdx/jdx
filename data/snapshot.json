@@ -75,7 +75,7 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "531",
+			"stars": "537",
 			"tagline": "a shared Rust build cache"
 		},
 		{
@@ -86,7 +86,7 @@
 			"logo": "https://jdx.dev/images/projects/jactionlint.svg",
 			"name": "jactionlint",
 			"repo": "jdx/jactionlint",
-			"stars": "272",
+			"stars": "275",
 			"tagline": "GitHub Actions workflow linter"
 		},
 		{
@@ -108,7 +108,7 @@
 			"logo": "https://jdx.dev/images/projects/packslip.svg",
 			"name": "packslip",
 			"repo": "jdx/packslip",
-			"stars": "154",
+			"stars": "157",
 			"tagline": "signed release manifests"
 		},
 		{
@@ -187,30 +187,30 @@
 		"value": 925561,
 		"dau": 48506
 	},
-	"stars": 45129,
+	"stars": 45137,
 	"issues": {
-		"count": 1,
+		"count": 3,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 24,
+		"count": 23,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
 		"followers": 4392,
 		"public_repos": 414,
-		"prs": 12334,
-		"prs_merged": 11564,
+		"prs": 12337,
+		"prs_merged": 11567,
 		"year": 2026,
-		"contributions_year": 20362,
-		"contributions_all": 63375,
+		"contributions_year": 20369,
+		"contributions_all": 63382,
 		"streak_current": 94,
 		"streak_longest": 94,
 		"languages": {
-			"Rust": 53431046,
-			"Go": 7006777,
-			"Shell": 6758712,
+			"Rust": 53467756,
+			"Go": 7007047,
+			"Shell": 6763294,
 			"TypeScript": 1937978,
 			"JavaScript": 1100949,
 			"Vim Script": 1006159,
