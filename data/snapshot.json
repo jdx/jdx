@@ -75,7 +75,7 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "565",
+			"stars": "577",
 			"tagline": "a shared Rust build cache"
 		},
 		{
@@ -86,7 +86,7 @@
 			"logo": "https://jdx.dev/images/projects/jactionlint.svg",
 			"name": "jactionlint",
 			"repo": "jdx/jactionlint",
-			"stars": "276",
+			"stars": "279",
 			"tagline": "GitHub Actions workflow linter"
 		},
 		{
@@ -119,7 +119,7 @@
 			"logo": "https://jdx.dev/images/projects/communique.svg",
 			"name": "communique",
 			"repo": "jdx/communique",
-			"stars": "122",
+			"stars": "123",
 			"tagline": "AI-edited release notes"
 		},
 		{
@@ -141,7 +141,7 @@
 			"logo": "https://jdx.dev/images/projects/tak.svg",
 			"name": "tak",
 			"repo": "jdx/tak",
-			"stars": "44",
+			"stars": "45",
 			"tagline": "CLI performance, tracked"
 		}
 	],
@@ -187,34 +187,34 @@
 		"value": 2161970,
 		"dau": 413880
 	},
-	"stars": 45249,
+	"stars": 45259,
 	"issues": {
-		"count": 4,
+		"count": 1,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 14,
+		"count": 10,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
 		"followers": 4397,
 		"public_repos": 414,
-		"prs": 12434,
-		"prs_merged": 11671,
+		"prs": 12456,
+		"prs_merged": 11697,
 		"year": 2026,
-		"contributions_year": 20579,
-		"contributions_all": 63592,
+		"contributions_year": 20625,
+		"contributions_all": 63638,
 		"streak_current": 96,
 		"streak_longest": 96,
 		"languages": {
-			"Rust": 54260121,
+			"Rust": 54750519,
 			"Go": 7025600,
-			"Shell": 6848816,
+			"Shell": 6953339,
 			"TypeScript": 2028869,
 			"JavaScript": 1159015,
 			"Vim Script": 1006159,
-			"Python": 729834,
+			"Python": 730077,
 			"PowerShell": 512724,
 			"Pkl": 484621,
 			"HTML": 310594,
