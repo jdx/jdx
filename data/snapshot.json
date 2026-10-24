@@ -187,29 +187,29 @@
 		"value": 2369878,
 		"dau": 355134
 	},
-	"stars": 45296,
+	"stars": 45311,
 	"issues": {
-		"count": 4,
+		"count": 10,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 13,
-		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
+		"count": 15,
+		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4397,
+		"followers": 4398,
 		"public_repos": 414,
-		"prs": 12459,
-		"prs_merged": 11706,
+		"prs": 12461,
+		"prs_merged": 11708,
 		"year": 2026,
-		"contributions_year": 20638,
-		"contributions_all": 63651,
+		"contributions_year": 20642,
+		"contributions_all": 63655,
 		"streak_current": 97,
 		"streak_longest": 97,
 		"languages": {
 			"Rust": 55059977,
-			"Shell": 7026828,
+			"Shell": 7027102,
 			"Go": 7025600,
 			"TypeScript": 2028869,
 			"JavaScript": 1159015,
