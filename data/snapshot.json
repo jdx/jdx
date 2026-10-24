@@ -187,13 +187,13 @@
 		"value": 2369878,
 		"dau": 355134
 	},
-	"stars": 45281,
+	"stars": 45296,
 	"issues": {
-		"count": 2,
+		"count": 4,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 10,
+		"count": 13,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
 	},
 	"github": {
@@ -201,12 +201,12 @@
 		"followers": 4397,
 		"public_repos": 414,
 		"prs": 12459,
-		"prs_merged": 11705,
+		"prs_merged": 11706,
 		"year": 2026,
-		"contributions_year": 20637,
-		"contributions_all": 63650,
-		"streak_current": 96,
-		"streak_longest": 96,
+		"contributions_year": 20638,
+		"contributions_all": 63651,
+		"streak_current": 97,
+		"streak_longest": 97,
 		"languages": {
 			"Rust": 55059977,
 			"Shell": 7026828,
