@@ -183,28 +183,28 @@
 		}
 	],
 	"mau": {
-		"date": "2026-10-23",
-		"value": 2369878,
-		"dau": 355134
+		"date": "2026-10-24",
+		"value": 2453567,
+		"dau": 184425
 	},
-	"stars": 45327,
+	"stars": 45336,
 	"issues": {
-		"count": 11,
+		"count": 12,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 18,
+		"count": 20,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4399,
+		"followers": 4400,
 		"public_repos": 414,
-		"prs": 12461,
+		"prs": 12462,
 		"prs_merged": 11708,
 		"year": 2026,
-		"contributions_year": 20645,
-		"contributions_all": 63658,
+		"contributions_year": 20646,
+		"contributions_all": 63659,
 		"streak_current": 97,
 		"streak_longest": 97,
 		"languages": {
