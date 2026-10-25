@@ -75,7 +75,7 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "578",
+			"stars": "594",
 			"tagline": "a shared Rust build cache"
 		},
 		{
@@ -86,7 +86,7 @@
 			"logo": "https://jdx.dev/images/projects/jactionlint.svg",
 			"name": "jactionlint",
 			"repo": "jdx/jactionlint",
-			"stars": "280",
+			"stars": "283",
 			"tagline": "GitHub Actions workflow linter"
 		},
 		{
@@ -108,7 +108,7 @@
 			"logo": "https://jdx.dev/images/projects/packslip.svg",
 			"name": "packslip",
 			"repo": "jdx/packslip",
-			"stars": "159",
+			"stars": "160",
 			"tagline": "signed release manifests"
 		},
 		{
@@ -187,14 +187,14 @@
 		"value": 2369878,
 		"dau": 355134
 	},
-	"stars": 45319,
+	"stars": 45327,
 	"issues": {
 		"count": 11,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 15,
-		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:app/renovate NOT \"chore: release\" in:title"
+		"count": 18,
+		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
