@@ -183,28 +183,28 @@
 		}
 	],
 	"mau": {
-		"date": "2026-10-25",
-		"value": 2531546,
-		"dau": 171969
+		"date": "2026-10-26",
+		"value": 2716974,
+		"dau": 334559
 	},
-	"stars": 45479,
+	"stars": 45489,
 	"issues": {
-		"count": 0,
+		"count": 4,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 2,
-		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
+		"count": 3,
+		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4405,
+		"followers": 4406,
 		"public_repos": 415,
-		"prs": 12573,
+		"prs": 12574,
 		"prs_merged": 11819,
 		"year": 2026,
-		"contributions_year": 20867,
-		"contributions_all": 63880,
+		"contributions_year": 20868,
+		"contributions_all": 63881,
 		"streak_current": 100,
 		"streak_longest": 100,
 		"languages": {
