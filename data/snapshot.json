@@ -183,36 +183,36 @@
 		}
 	],
 	"mau": {
-		"date": "2026-10-26",
-		"value": 2716974,
-		"dau": 334559
+		"date": "2026-10-27",
+		"value": 2921678,
+		"dau": 364717
 	},
-	"stars": 45532,
+	"stars": 45548,
 	"issues": {
 		"count": 2,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 3,
+		"count": 2,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
 		"followers": 4411,
 		"public_repos": 415,
-		"prs": 12603,
-		"prs_merged": 11847,
+		"prs": 12605,
+		"prs_merged": 11850,
 		"year": 2026,
-		"contributions_year": 20926,
-		"contributions_all": 63939,
+		"contributions_year": 20931,
+		"contributions_all": 63944,
 		"streak_current": 100,
 		"streak_longest": 100,
 		"languages": {
-			"Rust": 55755239,
-			"Shell": 7113609,
-			"Go": 7027982,
-			"TypeScript": 2038120,
-			"JavaScript": 1166765,
+			"Rust": 55767965,
+			"Shell": 7121592,
+			"Go": 7029184,
+			"TypeScript": 2040753,
+			"JavaScript": 1168496,
 			"Vim Script": 1006159,
 			"Python": 730150,
 			"PowerShell": 515944,
