@@ -9,7 +9,7 @@
 			"logo": "https://jdx.dev/images/projects/mise.svg",
 			"name": "mise",
 			"repo": "jdx/mise",
-			"stars": "35.4k",
+			"stars": "35.5k",
 			"tagline": "dev tools, env vars, and tasks"
 		},
 		{
@@ -31,7 +31,7 @@
 			"logo": "https://jdx.dev/images/projects/aube.svg",
 			"name": "aube",
 			"repo": "aubepkg/aube",
-			"stars": "2k",
+			"stars": "2.1k",
 			"tagline": "a fast Node.js package manager"
 		},
 		{
@@ -64,7 +64,7 @@
 			"logo": "https://jdx.dev/images/projects/pitchfork.png",
 			"name": "pitchfork",
 			"repo": "jdx/pitchfork",
-			"stars": "697",
+			"stars": "698",
 			"tagline": "daemons with DX"
 		},
 		{
@@ -75,7 +75,7 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "608",
+			"stars": "618",
 			"tagline": "a shared Rust build cache"
 		},
 		{
@@ -108,7 +108,7 @@
 			"logo": "https://jdx.dev/images/projects/packslip.svg",
 			"name": "packslip",
 			"repo": "jdx/packslip",
-			"stars": "163",
+			"stars": "164",
 			"tagline": "signed release manifests"
 		},
 		{
@@ -187,29 +187,29 @@
 		"value": 2716974,
 		"dau": 334559
 	},
-	"stars": 45525,
+	"stars": 45532,
 	"issues": {
-		"count": 1,
+		"count": 2,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 8,
+		"count": 3,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/dependabot -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4410,
+		"followers": 4411,
 		"public_repos": 415,
-		"prs": 12600,
-		"prs_merged": 11839,
+		"prs": 12603,
+		"prs_merged": 11847,
 		"year": 2026,
-		"contributions_year": 20915,
-		"contributions_all": 63928,
+		"contributions_year": 20926,
+		"contributions_all": 63939,
 		"streak_current": 100,
 		"streak_longest": 100,
 		"languages": {
-			"Rust": 55676665,
-			"Shell": 7093453,
+			"Rust": 55755239,
+			"Shell": 7113609,
 			"Go": 7027982,
 			"TypeScript": 2038120,
 			"JavaScript": 1166765,
