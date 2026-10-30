@@ -187,18 +187,18 @@
 		"value": 3321525,
 		"dau": 358535
 	},
-	"stars": 45683,
+	"stars": 45693,
 	"issues": {
-		"count": 3,
+		"count": 6,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 1,
-		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:mise-en-dev NOT \"chore: release\" in:title"
+		"count": 3,
+		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4416,
+		"followers": 4417,
 		"public_repos": 415,
 		"prs": 12680,
 		"prs_merged": 11922,
