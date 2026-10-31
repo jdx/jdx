@@ -9,7 +9,7 @@
 			"logo": "https://jdx.dev/images/projects/mise.svg",
 			"name": "mise",
 			"repo": "jdx/mise",
-			"stars": "35.5k",
+			"stars": "35.6k",
 			"tagline": "dev tools, env vars, and tasks"
 		},
 		{
@@ -64,7 +64,7 @@
 			"logo": "https://jdx.dev/images/projects/pitchfork.png",
 			"name": "pitchfork",
 			"repo": "jdx/pitchfork",
-			"stars": "699",
+			"stars": "700",
 			"tagline": "daemons with DX"
 		},
 		{
@@ -75,7 +75,7 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "635",
+			"stars": "639",
 			"tagline": "a shared Rust build cache"
 		},
 		{
@@ -86,7 +86,7 @@
 			"logo": "https://jdx.dev/images/projects/jactionlint.svg",
 			"name": "jactionlint",
 			"repo": "jdx/jactionlint",
-			"stars": "298",
+			"stars": "301",
 			"tagline": "GitHub Actions workflow linter"
 		},
 		{
@@ -97,7 +97,7 @@
 			"logo": "https://jdx.dev/images/projects/demand.svg",
 			"name": "demand",
 			"repo": "jdx/demand",
-			"stars": "266",
+			"stars": "265",
 			"tagline": "prompts for Rust CLIs"
 		},
 		{
@@ -187,36 +187,36 @@
 		"value": 3321525,
 		"dau": 358535
 	},
-	"stars": 45718,
+	"stars": 45723,
 	"issues": {
-		"count": 3,
+		"count": 0,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 9,
+		"count": 8,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
 		"followers": 4419,
 		"public_repos": 416,
-		"prs": 12727,
-		"prs_merged": 11958,
+		"prs": 12756,
+		"prs_merged": 11988,
 		"year": 2026,
-		"contributions_year": 21199,
-		"contributions_all": 64212,
+		"contributions_year": 21257,
+		"contributions_all": 64270,
 		"streak_current": 103,
 		"streak_longest": 103,
 		"languages": {
-			"Rust": 57561566,
-			"Shell": 7316726,
-			"Go": 7030795,
+			"Rust": 58749840,
+			"Go": 7485723,
+			"Shell": 7401710,
 			"TypeScript": 2041942,
 			"JavaScript": 1165776,
 			"Vim Script": 1006159,
-			"Python": 738353,
-			"PowerShell": 526226,
-			"Pkl": 507315,
+			"Python": 870281,
+			"PowerShell": 529874,
+			"Pkl": 507544,
 			"HTML": 310932,
 			"Lua": 303826,
 			"C": 282267,
@@ -225,10 +225,10 @@
 			"Ruby": 158900,
 			"Vue": 122346,
 			"Roff": 68533,
+			"Luau": 53155,
 			"Assembly": 39003,
 			"Dockerfile": 36866,
 			"Nix": 29871,
-			"Luau": 25401,
 			"Linker Script": 24748,
 			"Less": 10634,
 			"HCL": 9698,
