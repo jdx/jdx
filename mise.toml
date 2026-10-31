@@ -1,6 +1,6 @@
 [tools]
 node = "26"
-aube = "2.6"
+aube = "v2.8.2"
 
 [tasks.install]
 description = "install node dependencies"
