@@ -64,7 +64,7 @@
 			"logo": "https://jdx.dev/images/projects/pitchfork.png",
 			"name": "pitchfork",
 			"repo": "jdx/pitchfork",
-			"stars": "700",
+			"stars": "703",
 			"tagline": "daemons with DX"
 		},
 		{
@@ -75,7 +75,7 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "643",
+			"stars": "652",
 			"tagline": "a shared Rust build cache"
 		},
 		{
@@ -86,7 +86,7 @@
 			"logo": "https://jdx.dev/images/projects/jactionlint.svg",
 			"name": "jactionlint",
 			"repo": "jdx/jactionlint",
-			"stars": "303",
+			"stars": "307",
 			"tagline": "GitHub Actions workflow linter"
 		},
 		{
@@ -108,7 +108,7 @@
 			"logo": "https://jdx.dev/images/projects/packslip.svg",
 			"name": "packslip",
 			"repo": "jdx/packslip",
-			"stars": "169",
+			"stars": "172",
 			"tagline": "signed release manifests"
 		},
 		{
@@ -187,44 +187,44 @@
 		"value": 3591603,
 		"dau": 192657
 	},
-	"stars": 45852,
+	"stars": 45866,
 	"issues": {
 		"count": 1,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 3,
+		"count": 11,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4422,
+		"followers": 4425,
 		"public_repos": 416,
-		"prs": 12897,
-		"prs_merged": 12130,
+		"prs": 12924,
+		"prs_merged": 12150,
 		"year": 2026,
-		"contributions_year": 21541,
-		"contributions_all": 64554,
+		"contributions_year": 21589,
+		"contributions_all": 64602,
 		"streak_current": 105,
 		"streak_longest": 105,
 		"languages": {
-			"Rust": 62335486,
-			"Shell": 7768623,
+			"Rust": 62472568,
+			"Shell": 7787258,
 			"Go": 7488954,
 			"TypeScript": 2041331,
 			"JavaScript": 1443220,
 			"Vim Script": 1006159,
-			"Python": 916434,
-			"PowerShell": 531490,
+			"Python": 927874,
+			"PowerShell": 545988,
 			"Pkl": 515259,
 			"HTML": 308736,
-			"Lua": 303259,
+			"Lua": 305234,
 			"C": 282267,
 			"CSS": 263679,
 			"Astro": 200195,
 			"Ruby": 158900,
 			"Vue": 143416,
-			"Luau": 127014,
+			"Luau": 127098,
 			"Roff": 68533,
 			"Assembly": 39003,
 			"Dockerfile": 36866,
