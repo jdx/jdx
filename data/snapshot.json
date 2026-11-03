@@ -143,6 +143,17 @@
 			"repo": "jdx/tak",
 			"stars": "46",
 			"tagline": "CLI performance, tracked"
+		},
+		{
+			"description": "Tells coding agents which checks are slow and steers them off repeat mistakes.",
+			"href": "https://jouet.jdx.dev",
+			"install": "mise use -g jouet",
+			"kind": "Rust CLI",
+			"logo": "https://jdx.dev/images/projects/jouet.svg",
+			"name": "jouet",
+			"repo": "jdx/jouet",
+			"stars": "17",
+			"tagline": "a toolkit for coding agents"
 		}
 	],
 	"posts": [
@@ -183,39 +194,39 @@
 		}
 	],
 	"mau": {
-		"date": "2026-11-01",
-		"value": 3655645,
-		"dau": 158635
+		"date": "2026-11-02",
+		"value": 3837603,
+		"dau": 341412
 	},
-	"stars": 45997,
+	"stars": 46033,
 	"issues": {
-		"count": 6,
+		"count": 0,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 19,
-		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev NOT \"chore: release\" in:title"
+		"count": 9,
+		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4435,
+		"followers": 4438,
 		"public_repos": 416,
-		"prs": 13108,
-		"prs_merged": 12329,
+		"prs": 13147,
+		"prs_merged": 12379,
 		"year": 2026,
-		"contributions_year": 21947,
-		"contributions_all": 64960,
+		"contributions_year": 22030,
+		"contributions_all": 65043,
 		"streak_current": 107,
 		"streak_longest": 107,
 		"languages": {
-			"Rust": 62957815,
-			"Shell": 7871250,
-			"Go": 7584323,
-			"Python": 2477389,
-			"TypeScript": 2449299,
+			"Rust": 63145554,
+			"Shell": 7893874,
+			"Go": 7595067,
+			"Python": 2544771,
+			"TypeScript": 2450139,
 			"JavaScript": 1454578,
 			"Vim Script": 1006159,
-			"PowerShell": 574989,
+			"PowerShell": 576180,
 			"Pkl": 515259,
 			"HTML": 308736,
 			"Lua": 305234,
@@ -223,12 +234,12 @@
 			"CSS": 263679,
 			"Astro": 200195,
 			"Ruby": 158900,
+			"Luau": 146509,
 			"Vue": 143416,
-			"Luau": 132290,
 			"Roff": 68533,
 			"Assembly": 39003,
 			"Dockerfile": 36866,
-			"Nix": 29871,
+			"Nix": 29870,
 			"Linker Script": 24748,
 			"Less": 10634,
 			"HCL": 9698,
