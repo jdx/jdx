@@ -194,36 +194,36 @@
 		}
 	],
 	"mau": {
-		"date": "2026-11-05",
-		"value": 4472024,
-		"dau": 425755
+		"date": "2026-11-06",
+		"value": 4681745,
+		"dau": 414055
 	},
-	"stars": 46282,
+	"stars": 46303,
 	"issues": {
-		"count": 2,
+		"count": 1,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 15,
+		"count": 8,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4455,
+		"followers": 4456,
 		"public_repos": 416,
-		"prs": 13385,
-		"prs_merged": 12604,
+		"prs": 13411,
+		"prs_merged": 12637,
 		"year": 2026,
-		"contributions_year": 22385,
-		"contributions_all": 65398,
-		"streak_current": 110,
-		"streak_longest": 110,
+		"contributions_year": 22419,
+		"contributions_all": 65432,
+		"streak_current": 111,
+		"streak_longest": 111,
 		"languages": {
-			"Rust": 64477039,
-			"Shell": 8033125,
-			"Go": 7685054,
+			"Rust": 65463724,
+			"Shell": 8045478,
+			"Go": 7686394,
 			"TypeScript": 2583934,
-			"Python": 1972898,
+			"Python": 2074313,
 			"JavaScript": 1473651,
 			"Vim Script": 1006159,
 			"PowerShell": 576180,
@@ -234,7 +234,7 @@
 			"CSS": 263679,
 			"Astro": 200405,
 			"Ruby": 158893,
-			"Luau": 156568,
+			"Luau": 158546,
 			"Vue": 143416,
 			"Objective-C++": 92821,
 			"Roff": 68533,
