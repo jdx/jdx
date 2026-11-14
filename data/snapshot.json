@@ -198,7 +198,7 @@
 		"value": 5857255,
 		"dau": 636250
 	},
-	"stars": 46680,
+	"stars": 46681,
 	"issues": {
 		"count": 5,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
