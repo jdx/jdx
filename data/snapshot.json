@@ -198,29 +198,29 @@
 		"value": 6253710,
 		"dau": 353276
 	},
-	"stars": 46830,
+	"stars": 46854,
 	"issues": {
-		"count": 20,
+		"count": 22,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 20,
-		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:app/renovate NOT \"chore: release\" in:title"
+		"count": 18,
+		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4482,
+		"followers": 4487,
 		"public_repos": 416,
-		"prs": 13882,
-		"prs_merged": 13095,
+		"prs": 13893,
+		"prs_merged": 13104,
 		"year": 2026,
-		"contributions_year": 22886,
-		"contributions_all": 65899,
-		"streak_current": 120,
-		"streak_longest": 120,
+		"contributions_year": 22897,
+		"contributions_all": 65910,
+		"streak_current": 121,
+		"streak_longest": 121,
 		"languages": {
-			"Rust": 68320920,
-			"Shell": 8289359,
+			"Rust": 68365461,
+			"Shell": 8304030,
 			"Go": 7713776,
 			"TypeScript": 2589934,
 			"Python": 2187796,
