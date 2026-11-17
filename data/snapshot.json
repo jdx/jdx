@@ -194,14 +194,14 @@
 		}
 	],
 	"mau": {
-		"date": "2026-11-15",
-		"value": 6253710,
-		"dau": 353276
+		"date": "2026-11-16",
+		"value": 6788386,
+		"dau": 895721
 	},
-	"stars": 46854,
+	"stars": 46894,
 	"issues": {
-		"count": 22,
-		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
+		"count": 32,
+		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue -author:app/github-actions"
 	},
 	"prs": {
 		"count": 18,
@@ -209,7 +209,7 @@
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4487,
+		"followers": 4489,
 		"public_repos": 416,
 		"prs": 13893,
 		"prs_merged": 13104,
