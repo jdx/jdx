@@ -198,26 +198,26 @@
 		"value": 7713968,
 		"dau": 878801
 	},
-	"stars": 47014,
+	"stars": 47023,
 	"issues": {
-		"count": 12,
+		"count": 10,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue"
 	},
 	"prs": {
-		"count": 19,
+		"count": 22,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4490,
+		"followers": 4491,
 		"public_repos": 416,
-		"prs": 14013,
-		"prs_merged": 13218,
+		"prs": 14027,
+		"prs_merged": 13225,
 		"year": 2026,
-		"contributions_year": 23019,
-		"contributions_all": 66031,
-		"streak_current": 123,
-		"streak_longest": 123,
+		"contributions_year": 23027,
+		"contributions_all": 66039,
+		"streak_current": 124,
+		"streak_longest": 124,
 		"languages": {
 			"Rust": 68844073,
 			"Shell": 8386878,
