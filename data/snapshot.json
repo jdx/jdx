@@ -198,9 +198,9 @@
 		"value": 8103630,
 		"dau": 342577
 	},
-	"stars": 47115,
+	"stars": 47127,
 	"issues": {
-		"count": 1,
+		"count": 5,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue -author:app/github-actions"
 	},
 	"prs": {
@@ -209,7 +209,7 @@
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4495,
+		"followers": 4496,
 		"public_repos": 416,
 		"prs": 14115,
 		"prs_merged": 13326,
