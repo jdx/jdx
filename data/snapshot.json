@@ -64,7 +64,7 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "791",
+			"stars": "817",
 			"tagline": "a shared Rust build cache"
 		},
 		{
@@ -86,7 +86,7 @@
 			"logo": "https://jdx.dev/images/projects/jactionlint.svg",
 			"name": "jactionlint",
 			"repo": "jdx/jactionlint",
-			"stars": "359",
+			"stars": "360",
 			"tagline": "GitHub Actions workflow linter"
 		},
 		{
@@ -108,7 +108,7 @@
 			"logo": "https://jdx.dev/images/projects/packslip.svg",
 			"name": "packslip",
 			"repo": "jdx/packslip",
-			"stars": "226",
+			"stars": "227",
 			"tagline": "signed release manifests"
 		},
 		{
@@ -130,7 +130,7 @@
 			"logo": "https://jdx.dev/images/projects/tak.svg",
 			"name": "tak",
 			"repo": "jdx/tak",
-			"stars": "49",
+			"stars": "50",
 			"tagline": "CLI performance, tracked"
 		},
 		{
@@ -183,37 +183,37 @@
 		}
 	],
 	"mau": {
-		"date": "2026-11-24",
-		"value": 8727311,
-		"dau": 838252
+		"date": "2026-11-25",
+		"value": 9080025,
+		"dau": 801070
 	},
-	"stars": 47270,
+	"stars": 47294,
 	"issues": {
-		"count": 27,
+		"count": 32,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue -author:app/github-actions"
 	},
 	"prs": {
-		"count": 35,
+		"count": 41,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:pr draft:false -author:app/github-actions -author:mise-en-dev -author:app/renovate NOT \"chore: release\" in:title"
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
 		"followers": 4502,
 		"public_repos": 416,
-		"prs": 14212,
-		"prs_merged": 13399,
+		"prs": 14220,
+		"prs_merged": 13401,
 		"year": 2026,
-		"contributions_year": 23234,
-		"contributions_all": 66246,
-		"streak_current": 17,
-		"streak_longest": 111,
+		"contributions_year": 23236,
+		"contributions_all": 66248,
+		"streak_current": 130,
+		"streak_longest": 130,
 		"languages": {
-			"Rust": 69699455,
+			"Rust": 69776618,
 			"Shell": 8523267,
 			"Go": 7717072,
-			"TypeScript": 2598027,
+			"TypeScript": 2599194,
 			"Python": 2201703,
-			"JavaScript": 1486091,
+			"JavaScript": 1512493,
 			"Vim Script": 1006159,
 			"PowerShell": 583229,
 			"Pkl": 538066,
