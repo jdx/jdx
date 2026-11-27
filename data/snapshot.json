@@ -187,7 +187,7 @@
 		"value": 9283158,
 		"dau": 631530
 	},
-	"stars": 47332,
+	"stars": 47336,
 	"issues": {
 		"count": 40,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue -author:app/github-actions"
