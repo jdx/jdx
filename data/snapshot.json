@@ -9,7 +9,7 @@
 			"logo": "https://jdx.dev/images/projects/mise.svg",
 			"name": "mise",
 			"repo": "jdx/mise",
-			"stars": "36.5k",
+			"stars": "36.6k",
 			"tagline": "dev tools, env vars, and tasks"
 		},
 		{
@@ -64,7 +64,7 @@
 			"logo": "https://jdx.dev/images/projects/mr-boxington.svg",
 			"name": "mr boxington",
 			"repo": "jdx/mr-boxington",
-			"stars": "817",
+			"stars": "823",
 			"tagline": "a shared Rust build cache"
 		},
 		{
@@ -75,7 +75,7 @@
 			"logo": "https://jdx.dev/images/projects/pitchfork.png",
 			"name": "pitchfork",
 			"repo": "jdx/pitchfork",
-			"stars": "723",
+			"stars": "724",
 			"tagline": "daemons with DX"
 		},
 		{
@@ -86,7 +86,7 @@
 			"logo": "https://jdx.dev/images/projects/jactionlint.svg",
 			"name": "jactionlint",
 			"repo": "jdx/jactionlint",
-			"stars": "360",
+			"stars": "361",
 			"tagline": "GitHub Actions workflow linter"
 		},
 		{
@@ -97,7 +97,7 @@
 			"logo": "https://jdx.dev/images/projects/demand.svg",
 			"name": "demand",
 			"repo": "jdx/demand",
-			"stars": "269",
+			"stars": "270",
 			"tagline": "prompts for Rust CLIs"
 		},
 		{
@@ -183,13 +183,13 @@
 		}
 	],
 	"mau": {
-		"date": "2026-11-25",
-		"value": 9080025,
-		"dau": 801070
+		"date": "2026-11-26",
+		"value": 9283158,
+		"dau": 631530
 	},
-	"stars": 47315,
+	"stars": 47332,
 	"issues": {
-		"count": 39,
+		"count": 40,
 		"query": "user:jdx org:aubepkg is:public archived:false is:open is:issue -author:app/github-actions"
 	},
 	"prs": {
@@ -198,9 +198,9 @@
 	},
 	"github": {
 		"created_at": "2010-03-04T23:56:27Z",
-		"followers": 4506,
+		"followers": 4505,
 		"public_repos": 416,
-		"prs": 14221,
+		"prs": 14223,
 		"prs_merged": 13401,
 		"year": 2026,
 		"contributions_year": 23236,
